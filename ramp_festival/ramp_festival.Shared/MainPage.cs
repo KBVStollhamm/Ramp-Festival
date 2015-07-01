@@ -19,7 +19,7 @@ namespace ramp_festival
     sealed partial class MainPage: Page
     {
         private MobileServiceCollection<TodoItem, TodoItem> items;
-        private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
+		private IMobileServiceTable<TodoItem> todoTable = App.MobileService.GetTable<TodoItem>();
         //private IMobileServiceSyncTable<TodoItem> todoTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
 
         public MainPage()
@@ -104,26 +104,49 @@ namespace ramp_festival
             await RefreshTodoItems();
         }
 
-        #region Offline sync
+		#region Offline sync
 
-        //private async Task InitLocalStoreAsync()
-        //{
-        //    if (!App.MobileService.SyncContext.IsInitialized)
-        //    {
-        //        var store = new MobileServiceSQLiteStore("localstore.db");
-        //        store.DefineTable<TodoItem>();
-        //        await App.MobileService.SyncContext.InitializeAsync(store);
-        //    }
-        //
-        //    await SyncAsync();
-        //}
+		//private async Task InitLocalStoreAsync()
+		//{
+		//	if (!App.MobileService.SyncContext.IsInitialized)
+		//	{
+		//		var store = new MobileServiceSQLiteStore("localstore.db");
+		//		store.DefineTable<TodoItem>();
+		//		await App.MobileService.SyncContext.InitializeAsync(store);
+		//	}
 
-        //private async Task SyncAsync()
-        //{
-        //    await App.MobileService.SyncContext.PushAsync();
-        //    await todoTable.PullAsync("todoItems", todoTable.CreateQuery());
-        //}
+		//	await SyncAsync();
+		//}
 
-        #endregion 
-    }
+		//private async Task SyncAsync()
+		//{
+		//	String errorString = null;
+
+		//	try
+		//	{
+		//		await App.MobileService.SyncContext.PushAsync();
+		//		await todoTable.PullAsync("todoItems", todoTable.CreateQuery()); // first param is query ID, used for incremental sync
+		//	}
+
+		//	catch (MobileServicePushFailedException ex)
+		//	{
+		//		errorString = "Push failed because of sync errors: " +
+		//		  ex.PushResult.Errors.Count + " errors, message: " + ex.Message;
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		errorString = "Pull failed: " + ex.Message +
+		//		  "\n\nIf you are still in an offline scenario, " +
+		//		  "you can try your Pull again when connected with your Mobile Serice.";
+		//	}
+
+		//	if (errorString != null)
+		//	{
+		//		MessageDialog d = new MessageDialog(errorString);
+		//		await d.ShowAsync();
+		//	}
+		//}
+
+		#endregion
+	}
 }

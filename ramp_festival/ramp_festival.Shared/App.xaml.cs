@@ -23,6 +23,9 @@ namespace ramp_festival
 	/// </summary>
 	sealed partial class App : Application
 	{
+		public static Microsoft.WindowsAzure.MobileServices.MobileServiceClient ramp_festivalClient = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
+		"https://ramp-festival.azure-mobile.net/",
+		"lcSgURxEiZQYyRWWoRDmZSlWaCkIPz90");
 
 		// This MobileServiceClient has been configured to communicate with your local
 		// test project for debugging purposes.
@@ -97,6 +100,8 @@ namespace ramp_festival
 			}
 			// Ensure the current window is active
 			Window.Current.Activate();
+
+			ramp_festival.ramp_festivalPush.UploadChannel();
 		}
 
 		/// <summary>
