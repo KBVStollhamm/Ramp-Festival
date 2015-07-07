@@ -26,5 +26,7 @@ namespace ContestManagement.Web.Admin.Models
 		public DateTime EndDate { get; set; }
 
 		public string Slug { get; set; }
+
+		public string AccessCode { get; set; }
 	}
 }
