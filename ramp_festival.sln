@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ramp_festival", "ramp_festival", "{F6C0526E-9FE6-4B07-B340-243315E431F1}"
 EndProject
@@ -34,7 +34,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{7577D87C-76FF-42AC-B460-E07754E754D5}"
 	ProjectSection(SolutionItems) = preProject
 		PublishScripts\Configurations\ContestManagementWebAdmin-WAWS-dev.json = PublishScripts\Configurations\ContestManagementWebAdmin-WAWS-dev.json
+		PublishScripts\Configurations\madRamp-FestivalWebPublic-WAWS-dev.json = PublishScripts\Configurations\madRamp-FestivalWebPublic-WAWS-dev.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mad.Ramp-Festival.Web.Public", "mad.Ramp-Festival.Web.Public\mad.Ramp-Festival.Web.Public.csproj", "{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -129,6 +132,22 @@ Global
 		{F4A13631-BF7C-4012-8B07-5BE51EA1AE07}.Release|ARM.ActiveCfg = Release|Any CPU
 		{F4A13631-BF7C-4012-8B07-5BE51EA1AE07}.Release|x64.ActiveCfg = Release|Any CPU
 		{F4A13631-BF7C-4012-8B07-5BE51EA1AE07}.Release|x86.ActiveCfg = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|ARM.Build.0 = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|x64.Build.0 = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Debug|x86.Build.0 = Debug|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|ARM.Build.0 = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|x64.ActiveCfg = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|x64.Build.0 = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|x86.ActiveCfg = Release|Any CPU
+		{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
