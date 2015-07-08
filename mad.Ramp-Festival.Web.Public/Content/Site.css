@@ -27,6 +27,7 @@ img.scaled
 {
 max-width: 100%;
 height: auto;
+align-content: stretch;
 }
 img.scaled-right
 {
@@ -37,7 +38,8 @@ margin-top: -60px;
 
 p.title-prefix {
   text-align: left;
-  font-size: 48px;
+  font-size: 10vw;
+  fon
   padding-left: 5px;
   margin-bottom: -20px;
 }
