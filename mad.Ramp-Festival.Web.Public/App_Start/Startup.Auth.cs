@@ -54,9 +54,9 @@ namespace mad.Ramp_Festival.Web.Public
 			//   consumerKey: "",
 			//   consumerSecret: "");
 
-			//app.UseFacebookAuthentication(
-			//   appId: "",
-			//   appSecret: "");
+			app.UseFacebookAuthentication(
+			   appId: "1175920455767318",
+			   appSecret: "e712e9d7471b13627771930c685b6b99");
 
 			//app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
 			//{

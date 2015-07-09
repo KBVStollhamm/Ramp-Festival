@@ -9,8 +9,9 @@
 	<ul class="nav navbar-nav navbar-right">
 		<li>			
 			@{
-				var displayName = ((ClaimsIdentity)User.Identity).FindFirst("DisplayName");
-				@Html.ActionLink("Hello " + displayName.Value + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" });
+				//var displayName = ((ClaimsIdentity)User.Identity).FindFirst("DisplayName");
+				var displayName = User.Identity.GetUserName();
+				@Html.ActionLink("Hello " + displayName + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" });
 			}
 		</li>
 		<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

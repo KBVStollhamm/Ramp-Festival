@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace mad.Ramp_Festival.Web.Public.Controllers
 {
+	[RequireHttps]
 	public class HomeController : Controller
 	{
 		public ActionResult Index()
