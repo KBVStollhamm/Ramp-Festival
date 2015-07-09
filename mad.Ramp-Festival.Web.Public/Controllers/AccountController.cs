@@ -139,7 +139,7 @@ namespace mad.Ramp_Festival.Web.Public.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel() { SubscribedForNewsletters = true });
         }
 
         //
@@ -151,7 +151,7 @@ namespace mad.Ramp_Festival.Web.Public.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, SubscribedForNewsletters = model.SubscribedForNewsletters };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

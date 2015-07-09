@@ -22,18 +22,6 @@ namespace mad.Ramp_Festival.Web.Public.Models
 		}
 
 		public string DisplayName { get; set; }
-	}
-
-	public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-	{
-		public ApplicationDbContext()
-			: base("DefaultConnection", throwIfV1Schema: false)
-		{
-		}
-
-		public static ApplicationDbContext Create()
-		{
-			return new ApplicationDbContext();
-		}
+		public bool SubscribedForNewsletters { get; set; }
 	}
 }
