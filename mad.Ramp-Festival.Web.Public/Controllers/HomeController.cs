@@ -13,7 +13,17 @@ namespace mad.Ramp_Festival.Web.Public.Controllers
 			return View();
 		}
 
-		public ActionResult Index2()
+		public ActionResult FestivalWeek()
+		{
+			return View();
+		}
+
+		public ActionResult Contests()
+		{
+			return View();
+		}
+	
+		public ActionResult DailyGames()
 		{
 			return View();
 		}
