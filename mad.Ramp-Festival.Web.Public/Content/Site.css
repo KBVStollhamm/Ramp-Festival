@@ -64,3 +64,10 @@ p.subsubtitle {
   text-align: center;
   font-size: 2vw;
 }
+
+p.followus {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}

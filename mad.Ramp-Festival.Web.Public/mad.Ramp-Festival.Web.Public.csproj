@@ -186,17 +186,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\20140815_201235.jpg" />
     <Content Include="Content\images\2015.png" />
     <Content Include="Content\images\banner1.png" />
     <Content Include="Content\images\banner2.png" />
     <Content Include="Content\images\banner3.png" />
     <Content Include="Content\images\banner4.png" />
+    <Content Include="Content\images\newsletter_banner.png" />
     <Content Include="Content\images\ramp-festival.de.png" />
     <Content Include="Content\images\title.png" />
+    <Content Include="Content\metro-icons.css" />
+    <Content Include="Content\metro-icons.min.css" />
+    <Content Include="Content\metro.css" />
+    <Content Include="Content\metro.min.css" />
+    <Content Include="Content\tiles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\metro.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
@@ -209,6 +215,10 @@
     <Content Include="Areas\Admin\Views\ApplicationUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\ApplicationUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="fonts\selection.json" />
+    <Content Include="fonts\metro.woff" />
+    <Content Include="fonts\metro.ttf" />
+    <Content Include="fonts\metro.eot" />
     <None Include="Properties\PublishProfiles\madRamp-FestivalWebPublic.pubxml" />
     <None Include="Properties\PublishProfiles\ramp-festival - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ramp-festival - Web Deploy.pubxml" />
@@ -216,14 +226,17 @@
     <None Include="Properties\PublishProfiles\rampenfest - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\rampenfest - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\rampenfest.pubxml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\metro.js" />
+    <Content Include="Scripts\metro.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -242,7 +255,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\FestivalWeek.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />

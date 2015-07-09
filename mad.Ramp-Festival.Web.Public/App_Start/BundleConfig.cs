@@ -25,6 +25,8 @@ namespace mad.Ramp_Festival.Web.Public
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
 					  "~/Content/bootstrap-theme.css",
+					  "~/Content/tiles.css",
+					  "~/Content/metro-icons.css",
 					  "~/Content/site.css"));
 		}
 	}

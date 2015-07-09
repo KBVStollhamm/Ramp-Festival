@@ -2,14 +2,12 @@
 	ViewBag.Title = "Startseite";
 }
 
-
-<div class="row">
+<div class="container">
 	<h1 class="text-center">Stollhammer</h1>
 	<img class="img-responsive center-block" src="~/Content/images/title.png" alt="hier sollte ein bild sein" />
 </div>
 
-
-<div class="row">
+<div class="container">
 	<div class="col-md-4">
 		<h2>Festwoche</h2>
 		<p>
@@ -29,28 +27,43 @@
 	</div>
 </div>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<!-- Indicators -->
-	<ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-	</ol>
+<div class="container">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+		</ol>
 
-	<!-- Wrapper for slides -->
-	<div class="carousel-inner" role="listbox">
-		<div class="item active">
-			<img src="~/Content/images/banner1.png" alt="Chania">
-			<div class="carousel-caption">
-				<h3>Crocket-Golf</h3>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="~/Content/images/banner1.png" alt="Chania">
+				@*<div class="carousel-caption">
+					<h3>Crocket-Golf</h3>
+				</div>*@
 			</div>
-		</div>
 
-		<div class="item">
-			<img src="~/Content/images/banner2.png" alt="Chania">
-			<div class="carousel-caption">
-				<h3>Newsletter</h3>
-				<p>Lass dir die neuesten Informationen zum Rampenfest per Mail zusenden.</p>
-			</div>
+			<div class="item">
+				<a href="~/Account/Register">
+					<img src="~/Content/images/newsletter_banner.png" alt="ASP.NET" class="img-responsive">
+					<div class="container">
+						@*<div class="carousel-caption">
+							<p>
+								@Html.ActionLink("Newsletter abonnieren", "Subscribe", "Home")
+								<span class="glyphicon glyphicon-play" aria-hidden="true">
+								</span>
+								@Html.ActionLink("Newsletter abonnieren", "Subscribe", "Home")
+								<span class="glyphicon glyphicon-play" aria-hidden="true">
+								</span>
+								@Html.ActionLink("Newsletter abonnieren", "Subscribe", "Home")
+								<span class="glyphicon glyphicon-play" aria-hidden="true">
+								</span>
+							</p>
+						</div>*@
+					</div>
+					</a>
+</div>
 		</div>
 	</div>
 </div>
