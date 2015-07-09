@@ -30,6 +30,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -165,14 +169,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201507081452317_Init.cs" />
-    <Compile Include="Migrations\201507081452317_Init.Designer.cs">
-      <DependentUpon>201507081452317_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507081456497_Added-DisplayName.cs" />
-    <Compile Include="Migrations\201507081456497_Added-DisplayName.Designer.cs">
-      <DependentUpon>201507081456497_Added-DisplayName.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -198,6 +194,9 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\madRamp-FestivalWebPublic.pubxml" />
+    <None Include="Properties\PublishProfiles\ramp-festival - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ramp-festival - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ramp-festival.pubxml" />
     <None Include="Properties\PublishProfiles\rampenfest - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\rampenfest - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\rampenfest.pubxml" />
@@ -259,14 +258,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201507081452317_Init.resx">
-      <DependentUpon>201507081452317_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507081456497_Added-DisplayName.resx">
-      <DependentUpon>201507081456497_Added-DisplayName.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
