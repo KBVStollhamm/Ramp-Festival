@@ -33,9 +33,29 @@
 		@RenderBody()
 		<hr />
 		<footer>
-			<p>&copy; @DateTime.Now.Year - KBV Stollhamm e.V.</p>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://rampenfest.azurewebsites.net" data-text="Die Vorbereitungen zum Rampenfest in Stollhamm haben begonnen. Jetzt mit eigener Internetpräsenz auf" data-lang="de" data-hashtags="rampenfest15" data-dnt="true">Twittern</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			<div class=" row">
+				<div class="col-xs-2">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://rampenfest.azurewebsites.net" data-text="Die Vorbereitungen zum Rampenfest in Stollhamm haben begonnen. Jetzt mit eigener Internetpräsenz auf" data-lang="de" data-hashtags="rampenfest15" data-dnt="true">Twittern</a>
+					<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+				</div>
+				<div class="col-xs-2">
+				<div class="fb-like" data-href="http://www.rampenfest.de" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+					<div id="fb-root"></div>
+					<script>
+					(function (d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.4";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+					</script>
+				</div>
+			</div>
+
+			<div class="col-xs-12 text-right">
+				<p>&copy; @DateTime.Now.Year KBV Stollhamm e.V.</p>
+			</div>
 		</footer>
 	</div>
 
