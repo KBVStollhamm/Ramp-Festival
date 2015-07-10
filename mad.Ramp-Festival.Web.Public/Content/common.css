@@ -1,0 +1,30 @@
+﻿
+ul { list-style: none outside none; margin:20px; padding: 0;}
+li.li-inline { display: inline; margin: 0 10px; }
+
+@media (min-width:320px) {
+	ul {
+		text-align: left;
+	}
+}
+
+@media (min-width: 768px) {
+	ul {
+		text-align: right;
+	}
+}
+
+.kbv-title {
+	padding-right: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	color: GrayText;
+}
+.kbv-subtitle {
+	font-size: 14px;
+	color: GrayText
+}
+
+.footer-title {
+	font-size: 16px;
+}

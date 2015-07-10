@@ -24,7 +24,8 @@ namespace mad.Ramp_Festival.Web.Public
 					  "~/Scripts/respond.js"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include(
-					  "~/Content/bootstrap-theme.css",
+					  "~/Content/bootstrap.css",
+					  "~/Content/common.css",
 					  "~/Content/tiles.css",
 					  "~/Content/metro-icons.css",
 					  "~/Content/site.css"));

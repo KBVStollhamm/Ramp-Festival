@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ramp_festival", "ramp_festival", "{F6C0526E-9FE6-4B07-B340-243315E431F1}"
 EndProject
@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configura
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mad.Ramp-Festival.Web.Public", "mad.Ramp-Festival.Web.Public\mad.Ramp-Festival.Web.Public.csproj", "{19F826E9-2505-4D0F-8ACE-77F22B45F9F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5415563B-9940-4C8C-80B1-3AFE49AE1C4F}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
