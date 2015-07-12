@@ -191,7 +191,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\crocketgolf.jpg" />
+    <Content Include="Content\images\familyday_1.jpg" />
+    <Content Include="Content\images\familyday_2.jpg" />
+    <Content Include="Content\images\gbosseln.jpg" />
+    <Content Include="Content\images\luftkegeln.jpg" />
+    <Content Include="Content\_bootstrap.min.css" />
     <Content Include="Content\common.css" />
     <Content Include="Content\images\20140811_184817.jpg" />
     <Content Include="Content\images\20140812_193526.jpg" />
