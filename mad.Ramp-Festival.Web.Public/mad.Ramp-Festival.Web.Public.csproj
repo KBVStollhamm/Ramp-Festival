@@ -304,7 +304,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DailyGames.cshtml" />
-    <Content Include="Views\Home\Contests.cshtml" />
+    <Content Include="Views\Contest\Index.cshtml" />
     <Content Include="Views\Contest\CrocketGolf.cshtml" />
     <Content Include="Views\Contest\Luftkegeln.cshtml" />
     <Content Include="Views\Contest\GBosseln.cshtml" />
