@@ -304,6 +304,7 @@
     <Content Include="Views\Home\Contests.cshtml" />
     <Content Include="Views\Contest\CrocketGolf.cshtml" />
     <Content Include="Views\Contest\Luftkegeln.cshtml" />
+    <Content Include="Views\Contest\GBosseln.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
