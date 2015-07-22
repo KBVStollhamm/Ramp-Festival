@@ -171,6 +171,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -301,6 +302,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DailyGames.cshtml" />
     <Content Include="Views\Home\Contests.cshtml" />
+    <Content Include="Views\Contest\CrocketGolf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
