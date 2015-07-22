@@ -303,6 +303,7 @@
     <Content Include="Views\Home\DailyGames.cshtml" />
     <Content Include="Views\Home\Contests.cshtml" />
     <Content Include="Views\Contest\CrocketGolf.cshtml" />
+    <Content Include="Views\Contest\Luftkegeln.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

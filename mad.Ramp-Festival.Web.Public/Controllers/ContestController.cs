@@ -18,5 +18,11 @@ namespace mad.Ramp_Festival.Web.Public.Controllers
 		{
 			return View();
 		}
+
+		public ActionResult Luftkegeln()
+		{
+			return View();
+		}
+
 	}
 }
