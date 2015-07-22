@@ -287,6 +287,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Contest\Locate.cshtml" />
     <Content Include="Views\Contest\Create.cshtml" />
+    <Content Include="Views\Contest\Index.cshtml" />
+    <Content Include="Views\Contest\Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -297,6 +299,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
+      <Project>{bd8edb29-11de-468a-8ebb-6bd9a75bb473}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContestManagement.Application\ContestManagement.Application.csproj">
+      <Project>{338f186b-6765-4116-87e5-22de42d2f052}</Project>
+      <Name>ContestManagement.Application</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

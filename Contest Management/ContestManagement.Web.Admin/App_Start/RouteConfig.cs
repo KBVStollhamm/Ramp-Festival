@@ -14,6 +14,18 @@ namespace ContestManagement.Web.Admin
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute(
+				name: "Contest.Create",
+				url: "create",
+				defaults: new { controller = "Contest", action = "Create" }
+			);
+
+			routes.MapRoute(
+				name: "Contest",
+				url: "{slug}/{accessCode}/{action}",
+				defaults: new { controller = "Contest", action = "Index" }
+			);
+
+			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
