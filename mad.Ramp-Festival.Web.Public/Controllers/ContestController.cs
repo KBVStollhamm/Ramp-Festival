@@ -19,6 +19,11 @@ namespace mad.Ramp_Festival.Web.Public.Controllers
 			return View();
 		}
 
+		public ActionResult CrocketGolfRules()
+		{
+			return View();
+		}
+
 		public ActionResult GBosseln()
 		{
 			return View();

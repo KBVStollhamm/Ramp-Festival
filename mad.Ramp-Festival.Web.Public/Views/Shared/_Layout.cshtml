@@ -22,8 +22,8 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li>@Html.ActionLink("Start", "Index", "Home")</li>
-					<li>@Html.ActionLink("Impressum", "About", "Home")</li>
-					<li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+					<li>@Html.ActionLink("Wettkämpfe", "Index", "Contest")</li>
+					@*<li>@Html.ActionLink("Spiele", "Index", "Games")</li>*@
 					@if (User.IsInRole("Administrator"))
 					{
 						<li>@Html.ActionLink("Administration", "Index", "ApplicationUsers", new { area = "Admin" }, new { })</li>
@@ -34,19 +34,17 @@
 		</div>
 	</div>
 	<div class="container-phone body-content">
-		@RenderBody()
+		<div class="panel-body">
+			@RenderBody()
+		</div>
+	</div>
+	<div class="bottom">
 		<footer class="panel-footer">
-			<div class="row">
-				<div class="col-xs-6">
-					<a href="https://twitter.com/RampFestival" class="twitter-follow-button" data-show-count="false" data-lang="de" data-show-screen-name="false">folgen</a>
-					<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://rampenfest.de" data-text="Ich gehe zum Rampenfest. Komm doch auch!" data-lang="de" data-hashtags="rampenfest15">Twittern</a>
-					<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
-				</div>
-				<div class="col-xs-6">
-					<div class="fb-like" data-href="http://www.rampenfest.de" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-					<div id="fb-root"></div>
-					<script>
+			<div class="col-xs-6" style="margin-left: -15px;">
+				<div class="fb-like" data-href="http://www.rampenfest.de" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+				<div class="fb-follow" data-href="https://www.facebook.com/rampenfest" data-layout="standard" data-show-faces="true" style="margin-top: 5px;"></div>
+				<div id="fb-root"></div>
+				<script>
 						(function (d, s, id) {
 							var js, fjs = d.getElementsByTagName(s)[0];
 							if (d.getElementById(id)) return;
@@ -54,11 +52,18 @@
 							js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.4";
 							fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));
-					</script>
+				</script>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<a href="https://twitter.com/RampFestival" class="twitter-follow-button" data-show-count="false" data-lang="de" data-show-screen-name="false">folgen</a>
+					<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://rampenfest.de" data-text="Ich gehe zum Rampenfest. Komm doch auch!" data-lang="de" data-hashtags="rampenfest15">Twittern</a>
+					<script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
 				</div>
 			</div>
 
-			<div class="row">
+			@*<div class="row" style="margin-top:15px;">
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<span class="footer-title">Produkte</span>
 				</div>
@@ -71,7 +76,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<span class="footer-title">Beliebte Ressourcen</span>
 				</div>
-			</div>
+			</div>*@
 			<div>
 				<ul>
 					<li>
@@ -82,8 +87,8 @@
 			<div>
 				<ul>
 					<li class="li-inline"><a href="~/Home/About" class="no-wrap">Impressum</a></li>
-					<li class ="li-inline"><a class="no-wrap">Datenschutz &amp; Cookies</a></liclass>
-					<li class="li-inline"><a class="no-wrap">Nutzungsbedingungen</a></li>
+					@*<li class ="li-inline"><a class="no-wrap">Datenschutz &amp; Cookies</a></liclass>
+					<li class="li-inline"><a class="no-wrap">Nutzungsbedingungen</a></li>*@
 					<li class="li-inline"><a href="~/Home/Contact" class="no-wrap">Kontakt</a></li>
 					@*<li><a class="no-wrap">Markenzeichen</a></li>*@
 					@*<li><a class="no-wrap">Informationen zu unserer Werbung</a></li>*@

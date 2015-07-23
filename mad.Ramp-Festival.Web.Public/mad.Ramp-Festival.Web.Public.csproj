@@ -192,15 +192,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\crocketgolf.jpg" />
+    <Content Include="Content\images\familyday_1.jpg" />
+    <Content Include="Content\images\familyday_2.jpg" />
+    <Content Include="Content\images\gbosseln.jpg" />
+    <Content Include="Content\images\luftkegeln.jpg" />
+    <Content Include="Content\_bootstrap.min.css" />
     <Content Include="Content\common.css" />
     <Content Include="Content\images\20140811_184817.jpg" />
     <Content Include="Content\images\20140812_193526.jpg" />
     <Content Include="Content\images\20140812_205921.jpg" />
     <Content Include="Content\images\20140813_202902.jpg" />
     <Content Include="Content\images\20140815_201235.jpg" />
-    <Content Include="Content\images\20140815_211011.jpg" />
-    <Content Include="Content\images\20140815_211125.jpg" />
     <Content Include="Content\images\2015.png" />
     <Content Include="Content\images\banner1.png" />
     <Content Include="Content\images\banner2.png" />
@@ -301,11 +304,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\DailyGames.cshtml" />
-    <Content Include="Views\Home\Contests.cshtml" />
+    <Content Include="Views\Contest\Index.cshtml" />
     <Content Include="Views\Contest\CrocketGolf.cshtml" />
     <Content Include="Views\Contest\Luftkegeln.cshtml" />
     <Content Include="Views\Contest\GBosseln.cshtml" />
     <Content Include="Views\Home\Service.cshtml" />
+    <Content Include="Views\Contest\CrocketGolfRules.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

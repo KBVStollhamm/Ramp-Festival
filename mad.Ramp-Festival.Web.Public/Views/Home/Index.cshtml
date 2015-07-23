@@ -7,7 +7,7 @@
 	<img class="img-responsive center-block" src="~/Content/images/title.png" alt="hier sollte ein bild sein" />
 </div>
 
-<div class="container-phone">
+<div class="container-phone row">
 	<div class="col-md-4">
 		<h2>Festwoche</h2>
 		<p>
@@ -18,7 +18,7 @@
 	<div class="col-md-4">
 		<h2>Wettbewerbe</h2>
 		<p>Neben den - aus den Vorjahren bekannten - Wettbewerben Luftkegeln und Geschicklichkeitsboßeln veranstalten wir in diesem Jahr zum ersten mal einen dritten Wettbewerb: Crocket-Golf. Dieser Wettbewerb findet parallel zu den genannten Wettbewerben an allen Tagen statt. Auch beim Crocket-Golf wird je Tag ein Tagessieger ermittelt, die am Finaltag um den Gesamtsieg spielen.</p>
-		<p><a class="btn btn-default" href="~/Home/Contests">Mehr erfahren &raquo;</a></p>
+		<p><a class="btn btn-default" href="~/Contest/Index">Mehr erfahren &raquo;</a></p>
 	</div>
 	<div class="col-md-4">
 		<h2>Tagesspiele</h2>
@@ -27,7 +27,7 @@
 	</div>
 </div>
 
-<div class="container-phone">
+<div class="container-phone row">
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -38,32 +38,16 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="~/Content/images/banner1.png" alt="Chania">
-				@*<div class="carousel-caption">
-					<h3>Crocket-Golf</h3>
-				</div>*@
+				<a href="~/Contest/CrocketGolf">
+					<img src="~/Content/images/banner1.png" alt="Chania">
+				</a>
 			</div>
 
 			<div class="item">
 				<a href="~/Account/Register">
 					<img src="~/Content/images/newsletter_banner.png" alt="ASP.NET" class="img-responsive">
-					<div class="container">
-						@*<div class="carousel-caption">
-							<p>
-								@Html.ActionLink("Newsletter abonnieren", "Subscribe", "Home")
-								<span class="glyphicon glyphicon-play" aria-hidden="true">
-								</span>
-								@Html.ActionLink("Newsletter abonnieren", "Subscribe", "Home")
-								<span class="glyphicon glyphicon-play" aria-hidden="true">
-								</span>
-								@Html.ActionLink("Newsletter abonnieren", "Subscribe", "Home")
-								<span class="glyphicon glyphicon-play" aria-hidden="true">
-								</span>
-							</p>
-						</div>*@
-					</div>
-					</a>
-</div>
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
