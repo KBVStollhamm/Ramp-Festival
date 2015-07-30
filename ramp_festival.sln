@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ramp_festival", "ramp_festival", "{F6C0526E-9FE6-4B07-B340-243315E431F1}"
 EndProject
@@ -47,11 +47,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure\Infrastructure.csproj", "{BD8EDB29-11DE-468A-8EBB-6BD9A75BB473}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contest Execution", "Contest Execution", "{CF3C1F48-5113-4DDA-A62F-B2EE56D9ACBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContestExecution.App", "ContestExecution.App", "{56954BED-C2D0-4D1D-AFA3-9367B0BC053F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ContestExecution.App.Shared", "ContestExecution.App\ContestExecution.App.Shared\ContestExecution.App.Shared.shproj", "{E0000F18-EBE1-4B46-8869-39B62085F059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContestExecution.App.Windows", "ContestExecution.App\ContestExecution.App.Windows\ContestExecution.App.Windows.csproj", "{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContestExecution.App.WindowsPhone", "ContestExecution.App\ContestExecution.App.WindowsPhone\ContestExecution.App.WindowsPhone.csproj", "{179019A0-927E-434C-BCEA-EEAE654FDBD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{151E6655-1F32-4552-B9FF-9A79EC3C6699}"
+	ProjectSection(SolutionItems) = preProject
+		mad.Ramp-Festival.Web.Public\Content\images\title.png = mad.Ramp-Festival.Web.Public\Content\images\title.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ramp_festival\ramp_festival.Shared\ramp_festival.Shared.projitems*{bd50eca0-7f46-41e1-a407-56821f327b5b}*SharedItemsImports = 4
 		ramp_festival\ramp_festival.Shared\ramp_festival.Shared.projitems*{1bba7382-395f-44d1-9431-813384eab491}*SharedItemsImports = 13
 		ramp_festival\ramp_festival.Shared\ramp_festival.Shared.projitems*{c8fca4e8-5e5b-4b79-95a9-a74383823fec}*SharedItemsImports = 4
+		ContestExecution.App\ContestExecution.App.Shared\ContestExecution.App.Shared.projitems*{e0000f18-ebe1-4b46-8869-39b62085f059}*SharedItemsImports = 13
+		ContestExecution.App\ContestExecution.App.Shared\ContestExecution.App.Shared.projitems*{179019a0-927e-434c-bcea-eeae654fdbd3}*SharedItemsImports = 4
+		ContestExecution.App\ContestExecution.App.Shared\ContestExecution.App.Shared.projitems*{b12f9e2d-9ec3-4251-a3e1-42d2a486d065}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -176,6 +194,54 @@ Global
 		{BD8EDB29-11DE-468A-8EBB-6BD9A75BB473}.Release|ARM.ActiveCfg = Release|Any CPU
 		{BD8EDB29-11DE-468A-8EBB-6BD9A75BB473}.Release|x64.ActiveCfg = Release|Any CPU
 		{BD8EDB29-11DE-468A-8EBB-6BD9A75BB473}.Release|x86.ActiveCfg = Release|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|ARM.ActiveCfg = Debug|ARM
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|ARM.Build.0 = Debug|ARM
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|ARM.Deploy.0 = Debug|ARM
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|x64.ActiveCfg = Debug|x64
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|x64.Build.0 = Debug|x64
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|x64.Deploy.0 = Debug|x64
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|x86.ActiveCfg = Debug|x86
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|x86.Build.0 = Debug|x86
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Debug|x86.Deploy.0 = Debug|x86
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|ARM.ActiveCfg = Release|ARM
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|ARM.Build.0 = Release|ARM
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|ARM.Deploy.0 = Release|ARM
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|x64.ActiveCfg = Release|x64
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|x64.Build.0 = Release|x64
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|x64.Deploy.0 = Release|x64
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|x86.ActiveCfg = Release|x86
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|x86.Build.0 = Release|x86
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065}.Release|x86.Deploy.0 = Release|x86
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|ARM.Build.0 = Debug|ARM
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|ARM.Deploy.0 = Debug|ARM
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|x64.Build.0 = Debug|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|x64.Deploy.0 = Debug|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|x86.ActiveCfg = Debug|x86
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|x86.Build.0 = Debug|x86
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Debug|x86.Deploy.0 = Debug|x86
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|ARM.ActiveCfg = Release|ARM
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|ARM.Build.0 = Release|ARM
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|ARM.Deploy.0 = Release|ARM
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|x64.ActiveCfg = Release|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|x64.Build.0 = Release|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|x64.Deploy.0 = Release|Any CPU
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|x86.ActiveCfg = Release|x86
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|x86.Build.0 = Release|x86
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,5 +255,10 @@ Global
 		{7577D87C-76FF-42AC-B460-E07754E754D5} = {B31083F9-DDCC-453C-A4BE-888889BE6170}
 		{338F186B-6765-4116-87E5-22DE42D2F052} = {E69BCDD3-6421-416C-AA19-61D4B96C7CB8}
 		{BD8EDB29-11DE-468A-8EBB-6BD9A75BB473} = {2F4D688B-F002-49DE-A9F6-D8E6951F8CA6}
+		{56954BED-C2D0-4D1D-AFA3-9367B0BC053F} = {CF3C1F48-5113-4DDA-A62F-B2EE56D9ACBE}
+		{E0000F18-EBE1-4B46-8869-39B62085F059} = {56954BED-C2D0-4D1D-AFA3-9367B0BC053F}
+		{B12F9E2D-9EC3-4251-A3E1-42D2A486D065} = {56954BED-C2D0-4D1D-AFA3-9367B0BC053F}
+		{179019A0-927E-434C-BCEA-EEAE654FDBD3} = {56954BED-C2D0-4D1D-AFA3-9367B0BC053F}
+		{151E6655-1F32-4552-B9FF-9A79EC3C6699} = {5415563B-9940-4C8C-80B1-3AFE49AE1C4F}
 	EndGlobalSection
 EndGlobal
