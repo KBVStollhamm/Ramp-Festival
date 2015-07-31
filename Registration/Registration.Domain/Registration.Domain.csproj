@@ -51,6 +51,10 @@
       <Project>{c51fbe04-c95c-47c5-bfb8-59f767409028}</Project>
       <Name>Infrastructure.EventSourcing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.Messaging\Infrastructure.Messaging.csproj">
+      <Project>{9255e4a8-8f41-410f-8b4d-34a48d5643ea}</Project>
+      <Name>Infrastructure.Messaging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

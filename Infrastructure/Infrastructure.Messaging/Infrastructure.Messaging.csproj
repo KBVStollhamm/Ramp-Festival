@@ -31,8 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ServiceBus, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\WindowsAzure.ServiceBus.2.7.5\lib\net40-full\Microsoft.ServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.1.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,10 +51,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Azure\CommandDispatcher.cs">
+      <ItemGuid>768902f5-406c-4c04-a2da-257863f40702</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\CommandProcessor.cs">
+      <ItemGuid>cca72de3-c40d-4fd2-ab51-9dddcb07f9dd</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\IMessageReceiver.cs">
+      <ItemGuid>b513ab96-ec45-4877-8e2e-151788b9a460</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\Instrumentation\Constants.cs">
+      <ItemGuid>6c284761-fd2a-41d4-a1c9-1c4f843a2c15</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\Instrumentation\ISubscriptionReceiverInstrumentation.cs">
+      <ItemGuid>2e251250-ed23-46d7-aa83-2af42886d49e</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\Instrumentation\SubscriptionReceiverInstrumentation.cs">
+      <ItemGuid>c41dacd6-92d1-471e-a167-563d50ce1307</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\MessageProcessor.cs">
+      <ItemGuid>9f570469-07aa-42a3-a7cc-991ec66e1882</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\MessageReleaseAction.cs">
+      <ItemGuid>06fa9e03-1594-4815-a476-ce0b37d23b0e</ItemGuid>
+    </Compile>
+    <Compile Include="Azure\SubscriptionReceiver.cs">
+      <ItemGuid>15fdcc46-092d-4049-b136-3b33ab7a25ee</ItemGuid>
+    </Compile>
     <Compile Include="Handling\ICommandHandler.cs" />
+    <Compile Include="Handling\ICommandHandlerRegistry.cs">
+      <ItemGuid>0ed766e6-1996-4603-95c7-0503e0bbc11f</ItemGuid>
+    </Compile>
     <Compile Include="ICommand.cs" />
     <Compile Include="IEvent.cs" />
+    <Compile Include="Metadata\IMetadataProvider.cs">
+      <ItemGuid>54287091-ae59-41b4-97d4-99d1ca75ff71</ItemGuid>
+    </Compile>
+    <Compile Include="Metadata\StandardMetadata.cs">
+      <ItemGuid>0350c199-61f9-4d54-bb88-470316208659</ItemGuid>
+    </Compile>
+    <Compile Include="Metadata\StandardMetadataProvider.cs">
+      <ItemGuid>0f4356c1-4630-4f1c-a354-0bb80dca31bb</ItemGuid>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{bd8edb29-11de-468a-8ebb-6bd9a75bb473}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EventSourcing;
 
-namespace Registration.Domain
+namespace Registration.Domain.Participation
 {
 	public class Participation : EventSourced
 	{
@@ -14,8 +14,8 @@ namespace Registration.Domain
 		}
 
 		public Participation(Guid id, IEnumerable<IVersionedEvent> history)
-            : this(id)
-        {
+			: this(id)
+		{
 			this.LoadFrom(history);
 		}
 

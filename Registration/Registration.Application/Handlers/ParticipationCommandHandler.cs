@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Infrastructure.EventSourcing;
 using Infrastructure.Messaging.Handling;
 using Registration.Commands;
-using Registration.Domain;
+using Registration.Domain.Participation;
 
 namespace Registration.Application.Handlers
 {
@@ -29,7 +29,7 @@ namespace Registration.Application.Handlers
 			if (participation == null)
 			{
 				//TODO: Create paticipation
-				participation = new Participation(command.ParticipationId, command.PlayerName)
+				participation = new Participation(command.ParticipationId, command.PlayerName);
 			}
 			else
 			{

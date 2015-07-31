@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD8EDB29-11DE-468A-8EBB-6BD9A75BB473}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{B0D04075-E5F6-4D5F-B84B-DFB9F70C6558}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Infrastructure</RootNamespace>
-    <AssemblyName>Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Registration.Server</RootNamespace>
+    <AssemblyName>Registration.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +25,7 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,9 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,20 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IProcessor.cs">
-      <ItemGuid>d1e59fa6-3e36-4e2a-bb83-0fb8092a1074</ItemGuid>
+    <Compile Include="Program.cs">
+      <ItemGuid>7154abca-e457-4fbf-aaf7-04248920dfd6</ItemGuid>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\ITextSerializer.cs">
-      <ItemGuid>94fb545d-3877-499a-863f-4fb93eeb6914</ItemGuid>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <ItemGuid>bac920a1-aa8d-427f-8451-2ee5bdb70da1</ItemGuid>
     </Compile>
-    <Compile Include="Serialization\JsonTextSerializer.cs">
-      <ItemGuid>8d0a75c0-d3ef-47f4-9e00-c055e563849d</ItemGuid>
+    <Compile Include="RegistrationProcessor.cs">
+      <ItemGuid>8c85a608-9669-49b3-8f8b-0663e232e82d</ItemGuid>
     </Compile>
-    <Compile Include="Utils\GuidUtil.cs" />
+    <Compile Include="TestProcessor.cs">
+      <ItemGuid>145eb4fb-9ea9-44f1-bd09-040520548382</ItemGuid>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.Messaging\Infrastructure.Messaging.csproj">
+      <Project>{9255e4a8-8f41-410f-8b4d-34a48d5643ea}</Project>
+      <Name>Infrastructure.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure\Infrastructure.csproj">
+      <Project>{bd8edb29-11de-468a-8ebb-6bd9a75bb473}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Registration\Registration.Application\Registration.Application.csproj">
+      <Project>{e6615300-c078-4ad2-a0af-639fc6a8b971}</Project>
+      <Name>Registration.Application</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5393B65E-C5A9-4A30-B44E-EA5E3AA005FB}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Contracts", "Registration\Registration.Contracts\Registration.Contracts.csproj", "{7F1B89DE-97F1-4306-9FCA-97DAE7A7E179}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Domain", "Registration\Registration.Domain\Registration.Domain.csproj", "{30F340E2-2631-4F40-A69A-F56038E572DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Server", "Registration.Server\Registration.Server.csproj", "{B0D04075-E5F6-4D5F-B84B-DFB9F70C6558}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{30F340E2-2631-4F40-A69A-F56038E572DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30F340E2-2631-4F40-A69A-F56038E572DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30F340E2-2631-4F40-A69A-F56038E572DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D04075-E5F6-4D5F-B84B-DFB9F70C6558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D04075-E5F6-4D5F-B84B-DFB9F70C6558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D04075-E5F6-4D5F-B84B-DFB9F70C6558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D04075-E5F6-4D5F-B84B-DFB9F70C6558}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
