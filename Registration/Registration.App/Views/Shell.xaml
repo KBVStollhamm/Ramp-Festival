@@ -1,0 +1,18 @@
+﻿<Window x:Class="Registration.Views.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://www.codeplex.com/CompositeWPF"
+        xmlns:local="clr-namespace:Registration.Views"
+        mc:Ignorable="d"
+        Title="Rampenfest - Registrierung" Height="300" Width="300" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    <Grid Background="{StaticResource AppMainBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl prism:RegionManager.RegionName="MainRegion" />
+    </Grid>
+</Window>
