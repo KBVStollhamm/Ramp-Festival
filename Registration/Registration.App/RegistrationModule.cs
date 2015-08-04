@@ -7,6 +7,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
+using Registration.Controllers;
 using Registration.ViewModels;
 using Registration.Views;
 
@@ -25,10 +26,25 @@ namespace Registration
 
 		public void Initialize()
 		{
+			_container.Register(Component.For<RegistrationsController>());
+			
 			_container.Register(Component.For<RegistrationViewModel>());
-			_container.Register(Component.For<RegistrationView>());
+			_container.Register(Component.For<IRegistrationView>()
+				.ImplementedBy<RegistrationView>());
 
-			_regionManager.RegisterViewWithRegion("MainRegion", typeof(RegistrationView));
+			_container.Register(Component.For<IRegisterPlayerViewModel>()
+				.ImplementedBy<RegisterPlayerViewModel>()
+				.LifestyleTransient());
+
+			_container.Register(Component.For<IRegisterTeamViewModel>()
+				.ImplementedBy<RegisterTeamViewModel>()
+				.LifestyleTransient());
+
+			_container.Register(Component.For<SequencingView>());
+
+			//_regionManager.RegisterViewWithRegion("MainRegion", typeof(RegistrationView));
+			_container.Resolve<RegistrationsController>().ShowRegistrationView();
+			_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
 		}
 	}
 }

@@ -81,6 +81,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -105,6 +106,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\RegistrationsController.cs" />
     <Compile Include="Controls\ButtonHelper.cs" />
     <Compile Include="Controls\PlayerHeaderControl.xaml.cs">
       <DependentUpon>PlayerHeaderControl.xaml</DependentUpon>
@@ -113,10 +115,36 @@
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Infrastructure\FocusExtensions.cs" />
+    <Compile Include="Infrastructure\InputValidationException.cs" />
+    <Compile Include="Models\Party.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerName.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\TeamName.cs" />
     <Compile Include="RegistrationModule.cs" />
+    <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
+    <Compile Include="ViewModels\IRegisterTeamViewModel.cs" />
+    <Compile Include="ViewModels\RegisterPlayerViewModel.cs" />
+    <Compile Include="ViewModels\RegisterTeamViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\SequencingItemViewModel.cs" />
+    <Compile Include="ViewModels\SequencingViewModel.cs" />
+    <Compile Include="Views\IRegistrationView.cs" />
+    <Compile Include="Views\RegisterCommandsView.xaml.cs">
+      <DependentUpon>RegisterCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterPlayerView.xaml.cs">
+      <DependentUpon>RegisterPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RegisterTeamView.xaml.cs">
+      <DependentUpon>RegisterTeamView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SequencingView.xaml.cs">
+      <DependentUpon>SequencingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -153,7 +181,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RegisterCommandsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RegisterTeamView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegistrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SequencingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,9 +234,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

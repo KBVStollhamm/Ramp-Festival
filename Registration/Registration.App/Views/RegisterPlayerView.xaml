@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Registration.Views.RegisterPlayerView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:infra="clr-namespace:Registration.Infrastructure"
+			 xmlns:v="clr-namespace:Registration.Views"
+			 mc:Ignorable="d"			 
+			 infra:FocusExtensions.LoadedFocusedElement="{Binding ElementName=inputName}">
+	
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>	
+
+		<TextBlock Text="Teilnehmer registrieren" Style="{StaticResource Heading1}"/>
+
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="300"/>
+			</Grid.ColumnDefinitions>
+			
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<TextBlock Text="Name" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
+			<TextBox x:Name="inputName" Grid.Column="1" Text="{Binding Path=PlayerName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+
+			<v:RegisterCommandsView Grid.ColumnSpan="2" Grid.Row="1" Height="50" Margin="15"/>
+		</Grid>
+
+		<!--<StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Content="Registrieren" Command="{Binding SubmitCommand}" Margin="5" />
+			<Button Content="Abbrechen" Command="{Binding CancelCommand}" Margin="5"/>
+		</StackPanel>-->
+
+	</Grid>
+</UserControl>

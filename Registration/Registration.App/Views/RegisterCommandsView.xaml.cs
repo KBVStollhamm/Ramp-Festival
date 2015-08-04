@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Practices.Prism.Mvvm;
-using Registration.ViewModels;
 
 namespace Registration.Views
 {
-    /// <summary>
-    /// Interaction logic for RegistrationView.xaml
-    /// </summary>
-    public partial class RegistrationView : UserControl, IRegistrationView
-    {
-        public RegistrationView(RegistrationViewModel viewModel)
-        {
-            InitializeComponent();
-
-            this.DataContext = viewModel;
-        }
-    }
+	/// <summary>
+	/// Interaction logic for RegisterCommandsView.xaml
+	/// </summary>
+	public partial class RegisterCommandsView : UserControl
+	{
+		public RegisterCommandsView()
+		{
+			InitializeComponent();
+		}
+	}
 }

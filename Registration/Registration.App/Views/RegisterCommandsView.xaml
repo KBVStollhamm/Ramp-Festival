@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Registration.Views.RegisterCommandsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+	<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+		<Button Name="SubmitButton" Command="{Binding SubmitCommand}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand">Registrieren</Button>
+		<Button Name="CancelButton" Command="{Binding CancelCommand}" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand">Abbrechen</Button>
+	</StackPanel>
+</UserControl>
