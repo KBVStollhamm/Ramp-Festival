@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Mvvm;
-using Registration.Infrastructure;
 using Registration.ViewModels;
 
 namespace Registration.Views
@@ -21,7 +20,6 @@ namespace Registration.Views
     /// <summary>
     /// Interaction logic for RegistrationView.xaml
     /// </summary>
-    [ViewExport(RegionName = "MainRegion")]
     public partial class RegistrationView : UserControl
     {
         public RegistrationView(RegistrationViewModel viewModel)

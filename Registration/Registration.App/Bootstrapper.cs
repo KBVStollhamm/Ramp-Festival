@@ -5,49 +5,46 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Castle.MicroKernel.Registration;
+using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using PrismContrib.WindsorExtensions;
-using Registration.Infrastructure;
 using Registration.ViewModels;
 using Registration.Views;
 
 namespace Registration
 {
-    public class Bootstrapper : WindsorBootstrapper
-    {
-        protected override DependencyObject CreateShell()
-        {
-            return this.Container.Resolve<Shell>();
-        }
+	public class Bootstrapper : WindsorBootstrapper
+	{
+		protected override void ConfigureModuleCatalog()
+		{
+			base.ConfigureModuleCatalog();
 
-        protected override void ConfigureContainer()
-        {
-            this.Container.Register(Component.For<RegistrationViewModel>());
-            this.Container.Register(Component.For<RegistrationView>());
+			ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
+			moduleCatalog.AddModule(typeof(RegistrationModule));
 
-            this.Container.Register(Component.For<AutoPopulateExportedViewsBehavior>()
-                .LifestyleTransient());
+		}
+		protected override DependencyObject CreateShell()
+		{
+			return this.Container.Resolve<Shell>();
+		}
 
-            this.Container.Register(Component.For<Shell>()
-                .LifestyleSingleton());
+		protected override void ConfigureContainer()
+		{
+			this.Container.Register(Component.For<RegistrationModule>()
+				.LifestyleSingleton());
 
-           base.ConfigureContainer();
-        }
+			this.Container.Register(Component.For<Shell>()
+				.LifestyleSingleton());
 
-        protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
-        {
-            var factory = base.ConfigureDefaultRegionBehaviors();
+		   base.ConfigureContainer();
+		}
 
-            factory.AddIfMissing("AutoPopulateExportedViewsBehavior", typeof(AutoPopulateExportedViewsBehavior));
+		protected override void InitializeShell()
+		{
+			base.InitializeShell();
 
-            return factory;
-        }
-        protected override void InitializeShell()
-        {
-            base.InitializeShell();
-
-            Application.Current.MainWindow = this.Shell as Window;
-            Application.Current.MainWindow.Show();
-        }
-    }
+			Application.Current.MainWindow = (Shell)this.Shell;
+			Application.Current.MainWindow.Show();
+		}
+	}
 }
