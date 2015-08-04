@@ -47,6 +47,18 @@
       <HintPath>..\..\packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Magnum, Version=2.1.3.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Magnum.2.1.3\lib\NET40\Magnum.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MassTransit, Version=2.10.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MassTransit.2.10.1\lib\net40\MassTransit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MassTransit.Transports.MSMQ, Version=2.10.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MassTransit.MSMQ.2.10.1\lib\net40\MassTransit.Transports.MSMQ.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
       <Private>True</Private>
@@ -73,6 +85,10 @@
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PrismContrib.WindsorExtensions, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -119,10 +135,13 @@
     <Compile Include="Infrastructure\InputValidationException.cs" />
     <Compile Include="Models\Party.cs" />
     <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerContestRegistration.cs" />
     <Compile Include="Models\PlayerName.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamName.cs" />
     <Compile Include="RegistrationModule.cs" />
+    <Compile Include="Services\IRegistrationService.cs" />
+    <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
     <Compile Include="ViewModels\IRegisterTeamViewModel.cs" />
     <Compile Include="ViewModels\RegisterPlayerViewModel.cs" />
@@ -234,7 +253,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Registration.Contracts\Registration.Contracts.csproj">
+      <Project>{7f1b89de-97f1-4306-9fca-97dae7a7e179}</Project>
+      <Name>Registration.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

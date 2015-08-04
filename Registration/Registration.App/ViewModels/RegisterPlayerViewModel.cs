@@ -11,13 +11,18 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Registration.Infrastructure;
 using Registration.Models;
+using Registration.Services;
 
 namespace Registration.ViewModels
 {
 	public class RegisterPlayerViewModel : BindableBase, IRegisterPlayerViewModel
 	{
-		public RegisterPlayerViewModel()
+        private readonly IRegistrationService _registrationService;
+
+		public RegisterPlayerViewModel(IRegistrationService registrationService)
 		{
+            _registrationService = registrationService;
+
 			_submitCommand = DelegateCommand.FromAsyncHandler(Submit, CanSubmit);
 			this.CancelCommand = new DelegateCommand(Cancel);
 
@@ -56,8 +61,20 @@ namespace Registration.ViewModels
 
 		public async Task Submit()
 		{
-			await Task.Delay(1000);
+            if (!this.CanSubmit())
+            {
+                throw new InvalidOperationException();
+            }
 
+            PlayerContestRegistration registration = new PlayerContestRegistration()
+            {
+                ContestId = Constants.NinepinContestId,
+                ParticipationId = Guid.NewGuid(),
+                PlayerName = this.PlayerName
+            };
+
+            _registrationService.Submit(registration);
+            Task.Delay(10);
 			this.CloseViewRequested(this, EventArgs.Empty);
 		}
 		public bool CanSubmit()

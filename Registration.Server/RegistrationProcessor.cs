@@ -11,6 +11,7 @@ using Infrastructure.Messaging.Handling;
 using Infrastructure.Messaging.Metadata;
 using Infrastructure.Serialization;
 using Registration.Application.Handlers;
+using MassTransit;
 
 namespace Registration.Server
 {
@@ -87,24 +88,43 @@ namespace Registration.Server
 		{
 			ContainerBuilder builder = new ContainerBuilder();
 
-			builder.RegisterType<TestProcessor>().As<IProcessor>().SingleInstance();
+            //now we add the bus
+            var commandBus = ServiceBusFactory.New(sbc =>
+            {
+                sbc.UseMsmq(msmq =>
+                {
+                    msmq.UseMulticastSubscriptionClient();
+                    msmq.VerifyMsmqConfiguration();
+                });
+                sbc.ReceiveFrom("msmq://localhost/ramp-festival_commands_registration");
 
-			var serializer = container.Resolve<ITextSerializer>();
+                //this will find all of the consumers in the container and
+                //register them with the bus.
+                sbc.Subscribe(s => {
+                    s.Consumer<CommandProcessor>()
+                    .Permanent();
+                });
+            });
+            builder.Register(c => commandBus).As<IServiceBus>().SingleInstance();
 
-			var sessionlessCommandProcessor = new CommandProcessor(new SubscriptionReceiver(), serializer);
-			builder.RegisterInstance(sessionlessCommandProcessor).Named<IProcessor>("SessionlessCommandProcessor");
+            //builder.RegisterType<TestProcessor>().As<IProcessor>().SingleInstance();
 
-			builder.Update(container);
+            //var serializer = container.Resolve<ITextSerializer>();
 
-			this.RegisterCommandHandlers(container, sessionlessCommandProcessor);
-		}
+            //var sessionlessCommandProcessor = new CommandProcessor(new SubscriptionReceiver(), serializer);
+            //builder.RegisterInstance(sessionlessCommandProcessor).Named<IProcessor>("SessionlessCommandProcessor");
 
-		private void RegisterCommandHandlers(IContainer container, ICommandHandlerRegistry registry)
-		{
-			foreach (var commandHandler in container.Resolve<IEnumerable<ICommandHandler>>())
-			{
-				registry.Register(commandHandler);
-			}
-		}
+            builder.Update(container);
+
+            //this.RegisterCommandHandlers(container, sessionlessCommandProcessor);
+        }
+
+		//private void RegisterCommandHandlers(IContainer container, ICommandHandlerRegistry registry)
+		//{
+		//	foreach (var commandHandler in container.Resolve<IEnumerable<ICommandHandler>>())
+		//	{
+		//		registry.Register(commandHandler);
+		//	}
+		//}
 	}
 }

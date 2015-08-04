@@ -10,41 +10,61 @@ using Microsoft.Practices.Prism.Regions;
 using PrismContrib.WindsorExtensions;
 using Registration.ViewModels;
 using Registration.Views;
+using MassTransit;
 
 namespace Registration
 {
-	public class Bootstrapper : WindsorBootstrapper
-	{
-		protected override void ConfigureModuleCatalog()
-		{
-			base.ConfigureModuleCatalog();
+    public class Bootstrapper : WindsorBootstrapper
+    {
+        protected override void ConfigureModuleCatalog()
+        {
+            base.ConfigureModuleCatalog();
 
-			ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-			moduleCatalog.AddModule(typeof(RegistrationModule));
+            ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
+            moduleCatalog.AddModule(typeof(RegistrationModule));
 
-		}
-		protected override DependencyObject CreateShell()
-		{
-			return this.Container.Resolve<Shell>();
-		}
+        }
+        protected override DependencyObject CreateShell()
+        {
+            return this.Container.Resolve<Shell>();
+        }
 
-		protected override void ConfigureContainer()
-		{
-			this.Container.Register(Component.For<RegistrationModule>()
-				.LifestyleSingleton());
+        protected override void ConfigureContainer()
+        {
+            this.Container.Register(Component.For<RegistrationModule>()
+                .LifestyleSingleton());
 
-			this.Container.Register(Component.For<Shell>()
-				.LifestyleSingleton());
+            this.Container.Register(Component.For<Shell>()
+                .LifestyleSingleton());
 
-		   base.ConfigureContainer();
-		}
+            this.RegisterCommandBus();
 
-		protected override void InitializeShell()
-		{
-			base.InitializeShell();
+            base.ConfigureContainer();
+        }
 
-			Application.Current.MainWindow = (Shell)this.Shell;
-			Application.Current.MainWindow.Show();
-		}
-	}
+        protected override void InitializeShell()
+        {
+            base.InitializeShell();
+
+            Application.Current.MainWindow = (Shell)this.Shell;
+            Application.Current.MainWindow.Show();
+        }
+
+        private void RegisterCommandBus()
+        {
+            var commandBus = ServiceBusFactory.New(sbc =>
+            {
+                sbc.UseMsmq(msmq =>
+                {
+                    msmq.UseMulticastSubscriptionClient();
+                    msmq.VerifyMsmqConfiguration();
+                });
+                sbc.ReceiveFrom("msmq://localhost/ramp-festival_commands");
+            });
+
+            this.Container.Register(Component.For<IServiceBus>()
+                .Instance(commandBus)
+                .Named("CommandBus"));
+        }
+    }
 }

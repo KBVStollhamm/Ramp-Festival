@@ -10,6 +10,8 @@ using Microsoft.Practices.Prism.Regions;
 using Registration.Controllers;
 using Registration.ViewModels;
 using Registration.Views;
+using Registration.Services;
+using MassTransit;
 
 namespace Registration
 {
@@ -26,6 +28,10 @@ namespace Registration
 
 		public void Initialize()
 		{
+            _container.Register(Component.For<IRegistrationService>()
+                .ImplementedBy<RegistrationService>()
+                .DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
+
 			_container.Register(Component.For<RegistrationsController>());
 			
 			_container.Register(Component.For<RegistrationViewModel>());
