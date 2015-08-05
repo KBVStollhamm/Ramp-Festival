@@ -9,6 +9,6 @@ namespace Registration.Services
 {
     public interface IRegistrationService
     {
-        void Submit(PlayerContestRegistration registration);
+        Task Submit(PlayerContestRegistration registration);
     }
 }

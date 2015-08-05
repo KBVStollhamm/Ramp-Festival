@@ -254,6 +254,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.Messaging\Infrastructure.Messaging.csproj">
+      <Project>{9255e4a8-8f41-410f-8b4d-34a48d5643ea}</Project>
+      <Name>Infrastructure.Messaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Registration.Contracts\Registration.Contracts.csproj">
       <Project>{7f1b89de-97f1-4306-9fca-97dae7a7e179}</Project>
       <Name>Registration.Contracts</Name>

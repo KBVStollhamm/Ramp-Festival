@@ -17,11 +17,11 @@ namespace Registration.ViewModels
 {
 	public class RegisterPlayerViewModel : BindableBase, IRegisterPlayerViewModel
 	{
-        private readonly IRegistrationService _registrationService;
+		private readonly IRegistrationService _registrationService;
 
 		public RegisterPlayerViewModel(IRegistrationService registrationService)
 		{
-            _registrationService = registrationService;
+			_registrationService = registrationService;
 
 			_submitCommand = DelegateCommand.FromAsyncHandler(Submit, CanSubmit);
 			this.CancelCommand = new DelegateCommand(Cancel);
@@ -61,20 +61,19 @@ namespace Registration.ViewModels
 
 		public async Task Submit()
 		{
-            if (!this.CanSubmit())
-            {
-                throw new InvalidOperationException();
-            }
+			if (!this.CanSubmit())
+			{
+				throw new InvalidOperationException();
+			}
 
-            PlayerContestRegistration registration = new PlayerContestRegistration()
-            {
-                ContestId = Constants.NinepinContestId,
-                ParticipationId = Guid.NewGuid(),
-                PlayerName = this.PlayerName
-            };
+			PlayerContestRegistration registration = new PlayerContestRegistration()
+			{
+				ContestId = Constants.NinepinContestId,
+				PlayerName = this.PlayerName
+			};
 
-            _registrationService.Submit(registration);
-            Task.Delay(10);
+			await _registrationService.Submit(registration);
+
 			this.CloseViewRequested(this, EventArgs.Empty);
 		}
 		public bool CanSubmit()

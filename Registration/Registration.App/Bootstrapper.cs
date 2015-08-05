@@ -59,7 +59,7 @@ namespace Registration
                     msmq.UseMulticastSubscriptionClient();
                     msmq.VerifyMsmqConfiguration();
                 });
-                sbc.ReceiveFrom("msmq://localhost/ramp-festival_commands");
+                sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_commands");
             });
 
             this.Container.Register(Component.For<IServiceBus>()

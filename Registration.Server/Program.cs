@@ -10,6 +10,8 @@ namespace Registration.Server
 	{
 		static void Main(string[] args)
 		{
+			DatabaseSetup.Initialize();
+
 			using (var processor = new RegistrationProcessor(false))
 			{
 				processor.Start();

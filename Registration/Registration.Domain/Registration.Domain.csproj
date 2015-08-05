@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contest\Contest.cs" />
+    <Compile Include="Contest\ContestPlaced.cs" />
+    <Compile Include="Contest\PlayerRegistered.cs" />
     <Compile Include="Participation\Participation.cs" />
     <Compile Include="Participation\ParticipationPlaced.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

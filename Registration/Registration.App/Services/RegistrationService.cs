@@ -9,28 +9,26 @@ using Registration.Commands;
 
 namespace Registration.Services
 {
-    public class RegistrationService : IRegistrationService
-    {
-        private readonly IServiceBus _commandBus;
+	public class RegistrationService : IRegistrationService
+	{
+		private readonly IServiceBus _commandBus;
 
-        public RegistrationService(IServiceBus commandBus)
-        {
-            _commandBus = commandBus;
-        }
+		public RegistrationService(IServiceBus commandBus)
+		{
+			_commandBus = commandBus;
+		}
 
-        public void Submit(PlayerContestRegistration registration)
-        {
-            var command = new RegisterPlayerToContest()
-            {
-                ContestId = registration.ContestId,
-                ParticipationId = registration.ParticipationId,
-                PlayerName = registration.PlayerName
-            };
+		public async Task Submit(PlayerContestRegistration registration)
+		{
+			var command = new RegisterPlayerToContest()
+			{
+				ContestId = registration.ContestId,
+				PlayerName = registration.PlayerName
+			};
 
-            _commandBus.Publish(command);
-            //_commandBus.Publish(new Message() { Text = "Moinsen" });
+			_commandBus.Publish(command);
 
-            //await Task.FromResult<object>(null);
-        }
-    }
+			await Task.FromResult<object>(null);
+		}
+	}
 }
