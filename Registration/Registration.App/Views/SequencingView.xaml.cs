@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Registration.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace Registration.Views
 	/// </summary>
 	public partial class SequencingView : UserControl
 	{
-		public SequencingView()
+		public SequencingView(SequencingViewModel viewModel)
 		{
 			InitializeComponent();
+
+            this.DataContext = viewModel;
 		}
-	}
+    }
 }

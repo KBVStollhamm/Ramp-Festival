@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
+using MassTransit;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using PrismContrib.WindsorExtensions;
 using Registration.ViewModels;
 using Registration.Views;
-using MassTransit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Registration
 {
@@ -31,6 +32,8 @@ namespace Registration
 
         protected override void ConfigureContainer()
         {
+            this.Container.AddFacility<TypedFactoryFacility>();
+
             this.Container.Register(Component.For<RegistrationModule>()
                 .LifestyleSingleton());
 

@@ -12,6 +12,8 @@ using Registration.ViewModels;
 using Registration.Views;
 using Registration.Services;
 using MassTransit;
+using Registration.ReadModel;
+using Registration.ReadModel.Implementation;
 
 namespace Registration
 {
@@ -46,10 +48,17 @@ namespace Registration
 				.ImplementedBy<RegisterTeamViewModel>()
 				.LifestyleTransient());
 
-			_container.Register(Component.For<SequencingView>());
+            _container.Register(Component.For<SequencingViewModel>());
+            _container.Register(Component.For<SequencingView>());
 
-			//_regionManager.RegisterViewWithRegion("MainRegion", typeof(RegistrationView));
-			_container.Resolve<RegistrationsController>().ShowRegistrationView();
+            _container.Register(Component.For<ContestDbContext>()
+                .DependsOn(Dependency.OnValue("nameOrConnectionString", "Registration"))
+                .LifestyleTransient());
+            _container.Register(Component.For<IContestDao>()
+                .ImplementedBy<ContestDao>()
+                .LifestyleTransient());
+
+            _container.Resolve<RegistrationsController>().ShowRegistrationView();
 			_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
 		}
 	}

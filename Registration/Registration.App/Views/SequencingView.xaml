@@ -8,10 +8,17 @@
     <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<TextBlock Text="Nächste Spieler" Style="{StaticResource Heading1}"/>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding Sequence}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding PlayerName}" Style="{DynamicResource Title}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 	</Grid>
 </UserControl>

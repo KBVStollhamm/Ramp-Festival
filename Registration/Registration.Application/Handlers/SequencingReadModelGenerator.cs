@@ -9,6 +9,7 @@ using Registration.Domain.Contest;
 using Registration.ReadModel;
 using Registration.ReadModel.Implementation;
 using Infrastructure.EventSourcing;
+using Registration.Events;
 
 namespace Registration.Application.Handlers
 {
@@ -17,10 +18,12 @@ namespace Registration.Application.Handlers
 		, Consumes<PlayerRegistered>.All
 	{
 		private readonly Func<ContestDbContext> _contextFactory;
+        private readonly IServiceBus _eventBus;
 
-		public SequencingReadModelGenerator(Func<ContestDbContext> contextFactory)
+		public SequencingReadModelGenerator(Func<ContestDbContext> contextFactory, IServiceBus eventBus)
 		{
 			_contextFactory = contextFactory;
+            _eventBus = eventBus;
 		}
 
 		public void Consume(ContestPlaced message)
@@ -56,7 +59,9 @@ namespace Registration.Application.Handlers
 					context.Save(dto);
 				}
 			}
-		}
+
+            _eventBus.Publish(new SequencingChanged() { ContestId = message.SourceId });
+        }
 
 		private static bool WasNotAlreadyHandled(Sequencing sequencing, int eventVersion)
 		{
