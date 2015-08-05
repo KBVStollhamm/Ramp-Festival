@@ -48,7 +48,9 @@
     <Compile Include="Participation\ParticipationPlaced.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.EventSourcing\Infrastructure.EventSourcing.csproj">
       <Project>{c51fbe04-c95c-47c5-bfb8-59f767409028}</Project>

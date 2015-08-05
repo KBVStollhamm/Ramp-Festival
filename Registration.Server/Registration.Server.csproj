@@ -113,10 +113,6 @@
       <Project>{7f1b89de-97f1-4306-9fca-97dae7a7e179}</Project>
       <Name>Registration.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Registration\Registration.Domain\Registration.Domain.csproj">
-      <Project>{30f340e2-2631-4f40-a69a-f56038e572de}</Project>
-      <Name>Registration.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Registration\Registration.ReadModel\Registration.ReadModel.csproj">
       <Project>{c9987b8e-3302-4553-8449-3e750268402c}</Project>
       <Name>Registration.ReadModel</Name>

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EventSourcing.Utils;
 using Infrastructure.Serialization;
+using MassTransit;
+using Infrastructure.Messaging;
 
 namespace Infrastructure.EventSourcing.Sql
 {
@@ -20,14 +22,14 @@ namespace Infrastructure.EventSourcing.Sql
 	{
 		// Could potentially use DataAnnotations to get a friendly/unique name in case of collisions between BCs.
 		private static readonly string sourceType = typeof(T).Name;
-		//private readonly IEventBus eventBus;
+		private readonly IServiceBus eventBus;
 		private readonly ITextSerializer serializer;
 		private readonly Func<EventStoreDbContext> contextFactory;
 		private readonly Func<Guid, IEnumerable<IVersionedEvent>, T> entityFactory;
 
-		public SqlEventSourcedRepository(/*IEventBus eventBus*/ ITextSerializer serializer, Func<EventStoreDbContext> contextFactory)
+		public SqlEventSourcedRepository(IServiceBus eventBus, ITextSerializer serializer, Func<EventStoreDbContext> contextFactory)
 		{
-			//this.eventBus = eventBus;
+			this.eventBus = eventBus;
 			this.serializer = serializer;
 			this.contextFactory = contextFactory;
 
@@ -80,15 +82,13 @@ namespace Infrastructure.EventSourcing.Sql
 				var eventsSet = context.Set<Event>();
 				foreach (var e in events)
 				{
-					eventsSet.Add(this.Serialize(e, correlationId));
+                    this.eventBus.Publish(e, e.GetType());
+                    eventsSet.Add(this.Serialize(e, correlationId));
 				}
 
 				context.SaveChanges();
 			}
-
-			// TODO: guarantee delivery or roll back, or have a way to resume after a system crash
-			//this.eventBus.Publish(events.Select(e => new Envelope<IEvent>(e) { CorrelationId = correlationId }));
-		}
+        }
 
 		private Event Serialize(IVersionedEvent e, string correlationId)
 		{

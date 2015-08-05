@@ -9,7 +9,9 @@ namespace Registration.Domain.Contest
 {
 	public class Contest : EventSourced
 	{
-		protected Contest(Guid id)
+        private int _registeredCount = 0;
+
+        protected Contest(Guid id)
 			: base(id)
 		{
 			this.Handles<ContestPlaced>(When);
@@ -33,9 +35,12 @@ namespace Registration.Domain.Contest
 
 		public void RegisterPlayer(string playerName)
 		{
+            int position = _registeredCount + 1;
+
 			this.Apply(new PlayerRegistered
 				{
-					PlayerName = playerName
+					PlayerName = playerName,
+                    Position = position
 				});
 		}
 
@@ -45,6 +50,7 @@ namespace Registration.Domain.Contest
 
 		private void When(PlayerRegistered e)
 		{
+            _registeredCount = e.Position;
 		}
 	}
 }

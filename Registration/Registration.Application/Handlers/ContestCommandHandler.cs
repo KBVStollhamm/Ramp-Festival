@@ -14,10 +14,12 @@ namespace Registration.Application.Handlers
 		: Consumes<RegisterPlayerToContest>.All
 	{
 		private readonly IEventSourcedRepository<Contest> _repository;
+        private readonly IServiceBus _bus;
 
-		public ContestCommandHandler(IEventSourcedRepository<Contest> repository)
+		public ContestCommandHandler(IEventSourcedRepository<Contest> repository, IServiceBus bus)
 		{
 			_repository = repository;
+            _bus = bus;
 		}
 
 		public void Consume(RegisterPlayerToContest message)
@@ -35,6 +37,6 @@ namespace Registration.Application.Handlers
 			contest.RegisterPlayer(message.PlayerName);
 
 			_repository.Save(contest, message.Id.ToString());
-		}
-	}
+        }
+    }
 }

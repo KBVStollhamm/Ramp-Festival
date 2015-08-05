@@ -59,7 +59,8 @@ namespace Registration
                     msmq.UseMulticastSubscriptionClient();
                     msmq.VerifyMsmqConfiguration();
                 });
-                sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_commands");
+                sbc.ReceiveFrom("msmq://pc-mad/ramp-festival");
+                sbc.SetNetwork("WORKGROUP");
             });
 
             this.Container.Register(Component.For<IServiceBus>()

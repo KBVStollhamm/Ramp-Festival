@@ -10,5 +10,6 @@ namespace Registration.Domain.Contest
 	public class PlayerRegistered : VersionedEvent
 	{
 		public string PlayerName { get; set; }
+        public int Position { get; set; }
 	}
 }

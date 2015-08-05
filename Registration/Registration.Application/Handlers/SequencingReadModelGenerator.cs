@@ -8,6 +8,7 @@ using MassTransit;
 using Registration.Domain.Contest;
 using Registration.ReadModel;
 using Registration.ReadModel.Implementation;
+using Infrastructure.EventSourcing;
 
 namespace Registration.Application.Handlers
 {
@@ -26,7 +27,7 @@ namespace Registration.Application.Handlers
 		{
 			if (message == null) throw new ArgumentNullException("message");
 
-			using (var context = _contextFactory.Invoke())
+            using (var context = _contextFactory.Invoke())
 			{
 				var dto = new Sequencing(message.SourceId)
 				{					
@@ -40,13 +41,13 @@ namespace Registration.Application.Handlers
 		{
 			if (message == null) throw new ArgumentNullException("message");
 
-			using (var context = _contextFactory.Invoke())
+            using (var context = _contextFactory.Invoke())
 			{
 				var dto = context.Find<Sequencing>(message.SourceId);
-				if (WasNotAlreadyHandled(dto, message.Version))
+				if (dto != null && WasNotAlreadyHandled(dto, message.Version))
 				{
 					dto.Version = message.Version;
-					dto.Sequence.Add(new SequencingItem(1)
+					dto.Sequence.Add(new SequencingItem(message.Position)
 						{
 							PlayerName = message.PlayerName,
 							TeamName = ""
@@ -83,5 +84,5 @@ This read model generator has an expectation that the EventBus will deliver mess
 				return false;
 			}
 		}
-	}
+    }
 }

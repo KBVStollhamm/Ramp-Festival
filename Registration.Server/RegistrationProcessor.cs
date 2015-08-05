@@ -14,8 +14,8 @@ using Registration.Application.Handlers;
 using MassTransit;
 using Infrastructure.EventSourcing;
 using Infrastructure.EventSourcing.Sql;
-using Registration.Domain.Contest;
 using Registration.ReadModel.Implementation;
+using Autofac.Core;
 
 namespace Registration.Server
 {
@@ -57,10 +57,6 @@ namespace Registration.Server
 			var container = builder.Build();
 			OnCreateContainer(container);
 
-			var handler = container.Resolve<SequencingReadModelGenerator>();
-			Guid sourceId = Guid.NewGuid();
-			handler.Consume(new ContestPlaced { SourceId = sourceId });
-			handler.Consume(new PlayerRegistered { SourceId = sourceId, PlayerName = "MAD", Version=1 });
 			return container;
 		}
 
@@ -70,11 +66,14 @@ namespace Registration.Server
 			builder.RegisterInstance<IMetadataProvider>(new StandardMetadataProvider());
 
 			builder.RegisterType<EventStoreDbContext>().WithParameter("nameOrConnectionString", "EventStore");
-			builder.RegisterGeneric(typeof(SqlEventSourcedRepository<>))
-				.As(typeof(IEventSourcedRepository<>))
-				.InstancePerLifetimeScope();
+            builder.RegisterGeneric(typeof(SqlEventSourcedRepository<>))
+                .As(typeof(IEventSourcedRepository<>))
+                .InstancePerLifetimeScope();
+                //.WithParameter(new ResolvedParameter(
+                //    (pi, ctx) => pi.ParameterType == typeof(IServiceBus) && pi.Name == "configSectionName",
+                //    (pi, ctx) => ctx.ResolveNamed("CommandBus", typeof(IServiceBus))));
 
-			builder.RegisterType<ContestDbContext>().WithParameter("nameOrConnectionString", "Registration");
+            builder.RegisterType<ContestDbContext>().WithParameter("nameOrConnectionString", "Registration");
 		}
 
 		private void BuildHandlers(ContainerBuilder builder)
@@ -100,48 +99,81 @@ namespace Registration.Server
 		{
 		}
 
-		private void OnCreateContainer(IContainer container)
-		{
-			ContainerBuilder builder = new ContainerBuilder();
+        private void OnCreateContainer(IContainer container)
+        {
+            ContainerBuilder builder = new ContainerBuilder();
 
-			//now we add the bus
-			var commandBus = ServiceBusFactory.New(sbc =>
-			{
-				sbc.UseMsmq(msmq =>
-				{
-					msmq.UseMulticastSubscriptionClient();
-					msmq.VerifyMsmqConfiguration();
-				});
-				sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_commands_registration");
+            // Create the command bus
+            var commandBus = ServiceBusFactory.New(sbc =>
+            {
+                sbc.UseJsonSerializer();
 
-				//this will find all of the consumers in the container and
-				//register them with the bus.
-				sbc.Subscribe(s => {
-					s.LoadFrom(container);
-					//s.Consumer<ContestCommandHandler>()
-					//.Permanent();
-				});
-			});
-			builder.Register(c => commandBus).As<IServiceBus>().SingleInstance();
+                sbc.UseMsmq(msmq =>
+                {
+                    msmq.UseMulticastSubscriptionClient();
+                    msmq.VerifyMsmqConfiguration();
+                });
+                sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_registration");
+                sbc.SetNetwork("WORKGROUP");
 
-			//builder.RegisterType<TestProcessor>().As<IProcessor>().SingleInstance();
+                //this will find all of the consumers in the container and
+                //register them with the bus.
+                sbc.Subscribe(s =>
+                {
+                    s.LoadFrom(container);
+                });
+            });
+            builder.Register(c => commandBus).As<IServiceBus>().SingleInstance();
 
-			//var serializer = container.Resolve<ITextSerializer>();
+            //// Create the event publisher
+            //var eventPublisher = ServiceBusFactory.New(sbc =>
+            //{
+            //    sbc.UseJsonSerializer();
 
-			//var sessionlessCommandProcessor = new CommandProcessor(new SubscriptionReceiver(), serializer);
-			//builder.RegisterInstance(sessionlessCommandProcessor).Named<IProcessor>("SessionlessCommandProcessor");
+            //    sbc.UseMsmq(msmq =>
+            //   {
+            //         msmq.UseMulticastSubscriptionClient();
+            //         msmq.VerifyMsmqConfiguration();
+            //     });
+            //    sbc.ReceiveFrom("msmq://localhost/ramp-festival_events");
 
-			builder.Update(container);
+            //    sbc.Subscribe(s =>
+            //    {
+            //        s.Handler<PlayerRegistered>((e) => Console.WriteLine("jo"));
+            //    });
+            //});
+            //builder.Register(c => eventPublisher).As<IServiceBus>().Named<IServiceBus>("EventPublisher").SingleInstance();
 
-			//this.RegisterCommandHandlers(container, sessionlessCommandProcessor);
-		}
+            //// Create the event bus
+            //var eventBus = ServiceBusFactory.New(sbc =>
+            //{
+            //    sbc.UseJsonSerializer();
 
-		//private void RegisterCommandHandlers(IContainer container, ICommandHandlerRegistry registry)
-		//{
-		//	foreach (var commandHandler in container.Resolve<IEnumerable<ICommandHandler>>())
-		//	{
-		//		registry.Register(commandHandler);
-		//	}
-		//}
-	}
+            //    sbc.UseMsmq(msmq =>
+            //    {
+            //        msmq.UseMulticastSubscriptionClient();
+            //        msmq.VerifyMsmqConfiguration();
+            //    });
+            //    sbc.ReceiveFrom("msmq://localhost/ramp-festival_events_registration");
+
+            //    //this will find all of the consumers in the container and
+            //    //register them with the bus.
+            //    sbc.Subscribe(s =>
+            //                {
+            //                s.Handler<PlayerRegistered>((e) => Console.WriteLine("jo"));
+            //                });
+            //});
+            //builder.Register(c => eventBus).As<IServiceBus>().Named<IServiceBus>("EventBus").SingleInstance();
+
+            builder.Update(container);
+        }
+
+        //private void RegisterCommandHandlers(IContainer container, ICommandHandlerRegistry registry)
+        //{
+        //	foreach (var commandHandler in container.Resolve<IEnumerable<ICommandHandler>>())
+        //	{
+        //		registry.Register(commandHandler);
+        //	}
+        //}
+    }
 }
