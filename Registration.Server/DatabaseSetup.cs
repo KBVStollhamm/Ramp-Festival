@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EventSourcing.Sql;
+using Registration.ReadModel.Implementation;
 
 namespace Registration.Server
 {
@@ -18,6 +19,8 @@ namespace Registration.Server
 			//Database.DefaultConnectionFactory = new ServiceConfigurationSettingConnectionFactory(Database.DefaultConnectionFactory);
 
 			Database.SetInitializer<EventStoreDbContext>(new CreateDatabaseIfNotExists<EventStoreDbContext>());
+
+			Database.SetInitializer<ContestDbContext>(new CreateDatabaseIfNotExists<ContestDbContext>());
 		}
 	}
 }

@@ -15,6 +15,7 @@ using MassTransit;
 using Infrastructure.EventSourcing;
 using Infrastructure.EventSourcing.Sql;
 using Registration.Domain.Contest;
+using Registration.ReadModel.Implementation;
 
 namespace Registration.Server
 {
@@ -56,6 +57,10 @@ namespace Registration.Server
 			var container = builder.Build();
 			OnCreateContainer(container);
 
+			var handler = container.Resolve<SequencingReadModelGenerator>();
+			Guid sourceId = Guid.NewGuid();
+			handler.Consume(new ContestPlaced { SourceId = sourceId });
+			handler.Consume(new PlayerRegistered { SourceId = sourceId, PlayerName = "MAD", Version=1 });
 			return container;
 		}
 
@@ -68,11 +73,14 @@ namespace Registration.Server
 			builder.RegisterGeneric(typeof(SqlEventSourcedRepository<>))
 				.As(typeof(IEventSourcedRepository<>))
 				.InstancePerLifetimeScope();
+
+			builder.RegisterType<ContestDbContext>().WithParameter("nameOrConnectionString", "Registration");
 		}
 
 		private void BuildHandlers(ContainerBuilder builder)
 		{
 			builder.RegisterType<ContestCommandHandler>().AsSelf();
+			builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
 		}
 
 
