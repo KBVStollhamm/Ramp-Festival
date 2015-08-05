@@ -34,6 +34,7 @@ namespace Registration.ViewModels
         private void LoadData()
         {
             Sequencing model = _contestDao.FindSequencing(Constants.NinepinContestId);
+            if (model == null) return;
 
             App.Current.Dispatcher.Invoke(() =>
             {
