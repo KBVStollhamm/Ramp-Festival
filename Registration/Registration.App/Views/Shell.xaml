@@ -16,12 +16,13 @@
 	</Window.Resources>
 
 	<Grid>
-		<Grid Background="#FF404040" Visibility="{Binding SplashVisibility}">
+		<Grid Visibility="{Binding SplashVisibility}">
 			<TextBlock Text="Anwendung wird gestartet..." Style="{DynamicResource Heading1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 		</Grid>
 
-		<Grid Background="{StaticResource AppMainBackground}" Visibility="{Binding ShellVisibility}">
-			<Grid.ColumnDefinitions>
+		<!--<Grid Background="{StaticResource AppMainBackground}" Visibility="{Binding ShellVisibility}">-->
+		<Grid Background="{DynamicResource AppMainBackground}" Visibility="{Binding ShellVisibility}">
+				<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="2*"/>
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>

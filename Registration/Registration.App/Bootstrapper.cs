@@ -27,7 +27,7 @@ namespace Registration
 		}
 		protected override DependencyObject CreateShell()
 		{
-			return this.Container.Resolve<Shell>();
+			return this.Container.Resolve<Shell3>();
 		}
 
 		protected override void ConfigureContainer()
@@ -39,7 +39,7 @@ namespace Registration
 
 			this.Container.Register(Component.For<ShellViewModel>()
 				.LifestyleSingleton());
-			this.Container.Register(Component.For<Shell>()
+			this.Container.Register(Component.For<Shell3>()
 				.LifestyleSingleton());
 
 			this.RegisterCommandBus();
@@ -51,7 +51,7 @@ namespace Registration
 		{
 			base.InitializeShell();
 
-			Application.Current.MainWindow = (Shell)this.Shell;
+			Application.Current.MainWindow = (Shell3)this.Shell;
 			Application.Current.MainWindow.Show();
 		}
 

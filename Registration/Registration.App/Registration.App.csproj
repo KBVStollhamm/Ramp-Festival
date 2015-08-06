@@ -141,9 +141,11 @@
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Converters\VisibilityToStarHeightConverter.cs" />
     <Compile Include="Events\ModuleInitialized.cs" />
     <Compile Include="Infrastructure\FocusExtensions.cs" />
     <Compile Include="Infrastructure\InputValidationException.cs" />
+    <Compile Include="Infrastructure\RegionNames.cs" />
     <Compile Include="Models\Party.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerContestRegistration.cs" />
@@ -179,6 +181,9 @@
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell3.xaml.cs">
+      <DependentUpon>Shell3.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\PlayerHeaderControl.xaml">
       <SubType>Designer</SubType>
@@ -236,6 +241,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Shell3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -278,6 +287,20 @@
       <Project>{c9987b8e-3302-4553-8449-3e750268402c}</Project>
       <Name>Registration.ReadModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Cool-Text-125969995899261.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\2015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\background.jpg" />
+    <Resource Include="Assets\background2.jpg" />
+    <Resource Include="Assets\background3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

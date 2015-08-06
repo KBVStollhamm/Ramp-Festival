@@ -62,6 +62,9 @@ namespace Registration
 				.ImplementedBy<ContestDao>()
 				.LifestyleTransient());
 
+			_container.Resolve<RegistrationsController>().ShowRegistrationView();
+			//_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
+
 			Task.Factory.StartNew(() =>
 			{
 				var ctx = _container.Resolve<ContestDbContext>();
@@ -70,7 +73,6 @@ namespace Registration
 			})
 			.ContinueWith((r) =>
 			{
-				_container.Resolve<RegistrationsController>().ShowRegistrationView();
 				_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
 			}, TaskScheduler.FromCurrentSynchronizationContext())
 			.ContinueWith(async r =>
