@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="Handlers\SinglePlayerGameCommandHandler.cs" />
     <Compile Include="Handlers\SequencingReadModelGenerator.cs" />
-    <Compile Include="Handlers\TeamContestCommandHandler.cs" />
+    <Compile Include="Handlers\TeamGameCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
