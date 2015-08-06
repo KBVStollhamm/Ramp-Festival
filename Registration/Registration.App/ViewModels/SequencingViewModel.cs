@@ -37,17 +37,24 @@ namespace Registration.ViewModels
 
 		private async Task LoadData()
 		{
-			//await Task.Delay(1);
+            try
+            {
 
-			Sequencing model = await _contestDao.FindSequencing(Constants.NinepinContestId);
-			if (model == null) return;
 
-			App.Current.Dispatcher.Invoke(() =>
-			{
-				_sequence.Clear();
-				foreach (var item in model.Sequence.OrderBy(x => x.Position))
-					_sequence.Add(item);
-			});
+                Sequencing model = await _contestDao.FindSequencing(Constants.NinepinContestId);
+                if (model == null) return;
+
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    _sequence.Clear();
+                    foreach (var item in model.Sequence.OrderBy(x => x.RegisteredAt).ThenBy(x => x.Position))
+                        _sequence.Add(item);
+                });
+            }
+            catch (Exception ex)
+            {
+                  //TODO: Implement exception handling
+            }
 		}
 
 		public ICommand RefreshDataCommand { get; private set; }

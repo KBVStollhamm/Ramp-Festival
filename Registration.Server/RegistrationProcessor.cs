@@ -78,8 +78,9 @@ namespace Registration.Server
 
 		private void BuildHandlers(ContainerBuilder builder)
 		{
-			builder.RegisterType<ContestCommandHandler>().AsSelf();
-			builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
+			builder.RegisterType<SinglePlayerGameCommandHandler>().AsSelf();
+            builder.RegisterType<TeamGameCommandHandler>().AsSelf();
+            builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
 		}
 
 

@@ -8,17 +8,12 @@ namespace Registration.ReadModel
 {
 	public class SequencingItem
 	{
-		internal SequencingItem()
+		public SequencingItem()
 		{
 		}
 
-		public SequencingItem(int position)
-		{
-			this.SequencingId = Guid.NewGuid();
-			this.Position = position;
-		}
-
-		public Guid SequencingId { get; set; }
+		public Guid GameId { get; set; }
+        public DateTime RegisteredAt { get; set; }
 		public int Position {get ;set;}
 		public string PlayerName { get; set; }
 		public string TeamName { get; set; }

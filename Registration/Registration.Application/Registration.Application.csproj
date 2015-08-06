@@ -60,8 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\ContestCommandHandler.cs" />
+    <Compile Include="Handlers\SinglePlayerGameCommandHandler.cs" />
     <Compile Include="Handlers\SequencingReadModelGenerator.cs" />
+    <Compile Include="Handlers\TeamContestCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

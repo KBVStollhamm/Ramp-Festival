@@ -116,7 +116,6 @@ namespace Registration.ViewModels
 			}
 		}
 
-
 		private void AddError(string ruleName)
 		{
 			if (!_errors.Contains(ruleName))

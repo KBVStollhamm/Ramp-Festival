@@ -15,6 +15,7 @@ namespace Registration.Commands
 		}
 
 		public Guid Id { get; set; }
+        public Guid GameId { get; set; }
 		public Guid ContestId { get; set; }
 		public string PlayerName { get; set; }
 	}

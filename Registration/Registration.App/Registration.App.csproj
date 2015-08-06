@@ -151,10 +151,12 @@
     <Compile Include="Models\PlayerContestRegistration.cs" />
     <Compile Include="Models\PlayerName.cs" />
     <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\TeamContestRegistration.cs" />
     <Compile Include="Models\TeamName.cs" />
     <Compile Include="RegistrationModule.cs" />
     <Compile Include="Services\IRegistrationService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
+    <Compile Include="ViewModels\ContestControllingViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
     <Compile Include="ViewModels\IRegisterTeamViewModel.cs" />
@@ -164,6 +166,9 @@
     <Compile Include="ViewModels\SequencingItemViewModel.cs" />
     <Compile Include="ViewModels\SequencingViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\ContestControllingView.xaml.cs">
+      <DependentUpon>ContestControllingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -218,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Tile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContestControllingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

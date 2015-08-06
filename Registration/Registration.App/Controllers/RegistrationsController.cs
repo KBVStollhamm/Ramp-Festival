@@ -68,8 +68,17 @@ namespace Registration.Controllers
 	
 		public void RegisterTeam()
 		{
-			System.Windows.MessageBox.Show("Register Team");
-		}
+            IRegion mainRegion = _regionManager.Regions["MainRegion"];
+
+            var viewModel = ServiceLocator.Current.GetInstance<IRegisterTeamViewModel>();
+            viewModel.CloseViewRequested += delegate
+            {
+                this.ShowRegistrationView();
+            };
+            mainRegion.Add(viewModel);
+
+            mainRegion.Activate(viewModel);
+        }
 
 		public void ShowRegistrationView()
 		{

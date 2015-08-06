@@ -14,10 +14,10 @@ using Registration.Events;
 namespace Registration.Application.Handlers
 {
 	public class SequencingReadModelGenerator
-		: Consumes<ContestPlaced>.All
-		, Consumes<PlayerRegistered>.All
-	{
-		private readonly Func<ContestDbContext> _contextFactory;
+		: Consumes<SinglePlayerGamePlaced>.All
+		, Consumes<TeamGamePlaced>.All
+    {
+        private readonly Func<ContestDbContext> _contextFactory;
         private readonly IServiceBus _eventBus;
 
 		public SequencingReadModelGenerator(Func<ContestDbContext> contextFactory, IServiceBus eventBus)
@@ -26,68 +26,100 @@ namespace Registration.Application.Handlers
             _eventBus = eventBus;
 		}
 
-		public void Consume(ContestPlaced message)
+		public void Consume(SinglePlayerGamePlaced message)
 		{
 			if (message == null) throw new ArgumentNullException("message");
 
             using (var context = _contextFactory.Invoke())
 			{
-				var dto = new Sequencing(message.SourceId)
-				{					
-				};
+				var dto = context.Find<Sequencing>(message.ContestId);
+                if (dto == null)
+                {
+                    dto = new Sequencing(message.ContestId);
+                }
 
-				context.Save(dto);
-			}
-		}
+                var dtoItem = dto.Sequence.SingleOrDefault(x => x.GameId.Equals(message.SourceId));
+                if (dtoItem == null)
+                {
+                    dtoItem = new SequencingItem();
+                    dto.Sequence.Add(dtoItem);
+                }
+                dtoItem.GameId = message.SourceId;
+                dtoItem.RegisteredAt = message.RegisteredAt;
+                dtoItem.Position = 1;
+                dtoItem.PlayerName = message.PlayerName;
+                dtoItem.TeamName = string.Empty;
 
-		public void Consume(PlayerRegistered message)
-		{
-			if (message == null) throw new ArgumentNullException("message");
-
-            using (var context = _contextFactory.Invoke())
-			{
-				var dto = context.Find<Sequencing>(message.SourceId);
-				if (dto != null && WasNotAlreadyHandled(dto, message.Version))
-				{
-					dto.Version = message.Version;
-					dto.Sequence.Add(new SequencingItem(message.Position)
-						{
-							PlayerName = message.PlayerName,
-							TeamName = ""
-						});
-
-					context.Save(dto);
-				}
+                context.Save(dto);
 			}
 
-            _eventBus.Publish(new SequencingChanged() { ContestId = message.SourceId });
+            _eventBus.Publish(new SequencingChanged() { ContestId = message.ContestId });
         }
 
-		private static bool WasNotAlreadyHandled(Sequencing sequencing, int eventVersion)
-		{
-			// This assumes that events will be handled in order, but we might get the same message more than once.
-			if (eventVersion > sequencing.Version)
-			{
-				return true;
-			}
-			else if (eventVersion == sequencing.Version)
-			{
-				Trace.TraceWarning(
-					"Ignoring duplicate sequencing update message with version {1} for contest id {0}",
-					sequencing.ContestId,
-					eventVersion);
-				return false;
-			}
-			else
-			{
-				Trace.TraceWarning(
-					@"An older sequencing update message was received with version {1} for contest id {0}, last known version {2}.
-This read model generator has an expectation that the EventBus will deliver messages for the same source in order.",
-					sequencing.ContestId,
-					eventVersion,
-					sequencing.Version);
-				return false;
-			}
-		}
+        public void Consume(TeamGamePlaced message)
+        {
+            if (message == null) throw new ArgumentNullException("message");
+
+            using (var context = _contextFactory.Invoke())
+            {
+                var dto = context.Find<Sequencing>(message.ContestId);
+                if (dto == null)
+                {
+                    dto = new Sequencing(message.ContestId);
+                }
+
+                AddOrUpdate(dto, message.SourceId, message.RegisteredAt, 1, message.Player1Name, message.TeamName);
+                AddOrUpdate(dto, message.SourceId, message.RegisteredAt, 2, message.Player2Name, message.TeamName);
+                AddOrUpdate(dto, message.SourceId, message.RegisteredAt, 3, message.Player3Name, message.TeamName);
+                AddOrUpdate(dto, message.SourceId, message.RegisteredAt, 4, message.Player4Name, message.TeamName);
+                AddOrUpdate(dto, message.SourceId, message.RegisteredAt, 5, message.Player5Name, message.TeamName);
+
+                context.Save(dto);
+            }
+
+            _eventBus.Publish(new SequencingChanged() { ContestId = message.ContestId });
+        }
+
+        private static void AddOrUpdate(Sequencing sequence, Guid gameId, DateTime registeredAt, int position, string playerName, string teamName)
+        {
+            var dtoItem = sequence.Sequence.SingleOrDefault(x => x.GameId.Equals(gameId) && x.Position == position);
+            if (dtoItem == null)
+            {
+                dtoItem = new SequencingItem();
+                sequence.Sequence.Add(dtoItem);
+            }
+            dtoItem.GameId = gameId;
+            dtoItem.RegisteredAt = registeredAt;
+            dtoItem.Position = position;
+            dtoItem.PlayerName = playerName;
+            dtoItem.TeamName = teamName;
+        }
+
+        //		private static bool WasNotAlreadyHandled(Sequencing sequencing, int eventVersion)
+        //		{
+        //			// This assumes that events will be handled in order, but we might get the same message more than once.
+        //			if (eventVersion > sequencing.Version)
+        //			{
+        //				return true;
+        //			}
+        //			else if (eventVersion == sequencing.Version)
+        //			{
+        //				Trace.TraceWarning(
+        //					"Ignoring duplicate sequencing update message with version {1} for contest id {0}",
+        //					sequencing.ContestId,
+        //					eventVersion);
+        //				return false;
+        //			}
+        //			else
+        //			{
+        //				Trace.TraceWarning(
+        //					@"An older sequencing update message was received with version {1} for contest id {0}, last known version {2}.
+        //This read model generator has an expectation that the EventBus will deliver messages for the same source in order.",
+        //					sequencing.ContestId,
+        //					eventVersion,
+        //					sequencing.Version);
+        //				return false;
+        //			}
+        //		}
     }
 }

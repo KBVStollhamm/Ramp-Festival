@@ -15,8 +15,11 @@
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">
 			<v:RegisterPlayerView />
 		</DataTemplate>
-		
-		<Storyboard x:Key="InTransition">
+        <DataTemplate DataType="{x:Type vm:RegisterTeamViewModel}">
+            <v:RegisterTeamView />
+        </DataTemplate>
+
+        <Storyboard x:Key="InTransition">
 			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Logo" Storyboard.TargetProperty="(UIElement.Opacity)">
 				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
 				<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
