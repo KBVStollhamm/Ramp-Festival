@@ -7,7 +7,7 @@
 		xmlns:vm="clr-namespace:Registration.ViewModels"
 		xmlns:v="clr-namespace:Registration.Views"
 		mc:Ignorable="d"
-		Title="Rampenfest - Registrierung" Height="300" Width="300" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+		Title="Rampenfest - Registrierung" Height="300" Width="300" WindowState="Maximized" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
 
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">
