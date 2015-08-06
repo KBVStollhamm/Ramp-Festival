@@ -8,40 +8,48 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Prism.Commands;
+using System.Windows.Input;
 
 namespace Registration.ViewModels
 {
-    public class SequencingViewModel : BindableBase
-    {
-        private readonly IContestDao _contestDao;
+	public class SequencingViewModel : BindableBase
+	{
+		private readonly IContestDao _contestDao;
 
-        public SequencingViewModel(IContestDao contestDao, IServiceBus eventBus)
-        {
-            _contestDao = contestDao;
+		public SequencingViewModel(IContestDao contestDao, IServiceBus eventBus)
+		{
+			_contestDao = contestDao;
 
-            _sequence = new ObservableCollection<SequencingItem>();
-            this.Sequence = new ReadOnlyObservableCollection<SequencingItem>(_sequence);
-            eventBus.SubscribeHandler<SequencingChanged>(e =>
-            {
-                LoadData();
-            }, e => e.ContestId.Equals(Constants.NinepinContestId));
-            LoadData();
-        }
+			_sequence = new ObservableCollection<SequencingItem>();
+			this.Sequence = new ReadOnlyObservableCollection<SequencingItem>(_sequence);
+			eventBus.SubscribeHandler<SequencingChanged>(async (e) =>
+			{
+				await LoadData();
+			}, e => e.ContestId.Equals(Constants.NinepinContestId));
 
-        private ObservableCollection<SequencingItem> _sequence;
-        public ReadOnlyObservableCollection<SequencingItem> Sequence { get; private set; }
+			this.RefreshDataCommand = DelegateCommand.FromAsyncHandler(LoadData);
+		}
 
-        private void LoadData()
-        {
-            Sequencing model = _contestDao.FindSequencing(Constants.NinepinContestId);
-            if (model == null) return;
+		private ObservableCollection<SequencingItem> _sequence;
+		public ReadOnlyObservableCollection<SequencingItem> Sequence { get; private set; }
 
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                _sequence.Clear();
-                foreach (var item in model.Sequence.OrderBy(x => x.Position))
-                    _sequence.Add(item);
-            });
-        }
-    }
+		private async Task LoadData()
+		{
+			//await Task.Delay(1);
+
+			Sequencing model = await _contestDao.FindSequencing(Constants.NinepinContestId);
+			if (model == null) return;
+
+			App.Current.Dispatcher.Invoke(() =>
+			{
+				_sequence.Clear();
+				foreach (var item in model.Sequence.OrderBy(x => x.Position))
+					_sequence.Add(item);
+			});
+		}
+
+		public ICommand RefreshDataCommand { get; private set; }
+	}
 }

@@ -8,6 +8,6 @@ namespace Registration.ReadModel
 {
 	public interface IContestDao
 	{
-		Sequencing FindSequencing(Guid contestId);
+		Task<Sequencing> FindSequencing(Guid contestId);
 	}
 }

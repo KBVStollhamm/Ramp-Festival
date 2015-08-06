@@ -15,60 +15,74 @@ using System.Windows;
 
 namespace Registration
 {
-    public class Bootstrapper : WindsorBootstrapper
-    {
-        protected override void ConfigureModuleCatalog()
-        {
-            base.ConfigureModuleCatalog();
+	public class Bootstrapper : WindsorBootstrapper
+	{
+		protected override void ConfigureModuleCatalog()
+		{
+			base.ConfigureModuleCatalog();
 
-            ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
-            moduleCatalog.AddModule(typeof(RegistrationModule));
+			ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
+			moduleCatalog.AddModule(typeof(RegistrationModule));
 
-        }
-        protected override DependencyObject CreateShell()
-        {
-            return this.Container.Resolve<Shell>();
-        }
+		}
+		protected override DependencyObject CreateShell()
+		{
+			return this.Container.Resolve<Shell>();
+		}
 
-        protected override void ConfigureContainer()
-        {
-            this.Container.AddFacility<TypedFactoryFacility>();
+		protected override void ConfigureContainer()
+		{
+			this.Container.AddFacility<TypedFactoryFacility>();
 
-            this.Container.Register(Component.For<RegistrationModule>()
-                .LifestyleSingleton());
+			this.Container.Register(Component.For<RegistrationModule>()
+				.LifestyleSingleton());
 
-            this.Container.Register(Component.For<Shell>()
-                .LifestyleSingleton());
+			this.Container.Register(Component.For<ShellViewModel>()
+				.LifestyleSingleton());
+			this.Container.Register(Component.For<Shell>()
+				.LifestyleSingleton());
 
-            this.RegisterCommandBus();
+			this.RegisterCommandBus();
 
-            base.ConfigureContainer();
-        }
+			base.ConfigureContainer();
+		}
 
-        protected override void InitializeShell()
-        {
-            base.InitializeShell();
+		protected override void InitializeShell()
+		{
+			base.InitializeShell();
 
-            Application.Current.MainWindow = (Shell)this.Shell;
-            Application.Current.MainWindow.Show();
-        }
+			Application.Current.MainWindow = (Shell)this.Shell;
+			Application.Current.MainWindow.Show();
+		}
 
-        private void RegisterCommandBus()
-        {
-            var commandBus = ServiceBusFactory.New(sbc =>
-            {
-                sbc.UseMsmq(msmq =>
-                {
-                    msmq.UseMulticastSubscriptionClient();
-                    msmq.VerifyMsmqConfiguration();
-                });
-                sbc.ReceiveFrom("msmq://pc-mad/ramp-festival");
-                sbc.SetNetwork("WORKGROUP");
-            });
+		protected override void InitializeModules()
+		{
 
-            this.Container.Register(Component.For<IServiceBus>()
-                .Instance(commandBus)
-                .Named("CommandBus"));
-        }
-    }
+			base.InitializeModules();
+
+			//EventAggregator.GetEvent<MessageUpdateEvent>().Publish(new MessageUpdateEvent { Message = "Module1" });
+
+			//IModule splashModule = Container.Resolve<RegistrationModule>();
+			//splashModule.Initialize();
+
+		}
+
+		private void RegisterCommandBus()
+		{
+			var commandBus = ServiceBusFactory.New(sbc =>
+			{
+				sbc.UseMsmq(msmq =>
+				{
+					msmq.UseMulticastSubscriptionClient();
+					msmq.VerifyMsmqConfiguration();
+				});
+				sbc.ReceiveFrom("msmq://pc-mad/ramp-festival");
+				sbc.SetNetwork("WORKGROUP");
+			});
+
+			this.Container.Register(Component.For<IServiceBus>()
+				.Instance(commandBus)
+				.Named("CommandBus"));
+		}
+	}
 }

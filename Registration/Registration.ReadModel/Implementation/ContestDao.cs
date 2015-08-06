@@ -16,13 +16,13 @@ namespace Registration.ReadModel.Implementation
 			_contextFactory = contextFactory;
 		}
 
-		public Sequencing FindSequencing(Guid contestId)
+		public async Task<Sequencing> FindSequencing(Guid contestId)
 		{
 			using (var context = _contextFactory.Invoke())
 			{
-				return context.Sequencing
+				return await context.Sequencing
 					.Include(seq => seq.Sequence)
-					.FirstOrDefault(seq => seq.ContestId.Equals(contestId));
+					.FirstOrDefaultAsync(seq => seq.ContestId.Equals(contestId));
 			}
 		}
 	}

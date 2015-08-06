@@ -8,20 +8,26 @@
 		xmlns:v="clr-namespace:Registration.Views"
 		mc:Ignorable="d"
 		Title="Rampenfest - Registrierung" Height="300" Width="300" WindowState="Maximized" WindowStartupLocation="CenterScreen">
-	
+
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">
 			<v:RegisterPlayerView />
 		</DataTemplate>
 	</Window.Resources>
-	
-	<Grid Background="{StaticResource AppMainBackground}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="2*"/>
-			<ColumnDefinition />
-		</Grid.ColumnDefinitions>
 
-		<ContentControl prism:RegionManager.RegionName="MainRegion" Margin="30" />
-		<ContentControl Grid.Column="1" prism:RegionManager.RegionName="DetailsRegion" Margin="0 30 30 30"/>
+	<Grid>
+		<Grid Background="#FF404040" Visibility="{Binding SplashVisibility}">
+			<TextBlock Text="Anwendung wird gestartet..." Style="{DynamicResource Heading1}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		</Grid>
+
+		<Grid Background="{StaticResource AppMainBackground}" Visibility="{Binding ShellVisibility}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<ContentControl prism:RegionManager.RegionName="MainRegion" Margin="30" />
+			<ContentControl Grid.Column="1" prism:RegionManager.RegionName="DetailsRegion" Margin="0 30 30 30"/>
+		</Grid>
 	</Grid>
 </Window>

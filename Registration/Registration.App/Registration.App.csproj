@@ -108,6 +108,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -140,6 +141,7 @@
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Events\ModuleInitialized.cs" />
     <Compile Include="Infrastructure\FocusExtensions.cs" />
     <Compile Include="Infrastructure\InputValidationException.cs" />
     <Compile Include="Models\Party.cs" />
@@ -158,6 +160,7 @@
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SequencingItemViewModel.cs" />
     <Compile Include="ViewModels\SequencingViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\IRegistrationView.cs" />
     <Compile Include="Views\RegisterCommandsView.xaml.cs">
       <DependentUpon>RegisterCommandsView.xaml</DependentUpon>
