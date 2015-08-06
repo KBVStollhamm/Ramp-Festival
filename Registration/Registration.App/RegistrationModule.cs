@@ -39,6 +39,9 @@ namespace Registration
 				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
 
 			_container.Register(Component.For<RegistrationsController>());
+
+			_container.Register(Component.For<HomeViewModel>());
+			_container.Register(Component.For<HomeView>());
 			
 			_container.Register(Component.For<RegistrationViewModel>());
 			_container.Register(Component.For<IRegistrationView>()
@@ -62,8 +65,8 @@ namespace Registration
 				.ImplementedBy<ContestDao>()
 				.LifestyleTransient());
 
-			_container.Resolve<RegistrationsController>().ShowRegistrationView();
-			//_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
+			//_container.Resolve<RegistrationsController>().ShowRegistrationView();
+			_regionManager.RegisterViewWithRegion("MainRegion", typeof(HomeView));
 
 			Task.Factory.StartNew(() =>
 			{
