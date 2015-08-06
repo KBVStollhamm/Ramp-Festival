@@ -8,9 +8,9 @@ namespace Registration.ReadModel
 {
 	public class SequencingItem
 	{
-        internal SequencingItem()
-        {
-        }
+		internal SequencingItem()
+		{
+		}
 
 		public SequencingItem(int position)
 		{

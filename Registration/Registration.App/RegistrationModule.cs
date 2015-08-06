@@ -14,6 +14,10 @@ using Registration.Services;
 using MassTransit;
 using Registration.ReadModel;
 using Registration.ReadModel.Implementation;
+using System.Data.Entity;
+using System.Threading;
+using Microsoft.Practices.Prism.PubSubEvents;
+using Registration.Events;
 
 namespace Registration
 {
@@ -30,11 +34,14 @@ namespace Registration
 
 		public void Initialize()
 		{
-            _container.Register(Component.For<IRegistrationService>()
-                .ImplementedBy<RegistrationService>()
-                .DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
+			_container.Register(Component.For<IRegistrationService>()
+				.ImplementedBy<RegistrationService>()
+				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
 
 			_container.Register(Component.For<RegistrationsController>());
+
+			_container.Register(Component.For<HomeViewModel>());
+			_container.Register(Component.For<HomeView>());
 			
 			_container.Register(Component.For<RegistrationViewModel>());
 			_container.Register(Component.For<IRegistrationView>()
@@ -48,18 +55,43 @@ namespace Registration
 				.ImplementedBy<RegisterTeamViewModel>()
 				.LifestyleTransient());
 
-            _container.Register(Component.For<SequencingViewModel>());
-            _container.Register(Component.For<SequencingView>());
+			_container.Register(Component.For<SequencingViewModel>());
+			_container.Register(Component.For<SequencingView>());
 
-            _container.Register(Component.For<ContestDbContext>()
-                .DependsOn(Dependency.OnValue("nameOrConnectionString", "Registration"))
-                .LifestyleTransient());
-            _container.Register(Component.For<IContestDao>()
-                .ImplementedBy<ContestDao>()
-                .LifestyleTransient());
+			_container.Register(Component.For<ContestDbContext>()
+				.DependsOn(Dependency.OnValue("nameOrConnectionString", "Registration"))
+				.LifestyleTransient());
+			_container.Register(Component.For<IContestDao>()
+				.ImplementedBy<ContestDao>()
+				.LifestyleTransient());
 
-            _container.Resolve<RegistrationsController>().ShowRegistrationView();
-			_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
+			//_container.Resolve<RegistrationsController>().ShowRegistrationView();
+			_regionManager.RegisterViewWithRegion("MainRegion", typeof(HomeView));
+
+			Task.Factory.StartNew(() =>
+			{
+				var ctx = _container.Resolve<ContestDbContext>();
+				ctx.Database.Initialize(true);
+				_container.Release(ctx);
+			})
+			.ContinueWith((r) =>
+			{
+				_regionManager.RegisterViewWithRegion("DetailsRegion", typeof(SequencingView));
+			}, TaskScheduler.FromCurrentSynchronizationContext())
+			.ContinueWith(async r =>
+			{
+				var eventAggragator = _container.Resolve<IEventAggregator>();
+				eventAggragator.GetEvent<ModuleInitialized>().Publish(new ModuleInitialized());
+				_container.Release(eventAggragator);
+
+				await Task.Delay(100);
+			});
+
+		}
+
+		private void InitializeDatabase(Database db)
+		{
+			db.Initialize(true);
 		}
 	}
 }

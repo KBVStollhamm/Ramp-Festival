@@ -66,14 +66,14 @@ namespace Registration.Server
 			builder.RegisterInstance<IMetadataProvider>(new StandardMetadataProvider());
 
 			builder.RegisterType<EventStoreDbContext>().WithParameter("nameOrConnectionString", "EventStore");
-            builder.RegisterGeneric(typeof(SqlEventSourcedRepository<>))
-                .As(typeof(IEventSourcedRepository<>))
-                .InstancePerLifetimeScope();
-                //.WithParameter(new ResolvedParameter(
-                //    (pi, ctx) => pi.ParameterType == typeof(IServiceBus) && pi.Name == "configSectionName",
-                //    (pi, ctx) => ctx.ResolveNamed("CommandBus", typeof(IServiceBus))));
+			builder.RegisterGeneric(typeof(SqlEventSourcedRepository<>))
+				.As(typeof(IEventSourcedRepository<>))
+				.InstancePerLifetimeScope();
+				//.WithParameter(new ResolvedParameter(
+				//	(pi, ctx) => pi.ParameterType == typeof(IServiceBus) && pi.Name == "configSectionName",
+				//	(pi, ctx) => ctx.ResolveNamed("CommandBus", typeof(IServiceBus))));
 
-            builder.RegisterType<ContestDbContext>().WithParameter("nameOrConnectionString", "Registration");
+			builder.RegisterType<ContestDbContext>().WithParameter("nameOrConnectionString", "Registration");
 		}
 
 		private void BuildHandlers(ContainerBuilder builder)
@@ -99,81 +99,73 @@ namespace Registration.Server
 		{
 		}
 
-        private void OnCreateContainer(IContainer container)
-        {
-            ContainerBuilder builder = new ContainerBuilder();
+		private void OnCreateContainer(IContainer container)
+		{
+			ContainerBuilder builder = new ContainerBuilder();
 
-            // Create the command bus
-            var commandBus = ServiceBusFactory.New(sbc =>
-            {
-                sbc.UseJsonSerializer();
+			// Create the command bus
+			var commandBus = ServiceBusFactory.New(sbc =>
+			{
+				sbc.UseJsonSerializer();
 
-                sbc.UseMsmq(msmq =>
-                {
-                    msmq.UseMulticastSubscriptionClient();
-                    msmq.VerifyMsmqConfiguration();
-                });
-                sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_registration");
-                sbc.SetNetwork("WORKGROUP");
+				sbc.UseMsmq(msmq =>
+				{
+					msmq.UseMulticastSubscriptionClient();
+					msmq.VerifyMsmqConfiguration();
+				});
+				sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_registration");
+				sbc.SetNetwork("WORKGROUP");
 
-                //this will find all of the consumers in the container and
-                //register them with the bus.
-                sbc.Subscribe(s =>
-                {
-                    s.LoadFrom(container);
-                });
-            });
-            builder.Register(c => commandBus).As<IServiceBus>().SingleInstance();
+				// This will find all of the consumers in the container and
+				// register them with the bus.
+				sbc.Subscribe(s =>
+				{
+					s.LoadFrom(container);
+				});
+			});
+			builder.Register(c => commandBus).As<IServiceBus>().SingleInstance();
 
-            //// Create the event publisher
-            //var eventPublisher = ServiceBusFactory.New(sbc =>
-            //{
-            //    sbc.UseJsonSerializer();
+			//// Create the event publisher
+			//var eventPublisher = ServiceBusFactory.New(sbc =>
+			//{
+			//    sbc.UseJsonSerializer();
 
-            //    sbc.UseMsmq(msmq =>
-            //   {
-            //         msmq.UseMulticastSubscriptionClient();
-            //         msmq.VerifyMsmqConfiguration();
-            //     });
-            //    sbc.ReceiveFrom("msmq://localhost/ramp-festival_events");
+			//    sbc.UseMsmq(msmq =>
+			//   {
+			//         msmq.UseMulticastSubscriptionClient();
+			//         msmq.VerifyMsmqConfiguration();
+			//     });
+			//    sbc.ReceiveFrom("msmq://localhost/ramp-festival_events");
 
-            //    sbc.Subscribe(s =>
-            //    {
-            //        s.Handler<PlayerRegistered>((e) => Console.WriteLine("jo"));
-            //    });
-            //});
-            //builder.Register(c => eventPublisher).As<IServiceBus>().Named<IServiceBus>("EventPublisher").SingleInstance();
+			//    sbc.Subscribe(s =>
+			//    {
+			//        s.Handler<PlayerRegistered>((e) => Console.WriteLine("jo"));
+			//    });
+			//});
+			//builder.Register(c => eventPublisher).As<IServiceBus>().Named<IServiceBus>("EventPublisher").SingleInstance();
 
-            //// Create the event bus
-            //var eventBus = ServiceBusFactory.New(sbc =>
-            //{
-            //    sbc.UseJsonSerializer();
+			//// Create the event bus
+			//var eventBus = ServiceBusFactory.New(sbc =>
+			//{
+			//    sbc.UseJsonSerializer();
 
-            //    sbc.UseMsmq(msmq =>
-            //    {
-            //        msmq.UseMulticastSubscriptionClient();
-            //        msmq.VerifyMsmqConfiguration();
-            //    });
-            //    sbc.ReceiveFrom("msmq://localhost/ramp-festival_events_registration");
+			//    sbc.UseMsmq(msmq =>
+			//    {
+			//        msmq.UseMulticastSubscriptionClient();
+			//        msmq.VerifyMsmqConfiguration();
+			//    });
+			//    sbc.ReceiveFrom("msmq://localhost/ramp-festival_events_registration");
 
-            //    //this will find all of the consumers in the container and
-            //    //register them with the bus.
-            //    sbc.Subscribe(s =>
-            //                {
-            //                s.Handler<PlayerRegistered>((e) => Console.WriteLine("jo"));
-            //                });
-            //});
-            //builder.Register(c => eventBus).As<IServiceBus>().Named<IServiceBus>("EventBus").SingleInstance();
+			//    //this will find all of the consumers in the container and
+			//    //register them with the bus.
+			//    sbc.Subscribe(s =>
+			//                {
+			//                s.Handler<PlayerRegistered>((e) => Console.WriteLine("jo"));
+			//                });
+			//});
+			//builder.Register(c => eventBus).As<IServiceBus>().Named<IServiceBus>("EventBus").SingleInstance();
 
-            builder.Update(container);
-        }
-
-        //private void RegisterCommandHandlers(IContainer container, ICommandHandlerRegistry registry)
-        //{
-        //	foreach (var commandHandler in container.Resolve<IEnumerable<ICommandHandler>>())
-        //	{
-        //		registry.Register(commandHandler);
-        //	}
-        //}
-    }
+			builder.Update(container);
+		}
+	}
 }

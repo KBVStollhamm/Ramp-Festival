@@ -16,8 +16,6 @@ namespace Registration.Server
 	{
 		public static void Initialize()
 		{
-			//Database.DefaultConnectionFactory = new ServiceConfigurationSettingConnectionFactory(Database.DefaultConnectionFactory);
-
 			Database.SetInitializer<EventStoreDbContext>(new CreateDatabaseIfNotExists<EventStoreDbContext>());
 
 			Database.SetInitializer<ContestDbContext>(new CreateDatabaseIfNotExists<ContestDbContext>());

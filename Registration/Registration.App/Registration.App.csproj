@@ -108,6 +108,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -140,8 +141,11 @@
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Converters\VisibilityToStarHeightConverter.cs" />
+    <Compile Include="Events\ModuleInitialized.cs" />
     <Compile Include="Infrastructure\FocusExtensions.cs" />
     <Compile Include="Infrastructure\InputValidationException.cs" />
+    <Compile Include="Infrastructure\RegionNames.cs" />
     <Compile Include="Models\Party.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerContestRegistration.cs" />
@@ -151,6 +155,7 @@
     <Compile Include="RegistrationModule.cs" />
     <Compile Include="Services\IRegistrationService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
     <Compile Include="ViewModels\IRegisterTeamViewModel.cs" />
     <Compile Include="ViewModels\RegisterPlayerViewModel.cs" />
@@ -158,6 +163,10 @@
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SequencingItemViewModel.cs" />
     <Compile Include="ViewModels\SequencingViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\IRegistrationView.cs" />
     <Compile Include="Views\RegisterCommandsView.xaml.cs">
       <DependentUpon>RegisterCommandsView.xaml</DependentUpon>
@@ -176,6 +185,9 @@
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shell3.xaml.cs">
+      <DependentUpon>Shell3.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\PlayerHeaderControl.xaml">
       <SubType>Designer</SubType>
@@ -209,6 +221,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegisterCommandsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Shell3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -275,6 +295,20 @@
       <Project>{c9987b8e-3302-4553-8449-3e750268402c}</Project>
       <Name>Registration.ReadModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Cool-Text-125969995899261.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\2015.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\background.jpg" />
+    <Resource Include="Assets\background2.jpg" />
+    <Resource Include="Assets\background3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

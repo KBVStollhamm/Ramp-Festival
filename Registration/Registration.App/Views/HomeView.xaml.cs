@@ -10,17 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Registration.ViewModels;
 
 namespace Registration.Views
 {
 	/// <summary>
-	/// Interaction logic for MainView.xaml
+	/// Interaction logic for HomeView.xaml
 	/// </summary>
-	public partial class Shell : Window
+	public partial class HomeView : UserControl
 	{
-		public Shell(ShellViewModel viewModel)
+		public HomeView(HomeViewModel viewModel)
 		{
 			InitializeComponent();
 

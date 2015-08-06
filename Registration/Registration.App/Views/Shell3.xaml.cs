@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Registration.ViewModels;
 
 namespace Registration.Views
 {
 	/// <summary>
-	/// Interaction logic for MainView.xaml
+	/// Interaction logic for Shell3.xaml
 	/// </summary>
-	public partial class Shell : Window
+	public partial class Shell3 : Window
 	{
-		public Shell(ShellViewModel viewModel)
+		public Shell3()
 		{
 			InitializeComponent();
-
-			this.DataContext = viewModel;
 		}
 	}
 }
