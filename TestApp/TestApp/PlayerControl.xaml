@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="TestApp.PlayerControl" Name="PlayerCtrl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:local="clr-namespace:TestApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+	<UserControl.Resources>
+
+		<Storyboard x:Key="HideBorder" Name="HideBorder">
+			<DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="border" 
+                                             From="25" 
+                                             To="0" 
+							 AccelerationRatio="0.5"
+                                             Duration="0:0:0.4" />
+		</Storyboard>
+
+		<Storyboard x:Key="ShowBorder">
+			<DoubleAnimation Storyboard.TargetProperty="Height" Storyboard.TargetName="border"
+                                             From="0" 
+                                             To="25" 
+							 AccelerationRatio="0.5"
+                                             Duration="0:0:0.4" />
+		</Storyboard>
+
+	</UserControl.Resources>
+	<UserControl.DataContext>
+		<local:PlayerViewModel />
+	</UserControl.DataContext>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="25" />
+		</Grid.RowDefinitions>
+
+		<Border Margin="10" Background="WhiteSmoke" BorderBrush="Silver" BorderThickness="1">
+			<TextBlock Text="Hier könnte Ihre Werbung stehen!" VerticalAlignment="Center" HorizontalAlignment="Center" />
+		</Border>
+		
+		<Border Grid.Row="1" Name="border" Background="Silver" BorderBrush="DarkGray" BorderThickness="1" VerticalAlignment="Bottom" Height="25">
+			<TextBlock Text="{Binding PlayerName, Mode=TwoWay}" VerticalAlignment="Center" Margin="5,0,0,0" />
+		</Border>
+	</Grid>
+</UserControl>
