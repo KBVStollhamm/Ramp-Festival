@@ -170,6 +170,7 @@
     <Compile Include="Views\ContestControllingView.xaml.cs">
       <DependentUpon>ContestControllingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ContestDataTemplateSelector.cs" />
     <Compile Include="Views\ContestRegistrationView.xaml.cs">
       <DependentUpon>ContestRegistrationView.xaml</DependentUpon>
     </Compile>

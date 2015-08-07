@@ -79,7 +79,7 @@ namespace Registration.Server
 		private void BuildHandlers(ContainerBuilder builder)
 		{
 			builder.RegisterType<SinglePlayerGameCommandHandler>().AsSelf();
-            builder.RegisterType<TeamGameCommandHandler>().AsSelf();
+			builder.RegisterType<TeamGameCommandHandler>().AsSelf();
 
 			builder.RegisterType<ContestReadModelGenerator>().AsSelf();
 			builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
@@ -88,7 +88,14 @@ namespace Registration.Server
 
 		public void Start()
 		{
+			Migrate();
+
 			_processors.ForEach(p => p.Start());
+		}
+
+		private void Migrate()
+		{
+			_container.Resolve<ContestDbContext>().Database.Initialize(true);
 		}
 
 		public void Stop()

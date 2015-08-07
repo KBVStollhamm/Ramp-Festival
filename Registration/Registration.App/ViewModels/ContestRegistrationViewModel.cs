@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
+using Registration.Controllers;
 using Registration.ReadModel;
 
 namespace Registration.ViewModels
@@ -14,24 +15,26 @@ namespace Registration.ViewModels
 	{
 		private readonly IContestDao _contestDao;
 
-		public ContestRegistrationViewModel(IContestDao contestDao)
+		public ContestRegistrationViewModel(RegistrationsController controller, IContestDao contestDao)
 		{
 			this._contestDao = contestDao;
 
-			_contests = new ObservableCollection<ContestAlias>();
-			this.Contests = new ReadOnlyObservableCollection<ContestAlias>(_contests);
+			_contests = new ObservableCollection<Contest>();
+			this.Contests = new ReadOnlyObservableCollection<Contest>(_contests);
 
 			this.RefreshDataCommand = DelegateCommand.FromAsyncHandler(LoadData);
+			this.RegisterPlayerCommand = controller.RegisterPlayerCommand;
+			this.RegisterTeamCommand = controller.RegisterTeamCommand;
 		}
 
-		private ObservableCollection<ContestAlias> _contests;
-		public ReadOnlyObservableCollection<ContestAlias> Contests { get; private set; }
+		private ObservableCollection<Contest> _contests;
+		public ReadOnlyObservableCollection<Contest> Contests { get; private set; }
 
 		private async Task LoadData()
 		{
 			try
 			{
-				IList<ContestAlias> model = await _contestDao.GetPublishedContests();
+				IList<Contest> model = await _contestDao.GetPublishedContests();
 				if (model == null) return;
 
 				App.Current.Dispatcher.Invoke(() =>
@@ -47,7 +50,12 @@ namespace Registration.ViewModels
 			}
 		}
 
-		public ICommand RefreshDataCommand { get; private set; }
+		private void StartRegistration(Contest contest)
+		{
+		}
 
+		public ICommand RefreshDataCommand { get; private set; }
+		public ICommand RegisterPlayerCommand { get; private set; }
+		public ICommand RegisterTeamCommand { get; private set; }
 	}
 }

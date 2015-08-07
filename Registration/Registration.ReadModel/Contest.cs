@@ -8,9 +8,10 @@ namespace Registration.ReadModel
 {
 	public class Contest
 	{
-		public Contest(Guid id, string code, string name, string description, string location, DateTimeOffset startDate, DateTimeOffset endDate)
+		public Contest(Guid id, ContestType contestType, string code, string name, string description, string location, DateTimeOffset startDate, DateTimeOffset endDate)
 		{
 			this.Id = id;
+			this.ContestType = contestType;
 			this.Code = code;
 			this.Name = name;
 			this.Description = description;
@@ -24,6 +25,7 @@ namespace Registration.ReadModel
 		}
 
 		public Guid Id { get; set; }
+		public ContestType ContestType { get; set; }
 		public string Code { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -32,5 +34,11 @@ namespace Registration.ReadModel
 		public DateTimeOffset EndDate { get; set; }
 
 		public bool IsPublished { get; set; }
+	}
+
+	public enum ContestType
+	{
+		SinglePlayerContest = 1,
+		TeamContest = 2
 	}
 }

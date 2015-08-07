@@ -43,6 +43,7 @@ namespace Registration.Application.Handlers
 					repository.Set<Contest>().Add(
 						new Contest(
 							message.SourceId,
+							ContestType.SinglePlayerContest,
 							message.Slug,
 							message.Name,
 							message.Description,

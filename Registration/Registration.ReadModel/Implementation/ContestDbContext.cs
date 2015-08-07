@@ -11,6 +11,11 @@ namespace Registration.ReadModel.Implementation
 	{
 		public const string SchemaName = "Registration";
 
+		public ContestDbContext()
+			: base("Registration")
+		{
+		}
+
 		public ContestDbContext(string nameOrConnectionString)
 			: base(nameOrConnectionString)
 		{

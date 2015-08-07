@@ -76,7 +76,7 @@ namespace Registration
 					msmq.UseMulticastSubscriptionClient();
 					msmq.VerifyMsmqConfiguration();
 				});
-                sbc.ReceiveFrom("msmq://localhost/ramp-festival");
+				sbc.ReceiveFrom("msmq://localhost/ramp-festival");
 				sbc.SetNetwork("WORKGROUP");
 			});
 

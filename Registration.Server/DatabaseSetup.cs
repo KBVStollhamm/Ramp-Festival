@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.EventSourcing.Sql;
 using Registration.ReadModel.Implementation;
+using Registration.ReadModel.Migrations;
 
 namespace Registration.Server
 {
@@ -17,7 +18,7 @@ namespace Registration.Server
 		public static void Initialize()
 		{
 			Database.SetInitializer<EventStoreDbContext>(new CreateDatabaseIfNotExists<EventStoreDbContext>());
-			Database.SetInitializer<ContestDbContext>(new CreateDatabaseIfNotExists<ContestDbContext>());
+			Database.SetInitializer<ContestDbContext>(new MigrateDatabaseToLatestVersion<ContestDbContext, Configuration>());
 		}
 	}
 }

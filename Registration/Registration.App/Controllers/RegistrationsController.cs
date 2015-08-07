@@ -20,14 +20,14 @@ namespace Registration.Controllers
 		{
 			_regionManager = regionManager;
 
-			this.RegisterPlayerCommand = new DelegateCommand(RegisterPlayer);
-			this.RegisterTeamCommand = new DelegateCommand(RegisterTeam);
+			this.RegisterPlayerCommand = new DelegateCommand<Guid?>(RegisterPlayer);
+			this.RegisterTeamCommand = new DelegateCommand<Guid?>(RegisterTeam);
 		}
 
 		public ICommand RegisterPlayerCommand { get; private set; }
 		public ICommand RegisterTeamCommand { get; private set; }
 
-		public void RegisterPlayer()
+		public void RegisterPlayer(Guid? contestId)
 		{
 			IRegion mainRegion = _regionManager.Regions["MainRegion"];
 
@@ -66,7 +66,7 @@ namespace Registration.Controllers
 		//	}
 		//}
 	
-		public void RegisterTeam()
+		public void RegisterTeam(Guid? contestId)
 		{
 			IRegion mainRegion = _regionManager.Regions["MainRegion"];
 

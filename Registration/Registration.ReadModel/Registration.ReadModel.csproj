@@ -50,8 +50,9 @@
     <Compile Include="Contest.cs" />
     <Compile Include="ContestAlias.cs" />
     <Compile Include="IContestDao.cs" />
-    <Compile Include="Implementation\ContestContext.cs" />
+    <Compile Include="Implementation\ContestDbContext.cs" />
     <Compile Include="Implementation\ContestDao.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sequencing.cs" />
     <Compile Include="SequencingItem.cs" />
