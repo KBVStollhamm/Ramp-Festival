@@ -39,6 +39,7 @@ namespace Registration.ReadModel
 	public enum ContestType
 	{
 		SinglePlayerContest = 1,
-		TeamContest = 2
+		TeamContest = 2,
+        ChildrenContest = 3
 	}
 }

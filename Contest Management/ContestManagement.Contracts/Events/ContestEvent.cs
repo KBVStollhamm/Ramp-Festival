@@ -24,5 +24,14 @@ namespace ContestManagement.Events
 
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
+
+        public ContestType ContestType { get; set; }
 	}
+
+    public enum ContestType
+    {
+        SinglePlayerContest = 1,
+        TeamContest = 2,
+        ChildrenContest = 3
+    }
 }

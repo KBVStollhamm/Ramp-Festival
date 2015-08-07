@@ -6,16 +6,25 @@ using System.Threading.Tasks;
 
 namespace Registration.ReadModel
 {
-	public class SequencingItem
-	{
-		public SequencingItem()
-		{
-		}
+    public class SequencingItem
+    {
+        public SequencingItem()
+        {
+        }
 
-		public Guid GameId { get; set; }
+        public Guid GameId { get; set; }
+        public GameType GameType { get; set; }
         public DateTime RegisteredAt { get; set; }
 		public int Position {get ;set;}
 		public string PlayerName { get; set; }
 		public string TeamName { get; set; }
+
 	}
+
+    public enum GameType
+    {
+        SinglePlayerGame = 1,
+        TeamGame = 2,
+        ChildGame = 3
+    }
 }

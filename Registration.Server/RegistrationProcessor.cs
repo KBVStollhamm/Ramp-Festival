@@ -73,7 +73,7 @@ namespace Registration.Server
 				//	(pi, ctx) => pi.ParameterType == typeof(IServiceBus) && pi.Name == "configSectionName",
 				//	(pi, ctx) => ctx.ResolveNamed("CommandBus", typeof(IServiceBus))));
 
-			builder.RegisterType<ContestDbContext>().WithParameter("nameOrConnectionString", "Registration");
+			builder.RegisterType<RegistrationDbContext>().WithParameter("nameOrConnectionString", "Registration");
 		}
 
 		private void BuildHandlers(ContainerBuilder builder)
@@ -95,7 +95,7 @@ namespace Registration.Server
 
 		private void Migrate()
 		{
-			_container.Resolve<ContestDbContext>().Database.Initialize(true);
+			_container.Resolve<RegistrationDbContext>().Database.Initialize(true);
 		}
 
 		public void Stop()

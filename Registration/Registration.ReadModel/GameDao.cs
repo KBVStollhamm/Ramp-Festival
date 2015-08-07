@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Registration.ViewModels
+namespace Registration.ReadModel
 {
-    class ContestControllingViewModel
+    public class GameDao : IGameDao
     {
     }
 }

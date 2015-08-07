@@ -39,8 +39,9 @@ namespace Registration
 				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
 
 			_container.Register(Component.For<RegistrationsController>());
+            _container.Register(Component.For<GameController>());
 
-			_container.Register(Component.For<HomeViewModel>());
+            _container.Register(Component.For<HomeViewModel>());
 			_container.Register(Component.For<HomeView>());
 			
 			//_container.Register(Component.For<RegistrationViewModel>());
@@ -58,10 +59,15 @@ namespace Registration
 				.ImplementedBy<RegisterTeamViewModel>()
 				.LifestyleTransient());
 
-			_container.Register(Component.For<SequencingViewModel>());
+            _container.Register(Component.For<GameSelectionView>()
+                .LifestyleTransient());
+            _container.Register(Component.For<GameSelectionViewModel>()
+                .LifestyleTransient());
+
+            _container.Register(Component.For<SequencingViewModel>());
 			_container.Register(Component.For<SequencingView>());
 
-			_container.Register(Component.For<ContestDbContext>()
+			_container.Register(Component.For<RegistrationDbContext>()
 				.DependsOn(Dependency.OnValue("nameOrConnectionString", "Registration"))
 				.LifestyleTransient());
 			_container.Register(Component.For<IContestDao>()
@@ -73,7 +79,7 @@ namespace Registration
 
 			Task.Factory.StartNew(() =>
 			{
-				var ctx = _container.Resolve<ContestDbContext>();
+				var ctx = _container.Resolve<RegistrationDbContext>();
 				ctx.Database.Initialize(true);
 				_container.Release(ctx);
 			})

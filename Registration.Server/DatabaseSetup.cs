@@ -18,7 +18,7 @@ namespace Registration.Server
 		public static void Initialize()
 		{
 			Database.SetInitializer<EventStoreDbContext>(new CreateDatabaseIfNotExists<EventStoreDbContext>());
-			Database.SetInitializer<ContestDbContext>(new MigrateDatabaseToLatestVersion<ContestDbContext, Configuration>());
+			Database.SetInitializer<RegistrationDbContext>(new MigrateDatabaseToLatestVersion<RegistrationDbContext, Configuration>());
 		}
 	}
 }

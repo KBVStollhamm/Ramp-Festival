@@ -55,6 +55,7 @@
       <ItemGuid>8d0a75c0-d3ef-47f4-9e00-c055e563849d</ItemGuid>
     </Compile>
     <Compile Include="Utils\GuidUtil.cs" />
+    <Compile Include="ViewModel\NotifyTaskCompletion.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

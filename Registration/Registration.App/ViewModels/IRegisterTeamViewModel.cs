@@ -9,5 +9,7 @@ namespace Registration.ViewModels
 	public interface IRegisterTeamViewModel
 	{
         event EventHandler CloseViewRequested;
+
+        Guid ContestId { get; set; }
     }
 }

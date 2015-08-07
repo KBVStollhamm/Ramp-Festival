@@ -132,6 +132,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\RegistrationsController.cs" />
     <Compile Include="Controls\ButtonHelper.cs" />
     <Compile Include="Controls\PlayerHeaderControl.xaml.cs">
@@ -156,7 +157,7 @@
     <Compile Include="RegistrationModule.cs" />
     <Compile Include="Services\IRegistrationService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
-    <Compile Include="ViewModels\ContestControllingViewModel.cs" />
+    <Compile Include="ViewModels\GameSelectionViewModel.cs" />
     <Compile Include="ViewModels\ContestRegistrationViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
@@ -167,8 +168,9 @@
     <Compile Include="ViewModels\SequencingItemViewModel.cs" />
     <Compile Include="ViewModels\SequencingViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\ContestControllingView.xaml.cs">
-      <DependentUpon>ContestControllingView.xaml</DependentUpon>
+    <Compile Include="Views\SequenceItemDataTemplateSelector.cs" />
+    <Compile Include="Views\GameSelectionView.xaml.cs">
+      <DependentUpon>GameSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContestDataTemplateSelector.cs" />
     <Compile Include="Views\ContestRegistrationView.xaml.cs">
@@ -231,7 +233,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ContestControllingView.xaml">
+    <Page Include="Views\GameSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,6 +306,10 @@
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.Messaging\Infrastructure.Messaging.csproj">
       <Project>{9255e4a8-8f41-410f-8b4d-34a48d5643ea}</Project>
       <Name>Infrastructure.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj">
+      <Project>{bd8edb29-11de-468a-8ebb-6bd9a75bb473}</Project>
+      <Name>Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Registration.Contracts\Registration.Contracts.csproj">
       <Project>{7f1b89de-97f1-4306-9fca-97dae7a7e179}</Project>

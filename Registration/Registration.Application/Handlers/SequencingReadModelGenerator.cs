@@ -17,10 +17,10 @@ namespace Registration.Application.Handlers
 		: Consumes<SinglePlayerGamePlaced>.All
 		, Consumes<TeamGamePlaced>.All
     {
-        private readonly Func<ContestDbContext> _contextFactory;
+        private readonly Func<RegistrationDbContext> _contextFactory;
         private readonly IServiceBus _eventBus;
 
-		public SequencingReadModelGenerator(Func<ContestDbContext> contextFactory, IServiceBus eventBus)
+		public SequencingReadModelGenerator(Func<RegistrationDbContext> contextFactory, IServiceBus eventBus)
 		{
 			_contextFactory = contextFactory;
             _eventBus = eventBus;
@@ -49,6 +49,17 @@ namespace Registration.Application.Handlers
                 dtoItem.Position = 1;
                 dtoItem.PlayerName = message.PlayerName;
                 dtoItem.TeamName = string.Empty;
+
+                try
+                {
+                    var contestDto = context.Find<Contest>(message.ContestId);
+                    dtoItem.GameType = contestDto.ContestType == ContestType.SinglePlayerContest ? GameType.SinglePlayerGame : GameType.ChildGame;
+                }
+                catch (Exception)
+                { 
+                    Trace.TraceWarning("Ignoring GameType for game with ID {0} as contest with ID {1} wasn't found.",
+                        message.SourceId, message.ContestId);
+                }
 
                 context.Save(dto);
 			}
@@ -89,6 +100,7 @@ namespace Registration.Application.Handlers
                 sequence.Sequence.Add(dtoItem);
             }
             dtoItem.GameId = gameId;
+            dtoItem.GameType = GameType.TeamGame;
             dtoItem.RegisteredAt = registeredAt;
             dtoItem.Position = position;
             dtoItem.PlayerName = playerName;

@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.ServiceLocation;
 using Registration.Events;
+using Registration.Views;
 
 namespace Registration.ViewModels
 {
 	public class ShellViewModel : BindableBase
 	{
-		private IEventAggregator _eventAggregator;
+		private readonly IEventAggregator _eventAggregator;
 
 		public ShellViewModel(IEventAggregator eventAggregator)
 		{

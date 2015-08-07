@@ -34,6 +34,8 @@ namespace Registration.ViewModels
             this.SetInitialValidState();
         }
 
+        public Guid ContestId { get; set; }
+
         private string _teamName;
         [Required(ErrorMessage = "Name ist erforderlich.", AllowEmptyStrings = false)]
         public string TeamName
@@ -148,7 +150,7 @@ namespace Registration.ViewModels
 
             TeamContestRegistration registration = new TeamContestRegistration()
             {
-                ContestId = Constants.NinepinContestId,
+                ContestId = this.ContestId,
                 TeamName = this.TeamName,
                 Player1Name = this.Player1Name,
                 Player2Name = this.Player2Name,

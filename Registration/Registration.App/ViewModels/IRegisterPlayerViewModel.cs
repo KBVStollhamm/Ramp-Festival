@@ -10,5 +10,7 @@ namespace Registration.ViewModels
 	public interface IRegisterPlayerViewModel
 	{
 		event EventHandler CloseViewRequested;
+
+        Guid ContestId { get; set; }
 	}
 }

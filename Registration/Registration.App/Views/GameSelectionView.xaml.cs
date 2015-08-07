@@ -12,17 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Registration.ViewModels;
 
 namespace Registration.Views
 {
     /// <summary>
     /// Interaction logic for ContestControllingView.xaml
     /// </summary>
-    public partial class ContestControllingView : UserControl
+    public partial class GameSelectionView : UserControl
     {
-        public ContestControllingView()
+        public GameSelectionView(GameSelectionViewModel viewModel)
         {
             InitializeComponent();
+
+            this.DataContext = viewModel;
         }
     }
 }

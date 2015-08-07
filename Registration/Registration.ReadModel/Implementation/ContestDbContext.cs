@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Registration.ReadModel.Implementation
 {
-	public class ContestDbContext : DbContext
+	public class RegistrationDbContext : DbContext
 	{
 		public const string SchemaName = "Registration";
 
-		public ContestDbContext()
+		public RegistrationDbContext()
 			: base("Registration")
 		{
 		}
 
-		public ContestDbContext(string nameOrConnectionString)
+		public RegistrationDbContext(string nameOrConnectionString)
 			: base(nameOrConnectionString)
 		{
 		}
@@ -34,9 +34,13 @@ namespace Registration.ReadModel.Implementation
 			modelBuilder.Entity<Contest>().ToTable("ContestsView", SchemaName);
 		}
 
-		public T Find<T>(Guid id) where T : class
+        public T Find<T>(Guid id) where T : class
+        {
+            return this.Set<T>().Find(id);
+        }
+        public async Task<T> FindAsync<T>(Guid id) where T : class
 		{
-			return this.Set<T>().Find(id);
+			return await this.Set<T>().FindAsync(id);
 		}
 
 		public IQueryable<T> Query<T>() where T : class

@@ -13,14 +13,23 @@ namespace Registration.Views
 	{
 		public DataTemplate SinglePlayerContestTemplate { get; set; }
 		public DataTemplate TeamContestTemplate { get; set; }
+        public DataTemplate ChildrenContestTemplate { get; set; }
 
-		public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
+        public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
 		{
 			var contest = item as Contest;
 
 			if (contest != null)
 			{
-				return contest.ContestType == ContestType.SinglePlayerContest ? this.SinglePlayerContestTemplate : this.TeamContestTemplate;
+                switch (contest.ContestType)
+                {
+                    case ContestType.SinglePlayerContest:
+                        return this.SinglePlayerContestTemplate;
+                    case ContestType.TeamContest:
+                        return this.TeamContestTemplate;
+                    case ContestType.ChildrenContest:
+                        return this.ChildrenContestTemplate;
+                }
 			}
 
 			return base.SelectTemplate(item, container);

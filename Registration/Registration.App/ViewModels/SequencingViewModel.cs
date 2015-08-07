@@ -27,7 +27,7 @@ namespace Registration.ViewModels
 			eventBus.SubscribeHandler<SequencingChanged>(async (e) =>
 			{
 				await LoadData();
-			}, e => e.ContestId.Equals(Constants.NinepinContestId));
+			});
 
 			this.RefreshDataCommand = DelegateCommand.FromAsyncHandler(LoadData);
 		}
@@ -39,15 +39,13 @@ namespace Registration.ViewModels
 		{
             try
             {
-
-
-                Sequencing model = await _contestDao.FindSequencing(Constants.NinepinContestId);
+                IList<SequencingItem> model = await _contestDao.GetAllPendingGames();
                 if (model == null) return;
 
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     _sequence.Clear();
-                    foreach (var item in model.Sequence.OrderBy(x => x.RegisteredAt).ThenBy(x => x.Position))
+                    foreach (var item in model)
                         _sequence.Add(item);
                 });
             }

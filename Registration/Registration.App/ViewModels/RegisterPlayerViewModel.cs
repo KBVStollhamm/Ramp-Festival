@@ -47,6 +47,11 @@ namespace Registration.ViewModels
 			}
 		}
 
+        public Guid ContestId
+        {
+            get; set;
+        }
+
 		private DelegateCommand _submitCommand;
 		public ICommand SubmitCommand
 		{
@@ -68,7 +73,7 @@ namespace Registration.ViewModels
 
 			PlayerContestRegistration registration = new PlayerContestRegistration()
 			{
-				ContestId = Constants.NinepinContestId,
+				ContestId = this.ContestId,
 				PlayerName = this.PlayerName
 			};
 

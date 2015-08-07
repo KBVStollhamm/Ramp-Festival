@@ -29,9 +29,12 @@ namespace Registration.Controllers
 
 		public void RegisterPlayer(Guid? contestId)
 		{
+            if (!contestId.HasValue) throw new InvalidOperationException();
+
 			IRegion mainRegion = _regionManager.Regions["MainRegion"];
 
 			var viewModel = ServiceLocator.Current.GetInstance<IRegisterPlayerViewModel>();
+            viewModel.ContestId = contestId.Value;
 			viewModel.CloseViewRequested += delegate
 			{
 				this.ShowRegistrationView();
@@ -68,9 +71,12 @@ namespace Registration.Controllers
 	
 		public void RegisterTeam(Guid? contestId)
 		{
-			IRegion mainRegion = _regionManager.Regions["MainRegion"];
+            if (!contestId.HasValue) throw new InvalidOperationException();
+
+            IRegion mainRegion = _regionManager.Regions["MainRegion"];
 
 			var viewModel = ServiceLocator.Current.GetInstance<IRegisterTeamViewModel>();
+            viewModel.ContestId = contestId.Value;
 			viewModel.CloseViewRequested += delegate
 			{
 				this.ShowRegistrationView();

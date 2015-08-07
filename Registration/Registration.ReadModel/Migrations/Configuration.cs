@@ -5,7 +5,7 @@ namespace Registration.ReadModel.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<Registration.ReadModel.Implementation.ContestDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Registration.ReadModel.Implementation.RegistrationDbContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Registration.ReadModel.Migrations
             ContextKey = "Registration.ReadModel.Implementation.ContestDbContext";
         }
 
-        protected override void Seed(Registration.ReadModel.Implementation.ContestDbContext context)
+        protected override void Seed(Registration.ReadModel.Implementation.RegistrationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
