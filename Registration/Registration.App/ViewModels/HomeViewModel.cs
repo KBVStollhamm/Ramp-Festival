@@ -12,20 +12,20 @@ namespace Registration.ViewModels
 {
 	public class HomeViewModel : BindableBase
 	{
-        private readonly RegistrationsController _registrationsController;
+		private readonly RegistrationsController _registrationsController;
 
 		public HomeViewModel(RegistrationsController registrationsController)
 		{
-            _registrationsController = registrationsController;
+			_registrationsController = registrationsController;
 
-            this.GoToRegistrationCommand = new DelegateCommand(GoToRegistration);
+			this.GoToRegistrationCommand = new DelegateCommand(GoToRegistration);
 		}
 
 		public ICommand GoToRegistrationCommand { get; private set; }
-        public void GoToRegistration()
-        {
-            _registrationsController.ShowRegistrationView();
-        }
+		public void GoToRegistration()
+		{
+			_registrationsController.ShowRegistrationView();
+		}
 	}
 }
 
