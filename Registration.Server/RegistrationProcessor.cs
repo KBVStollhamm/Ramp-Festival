@@ -80,7 +80,9 @@ namespace Registration.Server
 		{
 			builder.RegisterType<SinglePlayerGameCommandHandler>().AsSelf();
             builder.RegisterType<TeamGameCommandHandler>().AsSelf();
-            builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
+
+			builder.RegisterType<ContestReadModelGenerator>().AsSelf();
+			builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
 		}
 
 

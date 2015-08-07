@@ -5,11 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ContestManagement.DataAccess;
+using ContestManagement.Events;
+using MassTransit;
 
 namespace ContestManagement
 {
 	public class ContestService
 	{
+		private readonly IServiceBus _eventBus;
+
+		public ContestService(IServiceBus eventBus)
+		{
+			_eventBus = eventBus;
+		}
+
 		public void CreateContest(ContestInfo contest)
 		{
 			using (var context = new ContestContext())
@@ -30,7 +39,7 @@ namespace ContestManagement
 
 				context.SaveChanges();
 
-				//this.PublishConferenceEvent<ConferenceCreated>(conference);
+				this.PublishContestEvent<ContestCreated>(contest);
 			}
 		}
 
@@ -48,6 +57,23 @@ namespace ContestManagement
 			{
 				return context.Contests.FirstOrDefault(x => x.OwnerEmail == email && x.AccessCode == accessCode);
 			}
+		}
+
+		private void PublishContestEvent<T>(ContestInfo contest)
+			where T : ContestEvent, new()
+		{
+			_eventBus.Publish(new T()
+			{
+				SourceId = contest.Id,
+				Name = contest.Name,
+				Description = contest.Description,
+				Location = contest.Location,
+				Slug = contest.Slug,
+				Tagline = contest.Tagline,
+				TwitterSearch = contest.TwitterSearch,
+				StartDate = contest.StartDate,
+				EndDate = contest.EndDate,
+			});
 		}
 	}
 }

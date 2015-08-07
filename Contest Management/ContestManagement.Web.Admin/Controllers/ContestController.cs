@@ -13,7 +13,7 @@ namespace ContestManagement.Web.Admin.Controllers
 		private ContestService service;
 		private ContestService Service
 		{
-			get { return service ?? (service = new ContestService()); }
+			get { return service ?? (service = new ContestService(MvcApplication.EventBus)); }
 		}
 
 		public ContestInfo Contest { get; private set; }

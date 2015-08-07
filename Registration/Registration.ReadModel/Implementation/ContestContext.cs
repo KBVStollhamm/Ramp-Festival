@@ -25,6 +25,8 @@ namespace Registration.ReadModel.Implementation
 			modelBuilder.Entity<Sequencing>().HasMany(e => e.Sequence).WithRequired();
 			modelBuilder.Entity<SequencingItem>().ToTable("SequencingItemsView", SchemaName);
 			modelBuilder.Entity<SequencingItem>().HasKey(e => new { e.GameId, e.Position });
+
+			modelBuilder.Entity<Contest>().ToTable("ContestsView", SchemaName);
 		}
 
 		public T Find<T>(Guid id) where T : class
