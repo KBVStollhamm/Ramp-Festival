@@ -16,6 +16,18 @@ namespace Registration.ReadModel.Implementation
 			_contextFactory = contextFactory;
 		}
 
+		public async Task<IList<ContestAlias>> GetPublishedContests()
+		{
+			using (var context = _contextFactory.Invoke())
+			{
+				return await context
+					.Query<Contest>()
+					.Where(dto => dto.IsPublished)
+					.Select(x => new ContestAlias { Id = x.Id, Code = x.Code, Name = x.Name })
+					.ToListAsync();
+			}
+		}
+
 		public async Task<Sequencing> FindSequencing(Guid contestId)
 		{
 			using (var context = _contextFactory.Invoke())

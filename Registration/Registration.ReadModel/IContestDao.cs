@@ -8,6 +8,7 @@ namespace Registration.ReadModel
 {
 	public interface IContestDao
 	{
+		Task<IList<ContestAlias>> GetPublishedContests();
 		Task<Sequencing> FindSequencing(Guid contestId);
 	}
 }

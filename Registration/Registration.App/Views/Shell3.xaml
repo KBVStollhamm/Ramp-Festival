@@ -9,17 +9,17 @@
 		xmlns:vm="clr-namespace:Registration.ViewModels"
 		xmlns:v="clr-namespace:Registration.Views"
 		Title="Rampenfest"
-		mc:Ignorable="d" ResizeMode="NoResize" WindowStyle="None" WindowState="Maximized">
+		mc:Ignorable="d" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" WindowState="Normal">
 
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">
 			<v:RegisterPlayerView />
 		</DataTemplate>
-        <DataTemplate DataType="{x:Type vm:RegisterTeamViewModel}">
-            <v:RegisterTeamView />
-        </DataTemplate>
+		<DataTemplate DataType="{x:Type vm:RegisterTeamViewModel}">
+			<v:RegisterTeamView />
+		</DataTemplate>
 
-        <Storyboard x:Key="InTransition">
+		<Storyboard x:Key="InTransition">
 			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Logo" Storyboard.TargetProperty="(UIElement.Opacity)">
 				<SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
 				<SplineDoubleKeyFrame KeyTime="00:00:02" Value="0"/>

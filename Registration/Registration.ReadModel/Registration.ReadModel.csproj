@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contest.cs" />
+    <Compile Include="ContestAlias.cs" />
     <Compile Include="IContestDao.cs" />
     <Compile Include="Implementation\ContestContext.cs" />
     <Compile Include="Implementation\ContestDao.cs" />

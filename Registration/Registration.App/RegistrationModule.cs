@@ -43,9 +43,12 @@ namespace Registration
 			_container.Register(Component.For<HomeViewModel>());
 			_container.Register(Component.For<HomeView>());
 			
-			_container.Register(Component.For<RegistrationViewModel>());
+			//_container.Register(Component.For<RegistrationViewModel>());
+			//_container.Register(Component.For<IRegistrationView>()
+			//	.ImplementedBy<RegistrationView>());
+			_container.Register(Component.For<ContestRegistrationViewModel>());
 			_container.Register(Component.For<IRegistrationView>()
-				.ImplementedBy<RegistrationView>());
+				.ImplementedBy<ContestRegistrationView>());
 
 			_container.Register(Component.For<IRegisterPlayerViewModel>()
 				.ImplementedBy<RegisterPlayerViewModel>()

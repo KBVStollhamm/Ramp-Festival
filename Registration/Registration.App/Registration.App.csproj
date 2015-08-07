@@ -157,6 +157,7 @@
     <Compile Include="Services\IRegistrationService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="ViewModels\ContestControllingViewModel.cs" />
+    <Compile Include="ViewModels\ContestRegistrationViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
     <Compile Include="ViewModels\IRegisterTeamViewModel.cs" />
@@ -168,6 +169,9 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\ContestControllingView.xaml.cs">
       <DependentUpon>ContestControllingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContestRegistrationView.xaml.cs">
+      <DependentUpon>ContestRegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -227,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContestControllingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContestRegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
