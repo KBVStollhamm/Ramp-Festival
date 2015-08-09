@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace Registration.ReadModel
 {
-	public interface IContestDao
-	{
+    public interface IContestDao
+    {
         Task<Contest> FindContest(Guid contestId);
-		Task<IList<Contest>> GetPublishedContests();
+        Task<IList<Contest>> GetPublishedContests();
 
-		Task<Sequencing> FindSequencing(Guid contestId);
-
+        Task<Sequencing> FindSequencing(Guid contestId);
+        Task<SequencingItem> FindNextGame(Guid stationId);
         Task<IList<SequencingItem>> GetAllPendingGames();
-	}
+
+        Task<GamingSummary> FindGamingSummary(Guid stationId);
+
+        Task<GameResult> FindGameResult(Guid gameId);
+    }
 }

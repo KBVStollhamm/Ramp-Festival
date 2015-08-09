@@ -41,9 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\MakePlayerShot.cs" />
     <Compile Include="Commands\Message.cs" />
     <Compile Include="Commands\RegisterPlayerToContest.cs" />
     <Compile Include="Commands\RegisterTeamToContest.cs" />
+    <Compile Include="Commands\SinglePlayerGameCommand.cs" />
+    <Compile Include="Commands\StartSinglePlayerGame.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Events\Live\GameStarted.cs" />
+    <Compile Include="Events\Live\PlayerScored.cs" />
     <Compile Include="Events\SequencingChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

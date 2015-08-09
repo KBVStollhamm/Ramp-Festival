@@ -13,17 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Registration.Controls
+namespace Registration.Views
 {
     /// <summary>
-    /// Interaction logic for PlayerHeaderControl.xaml
+    /// Interaction logic for SinglePlayerLiveView.xaml
     /// </summary>
-    public partial class PlayerHeaderControl : UserControl
+    public partial class SinglePlayerLiveView : UserControl
     {
-        public PlayerHeaderControl()
+        public SinglePlayerLiveView()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
+
+
 
         public string PlayerName
         {
@@ -33,6 +35,8 @@ namespace Registration.Controls
 
         // Using a DependencyProperty as the backing store for PlayerName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PlayerNameProperty =
-            DependencyProperty.Register("PlayerName", typeof(string), typeof(PlayerHeaderControl), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("PlayerName", typeof(string), typeof(SinglePlayerLiveView), new PropertyMetadata(default(string)));
+
+
     }
 }

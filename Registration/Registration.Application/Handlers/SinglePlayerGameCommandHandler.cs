@@ -12,6 +12,8 @@ namespace Registration.Application.Handlers
 {
 	public class SinglePlayerGameCommandHandler
 		: Consumes<RegisterPlayerToContest>.All
+        , Consumes<StartSinglePlayerGame>.All
+        , Consumes<MakePlayerShot>.All
 	{
 		private readonly IEventSourcedRepository<SinglePlayerGame> _repository;
 
@@ -20,13 +22,13 @@ namespace Registration.Application.Handlers
 			_repository = repository;
 		}
 
-		public void Consume(RegisterPlayerToContest message)
+        public void Consume(RegisterPlayerToContest message)
 		{
 			if (message == null) throw new ArgumentNullException("message");
 			
 			Console.WriteLine(message.PlayerName);
 
-			var game = _repository.Find(message.ContestId);
+			var game = _repository.Find(message.GameId);
             if (game == null)
             {
                 game = new SinglePlayerGame(message.GameId, message.ContestId, message.PlayerName);
@@ -36,8 +38,43 @@ namespace Registration.Application.Handlers
                 //TODO: Implement update
             }
 
-
 			_repository.Save(game, message.Id.ToString());
 		}
-	}
+
+
+        public void Consume(StartSinglePlayerGame message)
+        {
+            if (message == null) throw new ArgumentNullException("message");
+
+            Console.WriteLine("Starting single player game with ID: {0}", message.GameId);
+
+            var game = _repository.Find(message.GameId);
+            if (game != null)
+            {
+                game.Start();
+                Console.WriteLine("Single player game with ID: {0} started.", message.GameId);
+            }
+            else
+            {
+                Console.WriteLine("Couldn't find a single player game with ID: {1}", message.GameId);
+            }
+
+            _repository.Save(game, message.Id.ToString());
+        }
+
+        public void Consume(MakePlayerShot message)
+        {
+            if (message == null) throw new ArgumentNullException("message");
+
+            Console.WriteLine(message.Score);
+
+            var game = _repository.Find(message.GameId);
+            if (game != null)
+            {
+                game.MakeShot(message.ShotNumber, message.Score);
+            }
+
+            _repository.Save(game, message.Id.ToString());
+        }
+    }
 }

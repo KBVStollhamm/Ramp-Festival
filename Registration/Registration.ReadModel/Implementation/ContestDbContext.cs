@@ -27,11 +27,18 @@ namespace Registration.ReadModel.Implementation
 
 			modelBuilder.Entity<Sequencing>().ToTable("SequencingView", SchemaName);
 			modelBuilder.Entity<Sequencing>().HasKey(e => e.ContestId);
-			modelBuilder.Entity<Sequencing>().HasMany(e => e.Sequence).WithRequired();
+            modelBuilder.Entity<Sequencing>().HasMany(e => e.Sequence).WithRequired();
 			modelBuilder.Entity<SequencingItem>().ToTable("SequencingItemsView", SchemaName);
 			modelBuilder.Entity<SequencingItem>().HasKey(e => new { e.GameId, e.Position });
+            modelBuilder.Entity<GamingSummary>().ToTable("GamingSummary", SchemaName);
+            modelBuilder.Entity<GamingSummary>().HasKey(e => e.StationId);
+            modelBuilder.Entity<GameResult>().ToTable("GameResultsView", SchemaName);
+            modelBuilder.Entity<GameResult>().HasKey(e => e.GameId);
+            modelBuilder.Entity<GameResult>().HasMany(e => e.Scores).WithRequired().HasForeignKey(e => e.GameId);
+            modelBuilder.Entity<Shot>().ToTable("ShotsView", SchemaName);
+            modelBuilder.Entity<Shot>().HasKey(e => new { e.GameId, e.ShotNumber });
 
-			modelBuilder.Entity<Contest>().ToTable("ContestsView", SchemaName);
+            modelBuilder.Entity<Contest>().ToTable("ContestsView", SchemaName);
 		}
 
         public T Find<T>(Guid id) where T : class

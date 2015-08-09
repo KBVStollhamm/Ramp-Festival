@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Registration.Views.LiveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrl="clr-namespace:Registration.Controls"
+             xmlns:v="clr-namespace:Registration.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+   
+    <UserControl.Resources>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="1" PlayerName="Schinken" Margin="3"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <ctrl:Tile Grid.Column="0" Grid.Row="0" Count="{Binding Scores[1]}" />
+            <ctrl:Tile Grid.Column="1" Grid.Row="0" Count="{Binding Scores[2]}" />
+            <ctrl:Tile Grid.Column="2" Grid.Row="0" Count="{Binding Scores[3]}" Command="{Binding RefreshCommand}" />
+
+            <ctrl:Tile Grid.Column="0" Grid.Row="1" Count="{Binding Scores[4]}" />
+            <ctrl:Tile Grid.Column="1" Grid.Row="1" Count="{Binding Scores[5]}" />
+            <ctrl:Tile Grid.Column="2" Grid.Row="1" Count="{Binding Scores[6]}" />
+
+            <ctrl:Tile Grid.Column="0" Grid.Row="2" Count="{Binding Scores[7]}" />
+            <ctrl:Tile Grid.Column="1" Grid.Row="2" Count="{Binding Scores[8]}" />
+            <ctrl:Tile Grid.Column="2" Grid.Row="2" Count="{Binding Scores[9]}" Background="Gold" />
+
+            <ctrl:Tile Grid.Column="1" Grid.Row="3" Count="0" Background="DarkRed"/>
+
+        </Grid>
+    </Grid>
+</UserControl>

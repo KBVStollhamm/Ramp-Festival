@@ -14,12 +14,13 @@ namespace Registration.ViewModels
 	{
 		private readonly RegistrationsController _registrationsController;
 
-		public HomeViewModel(RegistrationsController registrationsController, GameController gameController)
+		public HomeViewModel(RegistrationsController registrationsController, GameController gameController, LiveController liveController)
 		{
 			_registrationsController = registrationsController;
 
 			this.GoToRegistrationCommand = new DelegateCommand(GoToRegistration);
-            this.GoToGameSelectionCommand = gameController.GoToGameSelectionCommand;
+            this.OpenGameSelectionCommand = gameController.OpenGameSelectionCommand;
+            this.LiveShowCommand = liveController.LiveShowCommand;
 		}
 
 		public ICommand GoToRegistrationCommand { get; private set; }
@@ -28,7 +29,8 @@ namespace Registration.ViewModels
 			_registrationsController.ShowRegistrationView();
 		}
 
-        public ICommand GoToGameSelectionCommand { get; private set; }
+        public ICommand OpenGameSelectionCommand { get; private set; }
+        public ICommand LiveShowCommand { get; private set; }
 	}
 }
 

@@ -1,18 +1,36 @@
-﻿<UserControl x:Class="Registration.Views.GameSelectionView"
+﻿<UserControl x:Class="Registration.Views.GamingSummaryView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Registration.Views"
-             xmlns:readModel="clr-namespace:Registration.ReadModel;assembly=Registration.ReadModel"
-             xmlns:ctrl="clr-namespace:Registration.Controls"
              xmlns:v="clr-namespace:Registration.Views"
+             xmlns:ctrl="clr-namespace:Registration.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    
+        <Style TargetType="ctrl:Tile" x:Key="ExtendedTileStyle" BasedOn="{StaticResource LargeTileStyle}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Content}" Value="{x:Null}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ctrl:Tile Background="DarkRed">
+                                    <ctrl:Tile.Content>
+                                        <TextBlock Text="Kein Spiel aktiv" Style="{StaticResource Heading2}"/>
+                                    </ctrl:Tile.Content>
+                                </ctrl:Tile>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
         <DataTemplate x:Key="SinglePlayerGameTemplate">
-            <ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
+            <ctrl:Tile Command="{Binding Path=DataContext.StartGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ContentControl}}}" CommandParameter="{Binding}">
                 <ctrl:Tile.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -34,7 +52,7 @@
             </ctrl:Tile>
         </DataTemplate>
         <DataTemplate x:Key="TeamGameTemplate">
-            <ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" Background="Green">
+            <ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.RegisterTeamCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding Id}" Background="Green">
                 <ctrl:Tile.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -51,7 +69,7 @@
             </ctrl:Tile>
         </DataTemplate>
         <DataTemplate x:Key="ChildGameTemplate">
-            <ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" Background="Orange">
+            <ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.RegisterPlayerCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding Id}" Background="Orange">
                 <ctrl:Tile.Content>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -74,20 +92,53 @@
         </DataTemplate>
         <v:SequenceItemDataTemplateSelector x:Key="SequenceItemTemplateSelector" SinglePlayerGameTemplate="{StaticResource SinglePlayerGameTemplate}" TeamGameTemplate="{StaticResource TeamGameTemplate}" ChildGameTemplate="{StaticResource ChildGameTemplate}" />
     </UserControl.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="410"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="630" />
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Border Margin="3" >
+            <TextBlock Text="{Binding Test.Result}" Style="{StaticResource Heading1}" VerticalAlignment="Center" Visibility="{Binding Test.IsCompleted,
+            Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Border>
+        
+        <ctrl:Tile Grid.Row="1" Count="Spiel wählen" Command="{Binding OpenGameSelectionCommand}" />
+
         <!-- Busy indicator -->
-        <TextBlock Style="{StaticResource Heading1}" Text="Lade Daten..." Visibility="{Binding PendingGames.IsNotCompleted,
+        <TextBlock Style="{StaticResource Heading1}" Text="Lade Daten..." Visibility="{Binding Summary.IsNotCompleted,
             Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <!-- Results -->
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding PendingGames.Result}" ItemTemplateSelector="{StaticResource SequenceItemTemplateSelector}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"></WrapPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+        <TextBlock Style="{StaticResource Heading2}" Text="{Binding Summary.Result.ActiveGameId}" />
         <!-- Error details -->
-        <TextBlock Style="{StaticResource Heading1}" Text="{Binding PendingGames.ErrorMessage}" Foreground="Red" Visibility="{Binding PendingGames.IsFaulted,
+        <TextBlock Style="{StaticResource Heading1}" Text="{Binding Summary.ErrorMessage}" Foreground="Red" Visibility="{Binding Summary.IsFaulted,
             Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+        <!--<Grid Grid.Row="1" Visibility="{Binding Summary.IsCompleted, Converter={StaticResource BooleanToVisibilityConverter}}" >
+            <StackPanel Orientation="Horizontal">
+                <ContentControl Content="{Binding ActiveGame}" ContentTemplateSelector="{StaticResource SequenceItemTemplateSelector}" />
+                <ContentControl Content="{Binding NextGame}" ContentTemplateSelector="{StaticResource SequenceItemTemplateSelector}" />
+            </StackPanel>
+        </Grid>-->
+
+        <ctrl:ShotsControl Grid.Column="2" Grid.Row="5" Shot1="{Binding Shot1}" EditShotCommand="{Binding EditShotCommand}" />
+        
+        <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="2" Margin="3" PlayerName="{Binding CurrentGame.PlayerName}" />
+        <v:MakeShotView Grid.Row="1" Grid.RowSpan="4" Grid.Column="2" MakeShotCommand="{Binding MakeShotCommand}" Visibility="{Binding CanMakeShots, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock Grid.Row="1" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource Heading1}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding BusyText}" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}
+            }" TextAlignment="Center"/>
     </Grid>
 </UserControl>

@@ -5,8 +5,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/DefaultTheme.xaml" />
-           </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Common.xaml" />
+                <ResourceDictionary Source="/Themes/TextBlock.xaml" />
+                <ResourceDictionary Source="/Themes/Button.xaml" />
+                <ResourceDictionary Source="/Themes/Tile.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

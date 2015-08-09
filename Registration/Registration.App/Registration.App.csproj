@@ -133,16 +133,21 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\LiveController.cs" />
     <Compile Include="Controllers\RegistrationsController.cs" />
     <Compile Include="Controls\ButtonHelper.cs" />
     <Compile Include="Controls\PlayerHeaderControl.xaml.cs">
       <DependentUpon>PlayerHeaderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShotsControl.xaml.cs">
+      <DependentUpon>ShotsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tile.cs" />
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
     <Compile Include="Converters\VisibilityToStarHeightConverter.cs" />
+    <Compile Include="Events\GameSelected.cs" />
     <Compile Include="Events\ModuleInitialized.cs" />
     <Compile Include="Infrastructure\FocusExtensions.cs" />
     <Compile Include="Infrastructure\InputValidationException.cs" />
@@ -151,23 +156,47 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\PlayerContestRegistration.cs" />
     <Compile Include="Models\PlayerName.cs" />
+    <Compile Include="Models\Score.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamContestRegistration.cs" />
     <Compile Include="Models\TeamName.cs" />
     <Compile Include="RegistrationModule.cs" />
+    <Compile Include="Services\GameControlService.cs" />
+    <Compile Include="Services\IGameControlService.cs" />
     <Compile Include="Services\IRegistrationService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
+    <Compile Include="ViewModels\GameControlViewModel.cs" />
     <Compile Include="ViewModels\GameSelectionViewModel.cs" />
     <Compile Include="ViewModels\ContestRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\GamingSummaryViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IRegisterPlayerViewModel.cs" />
     <Compile Include="ViewModels\IRegisterTeamViewModel.cs" />
+    <Compile Include="ViewModels\LiveViewModel.cs" />
     <Compile Include="ViewModels\RegisterPlayerViewModel.cs" />
     <Compile Include="ViewModels\RegisterTeamViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\SequencingItemViewModel.cs" />
     <Compile Include="ViewModels\SequencingViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\GameControlFrameView.xaml.cs">
+      <DependentUpon>GameControlFrameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GamingSummaryView.xaml.cs">
+      <DependentUpon>GamingSummaryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IGamingSummaryView.cs" />
+    <Compile Include="Views\ILeaderboardView.cs" />
+    <Compile Include="Views\ILiveView.cs" />
+    <Compile Include="Views\LeaderboardView.xaml.cs">
+      <DependentUpon>LeaderboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LiveView.xaml.cs">
+      <DependentUpon>LiveView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MakeShotView.xaml.cs">
+      <DependentUpon>MakeShotView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SequenceItemDataTemplateSelector.cs" />
     <Compile Include="Views\GameSelectionView.xaml.cs">
       <DependentUpon>GameSelectionView.xaml</DependentUpon>
@@ -201,19 +230,18 @@
     <Compile Include="Views\Shell3.xaml.cs">
       <DependentUpon>Shell3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SinglePlayerLiveView.xaml.cs">
+      <DependentUpon>SinglePlayerLiveView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controls\PlayerHeaderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ShotsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Button.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Dark.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\DefaultTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +261,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GameControlFrameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,7 +273,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\GamingSummaryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LeaderboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LiveView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MakeShotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -270,6 +318,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Shell3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SinglePlayerLiveView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

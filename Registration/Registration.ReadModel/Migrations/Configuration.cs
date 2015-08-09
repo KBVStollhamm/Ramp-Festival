@@ -10,6 +10,7 @@ namespace Registration.ReadModel.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "Registration.ReadModel.Implementation.ContestDbContext";
         }
 

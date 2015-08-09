@@ -14,7 +14,7 @@
 	
 	<WrapPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0">
 		<ctrl:Tile Title="Registrierung" Style="{StaticResource MegaTileStyle}" Content="{StaticResource AddUser}" Foreground="Black" Background="#FFF1E711" Command="{Binding GoToRegistrationCommand}" />
-        <ctrl:Tile Title="Spiel-Steuerung" Style="{StaticResource MegaTileStyle}" Content="{StaticResource AddUser}" Foreground="Black" Background="#FFF1E711" Command="{Binding GoToGameSelectionCommand}"  />
-        <ctrl:Tile Title="Live-Anzeige" Style="{StaticResource MegaTileStyle}" Content="{StaticResource AddUser}" Foreground="Black" Background="#FFF1E711"  />
+        <ctrl:Tile Title="Spiel-Steuerung" Style="{StaticResource MegaTileStyle}" Content="{StaticResource AddUser}" Foreground="Black" Background="#FFF1E711" Command="{Binding OpenGameSelectionCommand}"  />
+        <ctrl:Tile Title="Live-Anzeige" Style="{StaticResource MegaTileStyle}" Content="{StaticResource AddUser}" Foreground="Black" Background="#FFF1E711" Command="{Binding LiveShowCommand}"  />
 	</WrapPanel>
 </UserControl>

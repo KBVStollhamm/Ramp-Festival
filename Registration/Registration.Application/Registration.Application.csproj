@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Handlers\ContestReadModelGenerator.cs" />
+    <Compile Include="Handlers\GameResultReadModelGenerator.cs" />
     <Compile Include="Handlers\SinglePlayerGameCommandHandler.cs" />
     <Compile Include="Handlers\SequencingReadModelGenerator.cs" />
     <Compile Include="Handlers\TeamGameCommandHandler.cs" />

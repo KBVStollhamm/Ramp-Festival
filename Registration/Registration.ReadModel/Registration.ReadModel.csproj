@@ -51,6 +51,8 @@
     <Compile Include="ContestAlias.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameDao.cs" />
+    <Compile Include="GameResult.cs" />
+    <Compile Include="GamingSummary.cs" />
     <Compile Include="IContestDao.cs" />
     <Compile Include="IGameDao.cs" />
     <Compile Include="Implementation\ContestDbContext.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sequencing.cs" />
     <Compile Include="SequencingItem.cs" />
+    <Compile Include="Shot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

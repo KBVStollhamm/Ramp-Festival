@@ -83,6 +83,7 @@ namespace Registration.Server
 
 			builder.RegisterType<ContestReadModelGenerator>().AsSelf();
 			builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
+            builder.RegisterType<GameResultReadModelGenerator>().AsSelf();
 		}
 
 
@@ -95,7 +96,7 @@ namespace Registration.Server
 
 		private void Migrate()
 		{
-			_container.Resolve<RegistrationDbContext>().Database.Initialize(true);
+			_container.Resolve<RegistrationDbContext>().Database.Initialize(false);
 		}
 
 		public void Stop()
