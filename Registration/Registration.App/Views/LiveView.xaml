@@ -14,13 +14,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
-            <RowDefinition />
+            <RowDefinition Height="420"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="420"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="1" PlayerName="{Binding CurrentPlayerName}" Margin="3"/>
@@ -47,10 +47,7 @@
 
             <ctrl:Tile Grid.Column="0" Grid.Row="2" Count="{Binding Scores[7]}" />
             <ctrl:Tile Grid.Column="1" Grid.Row="2" Count="{Binding Scores[8]}" />
-            <ctrl:Tile Grid.Column="2" Grid.Row="2" Count="{Binding Scores[9]}" Background="Gold" />
-
-            <ctrl:Tile Grid.Column="1" Grid.Row="3" Count="0" Background="DarkRed"/>
-
+            <ctrl:Tile Grid.Column="2" Grid.Row="2" Count="{Binding Scores[9]}" />
         </Grid>
     </Grid>
 </UserControl>

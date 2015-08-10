@@ -17,11 +17,9 @@ namespace Registration.ViewModels
     {
         public LiveViewModel()
         {
-            _currentPlayerName = "MAaddi";
+            _currentPlayerName = "KEIN SPIEL GESTARTET";
             _scores = new Dictionary<int, int>();
             this.Scores = new ReadOnlyDictionary<int, int>(_scores);
-
-            _scores[1] = 55;
 
             this.RefreshCommand = DelegateCommand.FromAsyncHandler(Refresh);
 
