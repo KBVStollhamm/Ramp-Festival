@@ -45,8 +45,9 @@
     <Compile Include="Commands\Message.cs" />
     <Compile Include="Commands\RegisterPlayerToContest.cs" />
     <Compile Include="Commands\RegisterTeamToContest.cs" />
-    <Compile Include="Commands\SinglePlayerGameCommand.cs" />
+    <Compile Include="Commands\GameCommand.cs" />
     <Compile Include="Commands\StartSinglePlayerGame.cs" />
+    <Compile Include="Commands\StartTeamGame.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Events\Live\GameStarted.cs" />
     <Compile Include="Events\Live\PlayerScored.cs" />

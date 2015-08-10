@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Registration.Commands
 {
-    public class MakePlayerShot : SinglePlayerGameCommand
-    {
-        public int ShotNumber { get; set; }
-        public int Score { get; set; }
-    }
+	public class MakePlayerShot : GameCommand
+	{
+		public string PlayerName { get; set; }
+		public int ShotNumber { get; set; }
+		public int Score { get; set; }
+	}
 }

@@ -10,34 +10,54 @@ using Registration.Domain.Contest;
 
 namespace Registration.Application.Handlers
 {
-    public class TeamGameCommandHandler
-        : Consumes<RegisterTeamToContest>.All
-    {
-        private readonly IEventSourcedRepository<TeamGame> _repository;
+	public class TeamGameCommandHandler
+		: Consumes<RegisterTeamToContest>.All
+		, Consumes<StartTeamGame>.All
+	{
+		private readonly IEventSourcedRepository<TeamGame> _repository;
 
-        public TeamGameCommandHandler(IEventSourcedRepository<TeamGame> repository)
-        {
-            _repository = repository;
-        }
+		public TeamGameCommandHandler(IEventSourcedRepository<TeamGame> repository)
+		{
+			_repository = repository;
+		}
 
-        public void Consume(RegisterTeamToContest message)
-        {
-            if (message == null) throw new ArgumentNullException("message");
+		public void Consume(RegisterTeamToContest message)
+		{
+			if (message == null) throw new ArgumentNullException("message");
 
-            Console.WriteLine(message.TeamName);
+			Console.WriteLine(message.TeamName);
 
-            var game = _repository.Find(message.ContestId);
-            if (game == null)
-            {
-                game = new TeamGame(message.GameId, message.ContestId, message.TeamName, message.Player1Name, message.Player2Name, message.Player3Name, message.Player4Name, message.Player5Name);
-            }
-            else
-            {
-                //TODO: Implement update
-            }
+			var game = _repository.Find(message.ContestId);
+			if (game == null)
+			{
+				game = new TeamGame(message.GameId, message.ContestId, message.TeamName, message.Player1Name, message.Player2Name, message.Player3Name, message.Player4Name, message.Player5Name);
+			}
+			else
+			{
+				//TODO: Implement update
+			}
 
-            _repository.Save(game, message.Id.ToString());
-        }
-    }
+			_repository.Save(game, message.Id.ToString());
+		}
 
+		public void Consume(StartTeamGame message)
+		{
+			if (message == null) throw new ArgumentNullException("message");
+
+			Console.WriteLine("Starting team player game with ID: {0}", message.GameId);
+
+			var game = _repository.Find(message.GameId);
+			if (game != null)
+			{
+				game.Start();
+				Console.WriteLine("Team player game with ID: {0} started.", message.GameId);
+			}
+			else
+			{
+				Console.WriteLine("Couldn't find a team player game with ID: {1}", message.GameId);
+			}
+
+			_repository.Save(game, message.Id.ToString());
+		}
+	}
 }

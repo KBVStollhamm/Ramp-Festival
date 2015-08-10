@@ -7,10 +7,7 @@ using Infrastructure.EventSourcing;
 
 namespace Registration.Domain.Contest
 {
-	public class PlayerScored : VersionedEvent
+	public class TeamGameStarted : VersionedEvent
 	{
-		public string PlayerName { get; set; }
-		public int ShotNumber { get; set; }
-		public int Points { get; set; }
 	}
 }

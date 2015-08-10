@@ -7,7 +7,7 @@ using Infrastructure.Messaging;
 
 namespace Registration.Commands
 {
-    public abstract class SinglePlayerGameCommand : ICommand
+    public abstract class GameCommand : ICommand
     {
         public Guid Id { get; set; }
         public Guid GameId { get; set; }

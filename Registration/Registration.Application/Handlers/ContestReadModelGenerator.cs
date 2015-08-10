@@ -72,7 +72,8 @@ namespace Registration.Application.Handlers
 				case ContestManagement.Events.ContestType.WomenContest:
 					return ReadModel.ContestType.WomenContest;
 				default:
-					throw new InvalidCastException();
+					return ReadModel.ContestType.SinglePlayerContest;
+					//throw new InvalidCastException();
 			}
 		}
 	}

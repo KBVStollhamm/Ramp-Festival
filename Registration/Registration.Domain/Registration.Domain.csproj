@@ -42,16 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contest\PlayerScoreUpdated.cs" />
-    <Compile Include="Contest\Shot.cs" />
     <Compile Include="Contest\SinglePlayerGame.cs" />
     <Compile Include="Contest\SinglePlayerGamePlaced.cs" />
     <Compile Include="Contest\SinglePlayerGameStarted.cs" />
     <Compile Include="Contest\TeamGame.cs" />
     <Compile Include="Contest\TeamGamePlaced.cs" />
+    <Compile Include="Contest\TeamGameStarted.cs" />
     <Compile Include="Participation\Participation.cs" />
     <Compile Include="Participation\ParticipationPlaced.cs" />
     <Compile Include="Contest\PlayerScored.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shots.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

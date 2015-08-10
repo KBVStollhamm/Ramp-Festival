@@ -9,6 +9,7 @@ namespace Registration.Domain.Contest
 {
     public class PlayerScoreUpdated : VersionedEvent
     {
+		public string PlayerName { get; set; }
         public int ShotNumber { get; set; }
         public int Points { get; set; }
     }

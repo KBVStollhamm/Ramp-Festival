@@ -47,10 +47,10 @@ namespace Registration.ViewModels
 			}
 		}
 
-        public Guid ContestId
-        {
-            get; set;
-        }
+		public Guid ContestId
+		{
+			get; set;
+		}
 
 		private DelegateCommand _submitCommand;
 		public ICommand SubmitCommand
@@ -105,7 +105,7 @@ namespace Registration.ViewModels
 				{
 					throw new InputValidationException("Der Name des Spielers ist zwingend erforderlich.");
 				}
-			}
+		}
 			else
 			{
 				this.RemoveError("PlayerName");
