@@ -8,42 +8,58 @@ using Registration.Commands;
 
 namespace Registration.Services
 {
-    public class GameControlService : IGameControlService
-    {
-        private readonly IServiceBus _commandBus;
+	public class GameControlService : IGameControlService
+	{
+		private readonly IServiceBus _commandBus;
 
-        public GameControlService(IServiceBus commandBus)
-        {
-            _commandBus = commandBus;
-        }
+		public GameControlService(IServiceBus commandBus)
+		{
+			_commandBus = commandBus;
+		}
 
-        public async Task MakePlayerShot(Guid gameId, int shotNumber, int scores)
-        {
-            var command = new MakePlayerShot
-            {
-                GameId = gameId,
-                ShotNumber = shotNumber,
-                Score = scores
-            };
+		public async Task MakePlayerShot(Guid gameId, int shotNumber, int scores)
+		{
+			var command = new MakePlayerShot
+			{
+				GameId = gameId,
+				ShotNumber = shotNumber,
+				Score = scores
+			};
 
-            _commandBus.Publish(command);
+			_commandBus.Publish(command);
 
-            await Task.FromResult<object>(null);
-        }
+			await Task.FromResult<object>(null);
+		}
 
-        public Task MakeTeamPlayerShot(Guid gameId, string playerName, int shotNumber, int scores)
-        {
-            throw new NotImplementedException();
-        }
+		public Task MakeTeamPlayerShot(Guid gameId, string playerName, int shotNumber, int scores)
+		{
+			throw new NotImplementedException();
+		}
 
-        public Task StartSinglePlayerGame(Guid gameId)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task StartSinglePlayerGame(Guid gameId)
+		{
+			var command = new StartSinglePlayerGame
+			{
+				GameId = gameId
+			};
 
-        public Task StartTeamGame(Guid gameId, string playerName)
-        {
-            throw new NotImplementedException();
-        }
-    }
+			_commandBus.Publish(command);
+
+			await Task.FromResult<object>(null);
+		}
+
+		public async Task StartTeamGame(Guid gameId, string playerName)
+		{
+			var command = new StartTeamGame
+			{
+				GameId = gameId,
+				PlayerName = playerName
+				
+			};
+
+			_commandBus.Publish(command);
+
+			await Task.FromResult<object>(null);
+		}
+	}
 }

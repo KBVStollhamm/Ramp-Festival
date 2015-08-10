@@ -23,7 +23,7 @@
             <ColumnDefinition Width="500"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="1" PlayerName="Schinken" Margin="3"/>
+        <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="1" PlayerName="{Binding CurrentPlayerName}" Margin="3"/>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition />

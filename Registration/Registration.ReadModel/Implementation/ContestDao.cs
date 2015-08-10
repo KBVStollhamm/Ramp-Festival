@@ -52,16 +52,30 @@ namespace Registration.ReadModel.Implementation
                 return await context.Query<SequencingItem>().OrderBy(x => x.RegisteredAt).ThenBy(x => x.Position).FirstOrDefaultAsync();
             }
         }
-        public async Task<IList<SequencingItem>> GetAllPendingGames()
+        
+		public async Task<IList<SequencingItem>> GetAllPendingGames()
         {
             using (var context = _contextFactory.Invoke())
             {
                 return await context.Query<SequencingItem>()
+					.Where(x => x.Status == GameState.New || x.Status == GameState.Running)
                     .OrderBy(x => x.RegisteredAt)
                     .ThenBy(x => x.Position)
                     .ToListAsync();
             }
         }
+
+		public async Task<IList<SequencingItem>> GetAllNewGames()
+		{
+			using (var context = _contextFactory.Invoke())
+			{
+				return await context.Query<SequencingItem>()
+					.Where(x => x.Status == GameState.New)
+					.OrderBy(x => x.RegisteredAt)
+					.ThenBy(x => x.Position)
+					.ToListAsync();
+			}
+		}
 
         public async Task<GamingSummary> FindGamingSummary(Guid stationId)
         {

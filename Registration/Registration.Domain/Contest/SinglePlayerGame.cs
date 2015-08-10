@@ -10,6 +10,7 @@ namespace Registration.Domain.Contest
 	public class SinglePlayerGame : EventSourced
 	{
 		private bool _isRunning;
+		private bool _isFinished;
 		private Dictionary<int, int> _shots = new Dictionary<int, int>();
 
 		protected SinglePlayerGame(Guid id)
@@ -19,6 +20,7 @@ namespace Registration.Domain.Contest
 			this.Handles<SinglePlayerGameStarted>(When);
 			this.Handles<PlayerScored>(When);
 			this.Handles<PlayerScoreUpdated>(When);
+			this.Handles<GameFinished>(When);
 		}
 
 		public SinglePlayerGame(Guid id, IEnumerable<IVersionedEvent> history)
@@ -56,6 +58,11 @@ namespace Registration.Domain.Contest
 					ShotNumber = shotNumber,
 					Points = score
 				});
+
+				if (_shots.Count() == 9)
+				{
+					this.Apply(new GameFinished());
+				}
 			}
 			else
 			{
@@ -65,6 +72,7 @@ namespace Registration.Domain.Contest
 					Points = score
 				});
 			}
+
 		}
 
 		private void When(SinglePlayerGamePlaced e)
@@ -84,6 +92,12 @@ namespace Registration.Domain.Contest
 		private void When(PlayerScoreUpdated e)
 		{
 			_shots[e.ShotNumber] = e.Points;
+		}
+
+		private void When(GameFinished e)
+		{
+			_isRunning = false;
+			_isFinished = true;
 		}
 	}
 }

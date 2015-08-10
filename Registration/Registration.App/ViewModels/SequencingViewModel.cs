@@ -37,22 +37,22 @@ namespace Registration.ViewModels
 
 		private async Task LoadData()
 		{
-            try
-            {
-                IList<SequencingItem> model = await _contestDao.GetAllPendingGames();
-                if (model == null) return;
+			try
+			{
+				IList<SequencingItem> model = await _contestDao.GetAllNewGames();
+				if (model == null) return;
 
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    _sequence.Clear();
-                    foreach (var item in model)
-                        _sequence.Add(item);
-                });
-            }
-            catch (Exception ex)
-            {
-                  //TODO: Implement exception handling
-            }
+				App.Current.Dispatcher.Invoke(() =>
+				{
+					_sequence.Clear();
+					foreach (var item in model)
+						_sequence.Add(item);
+				});
+			}
+			catch (Exception ex)
+			{
+				  //TODO: Implement exception handling
+			}
 		}
 
 		public ICommand RefreshDataCommand { get; private set; }

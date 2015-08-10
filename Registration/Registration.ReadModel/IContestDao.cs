@@ -14,6 +14,7 @@ namespace Registration.ReadModel
         Task<Sequencing> FindSequencing(Guid contestId);
         Task<SequencingItem> FindNextGame(Guid stationId);
         Task<IList<SequencingItem>> GetAllPendingGames();
+		Task<IList<SequencingItem>> GetAllNewGames();
 
         Task<GamingSummary> FindGamingSummary(Guid stationId);
 

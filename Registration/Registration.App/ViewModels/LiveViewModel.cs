@@ -61,7 +61,6 @@ namespace Registration.ViewModels
 
         private async Task Refresh()
         {
-            _scores[1] = 77;
             this.OnPropertyChanged(() => this.Scores);
 
             await Task.FromResult<object>(null);
