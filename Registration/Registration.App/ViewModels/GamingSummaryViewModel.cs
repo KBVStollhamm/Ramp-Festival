@@ -73,14 +73,6 @@ namespace Registration.ViewModels
 
 		private bool _startGameOnLoading = false;
 
-		private void CurrentGameResult_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == "IsSuccessfullyCompleted")
-			{
-
-			}
-		}
-
 		public NotifyTaskCompletion<GameResult> CurrentGameResult { get; private set; }
 
 		private Dictionary<int, int> _shots;
@@ -178,7 +170,6 @@ namespace Registration.ViewModels
 		public ICommand OpenGameSelectionCommand { get; private set; }
 		public ICommand StartGameCommand { get; private set; }
 		public ICommand MakeShotCommand { get; private set; }
-	
 		public ICommand EditShotCommand { get; private set; }
 
 		private async Task StartGame(SequencingItem game)

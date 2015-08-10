@@ -84,6 +84,8 @@
     <Style x:Key="MegaTileStyle" TargetType="ctrl:Tile">
         <Setter Property="Width" Value="280" />
         <Setter Property="Height" Value="280" />
-    </Style>
+		<Setter Property="CountFontSize"
+				Value="40"/>
+	</Style>
     
 </ResourceDictionary>

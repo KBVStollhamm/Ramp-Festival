@@ -83,7 +83,7 @@ namespace Registration.Server
 
 			builder.RegisterType<ContestReadModelGenerator>().AsSelf();
 			builder.RegisterType<SequencingReadModelGenerator>().AsSelf();
-            builder.RegisterType<GameResultReadModelGenerator>().AsSelf();
+			builder.RegisterType<GameResultReadModelGenerator>().AsSelf();
 		}
 
 
