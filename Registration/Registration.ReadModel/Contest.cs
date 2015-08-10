@@ -40,6 +40,7 @@ namespace Registration.ReadModel
 	{
 		SinglePlayerContest = 1,
 		TeamContest = 2,
-        ChildrenContest = 3
+        ChildrenContest = 3,
+		WomenContest
 	}
 }
