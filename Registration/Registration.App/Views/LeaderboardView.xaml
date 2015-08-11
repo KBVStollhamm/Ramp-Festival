@@ -59,12 +59,15 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="140"/>
-			<RowDefinition />
-			<RowDefinition />
+			<RowDefinition Height="140"/>
+			<RowDefinition Height="140"/>
+			<RowDefinition Height="140"/>
 		</Grid.RowDefinitions>
 		<TextBlock Text="Bestenliste" Style="{StaticResource Heading1}"/>
 
-		<ContentControl Grid.Row="1" Content="{Binding Leaderboard.Result.SinglePlayerContestLeader}" ContentTemplateSelector="{StaticResource BoardTemplateSelector}" />
-		<ContentControl Grid.Row="2" Content="{Binding Leaderboard.Result.TeamContestLeader}" ContentTemplateSelector="{StaticResource BoardTemplateSelector}" />
+		<ContentControl Grid.Row="1" Content="{Binding Leaderboard.Result.TeamContestLeader}" ContentTemplateSelector="{StaticResource BoardTemplateSelector}" />
+		<ContentControl Grid.Row="2" Content="{Binding Leaderboard.Result.SinglePlayerContestLeader}" ContentTemplateSelector="{StaticResource BoardTemplateSelector}" />
+		<ContentControl Grid.Row="3" Content="{Binding Leaderboard.Result.WomenContestLeader}" ContentTemplateSelector="{StaticResource BoardTemplateSelector}" />
+		<ContentControl Grid.Row="4" Content="{Binding Leaderboard.Result.ChildrenContestLeader}" ContentTemplateSelector="{StaticResource BoardTemplateSelector}" />
 	</Grid>
 </UserControl>
