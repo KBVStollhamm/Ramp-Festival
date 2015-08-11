@@ -55,7 +55,7 @@ namespace Registration.Application.Handlers
 			}
 			else
 			{
-				Console.WriteLine("Couldn't find a team player game with ID: {1}", message.GameId);
+				Console.WriteLine("Couldn't find a team player game with ID: {0}", message.GameId);
 			}
 
 			_repository.Save(game, message.Id.ToString());

@@ -191,6 +191,7 @@
     <Compile Include="Views\IGamingSummaryView.cs" />
     <Compile Include="Views\ILeaderboardView.cs" />
     <Compile Include="Views\ILiveView.cs" />
+    <Compile Include="Views\LeaderboardDataTemplateSelector.cs" />
     <Compile Include="Views\LeaderboardView.xaml.cs">
       <DependentUpon>LeaderboardView.xaml</DependentUpon>
     </Compile>

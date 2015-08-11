@@ -7,7 +7,7 @@
 			 xmlns:v="clr-namespace:Registration.Views"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300">
-   
+
 	<UserControl.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 	</UserControl.Resources>
@@ -23,7 +23,7 @@
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="50" />
 			<ColumnDefinition Width="700"/>
-			<ColumnDefinition Width="280"/>
+			<ColumnDefinition Width="380"/>
 		</Grid.ColumnDefinitions>
 		<ctrl:PlayerHeaderControl Grid.Row="1" Grid.Column="1" PlayerName="{Binding CurrentPlayerName}" TotalScore="{Binding PlayerTotalScore}" Margin="3"/>
 		<ctrl:TeamHeaderControl Grid.Row="0" Grid.Column="1" TeamName="{Binding CurrentTeamName}" TotalScore="{Binding TeamTotalScore}"  Margin="3" Background="Green" Height="140" Visibility="{Binding IsTeamGame, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -54,6 +54,8 @@
 			<ctrl:Tile Grid.Column="2" Grid.Row="2" Count="{Binding Scores[9]}" CountFontSize="50" Title="Wurf 9"/>
 
 			<!--<ctrl:Tile Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Count="99" CountFontSize="100" />-->
-	</Grid>
+		</Grid>
+		
+		<v:LeaderboardView Grid.Column="2" />
 	</Grid>
 </UserControl>

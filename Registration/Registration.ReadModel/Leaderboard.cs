@@ -24,5 +24,6 @@ namespace Registration.ReadModel
 		public Guid GameId { get; set; }
 		public string LeaderName { get; set; }
 		public int TotalScore { get; set; }
+		public GameType GameType { get; set; }
 	}
 }

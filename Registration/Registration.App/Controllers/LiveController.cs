@@ -42,17 +42,17 @@ namespace Registration.Controllers
 
         private void ShowLeaderboard()
         {
-            IRegion region = _regionManager.Regions["DetailsRegion"];
+			//IRegion region = _regionManager.Regions["DetailsRegion"];
 
-            object view = region.GetView("LeaderboardView");
-            if (view == null)
-            {
-                view = ServiceLocator.Current.GetInstance<ILeaderboardView>();
-                region.Add(view, "LeaderboardView");
-            }
+			//object view = region.GetView("LeaderboardView");
+			//if (view == null)
+			//{
+			//	view = ServiceLocator.Current.GetInstance<ILeaderboardView>();
+			//	region.Add(view, "LeaderboardView");
+			//}
 
-            region.Activate(view
-                );
+			//region.Activate(view
+			//	);
         }
 
         public ICommand LiveShowCommand { get; private set; }

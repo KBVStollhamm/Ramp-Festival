@@ -58,7 +58,7 @@ namespace Registration.Application.Handlers
 			}
 			else
 			{
-				Console.WriteLine("Couldn't find a single player game with ID: {1}", message.GameId);
+				Console.WriteLine("Couldn't find a single player game with ID: {0}", message.GameId);
 			}
 		}
 

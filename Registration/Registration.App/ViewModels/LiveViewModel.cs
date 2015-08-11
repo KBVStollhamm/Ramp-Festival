@@ -146,8 +146,10 @@ namespace Registration.ViewModels
 			this.OnPropertyChanged("TeamTotalScore");
 			this.OnPropertyChanged("IsTeamGame");
 
+			this.Items = new ObservableCollection<LeaderboardItem>();
+
 			this.Leaderboard = new NotifyTaskCompletion<Leaderboard>(this.GetLeaderboard());
-			//this.OnPropertyChanged("Leaderboard");
+			this.OnPropertyChanged("Leaderboard");
 		}
 
 		private void OnPlayerScored(PlayerScored e)
@@ -158,13 +160,25 @@ namespace Registration.ViewModels
 			this.OnPropertyChanged("TeamTotalScore");
 		}
 
+
+		public ObservableCollection<LeaderboardItem> Items
+		{
+			get;
+			private set;
+		}
+
 		public NotifyTaskCompletion<Leaderboard> Leaderboard { get; private set; }
 
 		private async Task<Leaderboard> GetLeaderboard()
 		{
 			var board =  await _contestDao.GetLeaderboard();
 
+			this.Items.Clear();
+			if (board.SinglePlayerContestLeader != null)
+				this.Items.Add(board.SinglePlayerContestLeader);
+
 			return board;
+
 		}
 	}
 }
