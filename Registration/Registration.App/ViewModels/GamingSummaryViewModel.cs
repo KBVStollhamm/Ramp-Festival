@@ -106,7 +106,11 @@ namespace Registration.ViewModels
 		{
 			get
 			{
-				return _shotNumberToEdit > 0 ? _shotNumberToEdit : _currentShotNumber;
+				var number = _shotNumberToEdit > 0 ? _shotNumberToEdit : _currentShotNumber;
+				if (number > 9)
+					number = 9;
+
+				return number;
 			}
 			set
 			{
@@ -227,6 +231,8 @@ namespace Registration.ViewModels
 
 				int waitForShotNumber = this.CurrentShotNumber;
 				_liveBus.Publish(@event);
+
+				await Task.Delay(1000);
 
 				bool found = false;
 				while (!found)

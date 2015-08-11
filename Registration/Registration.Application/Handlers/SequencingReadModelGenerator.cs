@@ -19,6 +19,8 @@ namespace Registration.Application.Handlers
 		, Consumes<SinglePlayerGameStarted>.All
 		, Consumes<TeamGameStarted>.All
 		, Consumes<GameFinished>.All
+		, Consumes<PlayerScored>.All
+		, Consumes<PlayerScoreUpdated>.All
 	{
 		private readonly Func<RegistrationDbContext> _contextFactory;
 		private readonly IServiceBus _eventBus;
@@ -198,6 +200,38 @@ namespace Registration.Application.Handlers
 
 				context.Save(dto);
 			}
+		}
+
+		public void Consume(PlayerScored message)
+		{
+			using (var context = _contextFactory.Invoke())
+			{
+				var dto = context.Query<SequencingItem>().Where(e => e.GameId.Equals(message.SourceId) && e.PlayerName.Equals(message.PlayerName)).SingleOrDefault();
+				
+				if (dto != null && message.ShotNumber >= 9)
+				{
+					dto.Status = GameState.Finished;
+				}
+
+				context.Save(dto);
+			}
+			
+		}
+		
+		public void Consume(PlayerScoreUpdated message)
+		{
+			using (var context = _contextFactory.Invoke())
+			{
+				var dto = context.Query<SequencingItem>().Where(e => e.GameId.Equals(message.SourceId) && e.PlayerName.Equals(message.PlayerName)).SingleOrDefault();
+
+				if (dto != null && message.ShotNumber >= 9)
+				{
+					dto.Status = GameState.Finished;
+				}
+
+				context.Save(dto);
+			}
+
 		}
 	}
 }

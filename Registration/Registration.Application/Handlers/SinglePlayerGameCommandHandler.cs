@@ -24,56 +24,78 @@ namespace Registration.Application.Handlers
 
 		public void Consume(RegisterPlayerToContest message)
 		{
-			if (message == null) throw new ArgumentNullException("message");
-			
-			Console.WriteLine(message.PlayerName);
-
-			var game = _repository.Find(message.GameId);
-			if (game == null)
+			try
 			{
-				game = new SinglePlayerGame(message.GameId, message.ContestId, message.PlayerName);
-			}
-			else
-			{
-				//TODO: Implement update
-			}
+				if (message == null) throw new ArgumentNullException("message");
 
-			_repository.Save(game, message.Id.ToString());
+				Console.WriteLine(message.PlayerName);
+
+				var game = _repository.Find(message.GameId);
+				if (game == null)
+				{
+					game = new SinglePlayerGame(message.GameId, message.ContestId, message.PlayerName);
+				}
+				else
+				{
+					//TODO: Implement update
+				}
+
+				_repository.Save(game, message.Id.ToString());
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 		}
 
 
 		public void Consume(StartSinglePlayerGame message)
 		{
-			if (message == null) throw new ArgumentNullException("message");
-
-			Console.WriteLine("Starting single player game with ID: {0}", message.GameId);
-
-			var game = _repository.Find(message.GameId);
-			if (game != null)
+			try
 			{
-				game.Start();
+				if (message == null) throw new ArgumentNullException("message");
 
-				_repository.Save(game, message.Id.ToString());
-				Console.WriteLine("Single player game with ID: {0} started.", message.GameId);
+				Console.WriteLine("Starting single player game with ID: {0}", message.GameId);
+
+				var game = _repository.Find(message.GameId);
+				if (game != null)
+				{
+					game.Start();
+
+					_repository.Save(game, message.Id.ToString());
+					Console.WriteLine("Single player game with ID: {0} started.", message.GameId);
+				}
+				else
+				{
+					Console.WriteLine("Couldn't find a single player game with ID: {0}", message.GameId);
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				Console.WriteLine("Couldn't find a single player game with ID: {0}", message.GameId);
+				Console.WriteLine(ex.Message);
 			}
+
 		}
 
 		public void Consume(MakePlayerShot message)
 		{
-			if (message == null) throw new ArgumentNullException("message");
-
-			Console.WriteLine(message.Score);
-
-			var game = _repository.Find(message.GameId);
-			if (game != null)
+			try
 			{
-				game.MakeShot(message.PlayerName, message.ShotNumber, message.Score);
+				if (message == null) throw new ArgumentNullException("message");
 
-				_repository.Save(game, message.Id.ToString());
+				Console.WriteLine(message.Score);
+
+				var game = _repository.Find(message.GameId);
+				if (game != null)
+				{
+					game.MakeShot(message.PlayerName, message.ShotNumber, message.Score);
+
+					_repository.Save(game, message.Id.ToString());
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
 			}
 		}
 	}

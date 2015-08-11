@@ -24,45 +24,61 @@ namespace Registration.Application.Handlers
 
         public void Consume(RegisterTeamToContest message)
 		{
-			if (message == null) throw new ArgumentNullException("message");
-
-			Console.WriteLine(message.TeamName);
-
-			var game = _repository.Find(message.ContestId);
-			if (game == null)
+			try
 			{
-				game = new TeamGame(message.GameId, message.ContestId, message.TeamName, message.Player1Name, message.Player2Name, message.Player3Name, message.Player4Name, message.Player5Name);
-			}
-			else
-			{
-				//TODO: Implement update
-			}
+				if (message == null) throw new ArgumentNullException("message");
 
-			_repository.Save(game, message.Id.ToString());
+				Console.WriteLine(message.TeamName);
+
+				var game = _repository.Find(message.ContestId);
+				if (game == null)
+				{
+					game = new TeamGame(message.GameId, message.ContestId, message.TeamName, message.Player1Name, message.Player2Name, message.Player3Name, message.Player4Name, message.Player5Name);
+				}
+				else
+				{
+					//TODO: Implement update
+				}
+
+				_repository.Save(game, message.Id.ToString());
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 		}
 
 		public void Consume(StartTeamGame message)
 		{
-			if (message == null) throw new ArgumentNullException("message");
-
-			Console.WriteLine("Starting team player game with ID: {0}", message.GameId);
-
-			var game = _repository.Find(message.GameId);
-			if (game != null)
+			try
 			{
-				game.Start(message.PlayerName);
-				Console.WriteLine("Team player game with ID: {0} started.", message.GameId);
-			}
-			else
-			{
-				Console.WriteLine("Couldn't find a team player game with ID: {0}", message.GameId);
-			}
+				if (message == null) throw new ArgumentNullException("message");
 
-			_repository.Save(game, message.Id.ToString());
+				Console.WriteLine("Starting team player game with ID: {0}", message.GameId);
+
+				var game = _repository.Find(message.GameId);
+				if (game != null)
+				{
+					game.Start(message.PlayerName);
+					Console.WriteLine("Team player game with ID: {0} started.", message.GameId);
+				}
+				else
+				{
+					Console.WriteLine("Couldn't find a team player game with ID: {0}", message.GameId);
+				}
+
+				_repository.Save(game, message.Id.ToString());
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 		}
 
         public void Consume(MakeTeamPlayerShot message)
         {
+			try
+			{ 
             if (message == null) throw new ArgumentNullException("message");
 
             Console.WriteLine(message.Score);
@@ -74,7 +90,11 @@ namespace Registration.Application.Handlers
             }
 
             _repository.Save(game, message.Id.ToString());
-
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
         }
     }
 }

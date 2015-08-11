@@ -20,6 +20,7 @@ namespace Registration.Domain.Contest
 			this.Handles<TeamGameStarted>(When);
 			this.Handles<PlayerScored>(When);
 			this.Handles<PlayerScoreUpdated>(When);
+			this.Handles<GameFinished>(When);
 		}
 
 		public TeamGame(Guid id, IEnumerable<IVersionedEvent> history)
@@ -113,6 +114,11 @@ namespace Registration.Domain.Contest
 			_shots.Remove(old);
 
 			_shots.Add(new Shot(e.PlayerName, e.ShotNumber, e.Points));
+		}
+
+		private void When(GameFinished e)
+		{
+			
 		}
 	}
 }

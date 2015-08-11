@@ -42,8 +42,12 @@ namespace Registration
 			this.Container.Register(Component.For<Shell3>()
 				.LifestyleSingleton());
 
-			this.RegisterCommandBus("Registration", "RegistrationCommandBus");
-            this.RegisterCommandBus("GameControl", "GameControlCommandBus");
+			var settings = new Properties.Settings();
+
+			this.RegisterCommandBus("_Registration" + settings.InstanceName, "RegistrationCommandBus");
+			this.RegisterCommandBus("_GameControl" + settings.InstanceName, "GameControlCommandBus");
+			
+			this.RegisterCommandBus(settings.InstanceName, "InstanceBus");
 
 			base.ConfigureContainer();
 		}
@@ -77,7 +81,7 @@ namespace Registration
 					msmq.UseMulticastSubscriptionClient();
 					msmq.VerifyMsmqConfiguration();
 				});
-				sbc.ReceiveFrom("msmq://localhost/ramp-festival_commands" + suffix);
+				sbc.ReceiveFrom("msmq://localhost/ramp-festival_" + suffix);
 				sbc.SetNetwork("WORKGROUP");
 			});
 

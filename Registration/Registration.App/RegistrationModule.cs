@@ -84,7 +84,8 @@ namespace Registration
 				.ImplementedBy<LiveView>()
 				.LifestyleSingleton());
 
-			_container.Register(Component.For<SequencingViewModel>());
+			_container.Register(Component.For<SequencingViewModel>()
+				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "InstanceBus")));
 			_container.Register(Component.For<SequencingView>());
 
 			_container.Register(Component.For<RegistrationDbContext>()
