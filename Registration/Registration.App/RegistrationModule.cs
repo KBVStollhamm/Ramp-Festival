@@ -36,10 +36,10 @@ namespace Registration
 		{
 			_container.Register(Component.For<IRegistrationService>()
 				.ImplementedBy<RegistrationService>()
-				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
+				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "RegistrationCommandBus")));
 			_container.Register(Component.For<IGameControlService>()
 				.ImplementedBy<GameControlService>()
-				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "CommandBus")));
+				.DependsOn(Dependency.OnComponent(typeof(IServiceBus), "GameControlCommandBus")));
 
 			_container.Register(Component.For<RegistrationsController>());
 			_container.Register(Component.For<GameController>());

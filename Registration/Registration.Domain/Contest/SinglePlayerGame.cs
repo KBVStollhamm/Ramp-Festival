@@ -35,7 +35,7 @@ namespace Registration.Domain.Contest
 			{
 				ContestId = contestId,
 				RegisteredAt = DateTime.Now,
-				PlayerName = playerName
+				PlayerName = playerName,
 			});
 		}
 
@@ -61,13 +61,18 @@ namespace Registration.Domain.Contest
 
 				if (_shots.Count() == 9)
 				{
-					this.Apply(new GameFinished());
+					this.Apply(new GameFinished
+					{
+						PlayerName = playerName,
+						TotalScore = _shots.Sum(x => x.Value),
+					});
 				}
 			}
 			else
 			{
 				this.Apply(new PlayerScoreUpdated
 				{
+					PlayerName = playerName,
 					ShotNumber = shotNumber,
 					Points = score
 				});

@@ -9,7 +9,7 @@ namespace Registration.Services
     public interface IGameControlService
     {
         Task StartSinglePlayerGame(Guid gameId);
-        Task MakePlayerShot(Guid gameId, int shotNumber, int scores);
+        Task MakePlayerShot(Guid gameId, string playerName, int shotNumber, int scores);
 
         Task StartTeamGame(Guid gameId, string playerName);
         Task MakeTeamPlayerShot(Guid gameId, string playerName, int shotNumber, int scores);

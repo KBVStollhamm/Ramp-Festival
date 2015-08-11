@@ -9,13 +9,17 @@ namespace Registration.Domain.Contest
 {
 	public class TeamGame : EventSourced
 	{
-		private bool _isRunning;
-		private Dictionary<string, Scores> _scores = new Dictionary<string, Scores>();
+		private Dictionary<string, bool> _isRunning = new Dictionary<string, bool>();
+		private List<Shot> _shots = new List<Shot>();
+		private string _teamName;
 
 		protected TeamGame(Guid id)
 			: base(id)
 		{
 			this.Handles<TeamGamePlaced>(When);
+			this.Handles<TeamGameStarted>(When);
+			this.Handles<PlayerScored>(When);
+			this.Handles<PlayerScoreUpdated>(When);
 		}
 
 		public TeamGame(Guid id, IEnumerable<IVersionedEvent> history)
@@ -39,18 +43,24 @@ namespace Registration.Domain.Contest
 			});
 		}
 
-		public void Start()
+		public void Start(string playerName)
 		{
-			if (_isRunning) return; // Game already started before
+			if (_isRunning.ContainsKey(playerName)) return; // Game already started before
 
-			this.Apply(new TeamGameStarted());
+			this.Apply(new TeamGameStarted
+			{
+				PlayerName = playerName
+			});
 		}
 
 		public void MakeShot(string playerName, int shotNumber, int score)
 		{
 			//if (!_isRunning) throw new InvalidOperationException("Game is not running, player mustn't make shots!");
 
-			if (!_scores.ContainsKey(playerName))
+			Shot existing;
+			existing = _shots.FirstOrDefault(x => x.PlayerName.Equals(playerName) && x.ShotNumber == shotNumber);
+
+			if (existing == null)
 			{
 				this.Apply(new PlayerScored
 				{
@@ -68,37 +78,41 @@ namespace Registration.Domain.Contest
 					Points = score
 				});
 			}
+
+			if (_shots.Count == 45)
+			{
+				this.Apply(new GameFinished
+				{
+					PlayerName = playerName,
+					TotalScore = _shots.Sum(x => x.Score),
+					TeamName = _teamName
+				});
+			}
 		}
 
 		private void When(TeamGamePlaced e)
 		{
+			_teamName = e.TeamName;
 		}
 		
 		private void When(TeamGameStarted e)
 		{
-			_isRunning = true;
+			if (string.IsNullOrEmpty(e.PlayerName)) return; // Old data in events 
+
+			_isRunning[e.PlayerName] = true;
 		}
 
 		private void When(PlayerScored e)
 		{
-			Scores existing;
-			if (!_scores.TryGetValue(e.PlayerName, out existing))
-			{
-				existing = new Scores(e.PlayerName, new Dictionary<int, int>());
-			}
-
-			existing.AddOrUpdate(e.ShotNumber, e.Points);
+			_shots.Add(new Shot(e.PlayerName, e.ShotNumber, e.Points));
 		}
 
 		private void When(PlayerScoreUpdated e)
 		{
-			Scores existing;
-			if (!_scores.TryGetValue(e.PlayerName, out existing))
-			{
-				existing = new Scores(e.PlayerName, new Dictionary<int, int>());
-			}
+			var old = _shots.Single(x => x.PlayerName.Equals(e.PlayerName) && x.ShotNumber == e.ShotNumber);
+			_shots.Remove(old);
 
-			existing.AddOrUpdate(e.ShotNumber, e.Points);
+			_shots.Add(new Shot(e.PlayerName, e.ShotNumber, e.Points));
 		}
 	}
 }

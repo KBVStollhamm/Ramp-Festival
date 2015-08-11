@@ -72,7 +72,7 @@ namespace Registration.Application.Handlers
 
             using (var context = _contextFactory.Invoke())
             {
-                var dto = context.Find<GameResult>(message.SourceId);
+                var dto = context.Query<GameResult>().Include("Scores").FirstOrDefault(x => x.GameId == message.SourceId);
 
                 if (dto == null)
                 {
@@ -82,7 +82,7 @@ namespace Registration.Application.Handlers
                     };
                 }
 
-                var score = dto.Scores.FirstOrDefault(x => x.ShotNumber == message.ShotNumber);
+                var score = dto.Scores.FirstOrDefault(x => x.ShotNumber == message.ShotNumber && x.PlayerName.Equals(message.PlayerName));
                 if (score != null)
                 {
                     score.Points = message.Points;
@@ -91,6 +91,7 @@ namespace Registration.Application.Handlers
                 {
                     dto.Scores.Add(new Shot
                     {
+                        PlayerName = message.PlayerName,
                         ShotNumber = message.ShotNumber,
                         Points = message.Points
                     });
@@ -108,7 +109,7 @@ namespace Registration.Application.Handlers
 
             using (var context = _contextFactory.Invoke())
             {
-                var dto = context.Find<GameResult>(message.SourceId);
+                var dto = context.Query<GameResult>().Include("Scores").FirstOrDefault(x => x.GameId == message.SourceId);
 
                 if (dto == null)
                 {
@@ -118,7 +119,7 @@ namespace Registration.Application.Handlers
                     };
                 }
 
-                var score = dto.Scores.FirstOrDefault(x => x.ShotNumber == message.ShotNumber);
+                var score = dto.Scores.FirstOrDefault(x => x.ShotNumber == message.ShotNumber && x.PlayerName.Equals(message.PlayerName));
                 if (score != null)
                 {
                     score.Points = message.Points;
@@ -127,6 +128,7 @@ namespace Registration.Application.Handlers
                 {
                     dto.Scores.Add(new Shot
                     {
+                        PlayerName = message.PlayerName,
                         ShotNumber = message.ShotNumber,
                         Points = message.Points
                     });

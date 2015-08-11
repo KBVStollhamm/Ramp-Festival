@@ -136,7 +136,7 @@
 
         <ctrl:ShotsControl Grid.Column="2" Grid.Row="5" Shot1="{Binding Shot1}" EditShotCommand="{Binding EditShotCommand}" />
         
-        <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="2" Margin="3" PlayerName="{Binding CurrentGame.PlayerName}" />
+        <ctrl:PlayerHeaderControl Grid.Row="0" Grid.Column="2" Margin="3" PlayerName="{Binding CurrentGame.PlayerName}" TotalScore="{Binding PlayerTotalScore}" />
         <v:MakeShotView Grid.Row="1" Grid.RowSpan="4" Grid.Column="2" MakeShotCommand="{Binding MakeShotCommand}" Visibility="{Binding CanMakeShots, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <TextBlock Grid.Row="1" Grid.RowSpan="4" Grid.Column="2" Style="{StaticResource Heading1}"  HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding BusyText}" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}
             }" TextAlignment="Center"/>

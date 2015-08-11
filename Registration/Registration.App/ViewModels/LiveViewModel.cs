@@ -13,85 +13,140 @@ using Registration.Models;
 
 namespace Registration.ViewModels
 {
-    public class LiveViewModel : BindableBase
-    {
-        public LiveViewModel()
-        {
-            _currentPlayerName = "KEIN SPIEL GESTARTET";
-            _scores = new Dictionary<int, int>();
-            this.Scores = new ReadOnlyDictionary<int, int>(_scores);
+	public class LiveViewModel : BindableBase
+	{
+		public LiveViewModel()
+		{
+			_currentPlayerName = "KEIN SPIEL GESTARTET";
+			_scores = new Dictionary<int, int>();
+			this.Scores = new ReadOnlyDictionary<int, int>(_scores);
 
-            this.RefreshCommand = DelegateCommand.FromAsyncHandler(Refresh);
+			this.RefreshCommand = DelegateCommand.FromAsyncHandler(Refresh);
 
-            InitializeEventHandling();
-        }
+			InitializeEventHandling();
+		}
 
-        private Guid _currentGameId;
-        public Guid CurrentGameId
-        {
-            get
-            {
-                return _currentGameId;
-            }
-            private set
-            {
-                SetProperty(ref _currentGameId, value);
-            }
-        }
+		private Guid _currentGameId;
+		public Guid CurrentGameId
+		{
+			get
+			{
+				return _currentGameId;
+			}
+			private set
+			{
+				SetProperty(ref _currentGameId, value);
+			}
+		}
 
-        private string _currentPlayerName;
-        public string CurrentPlayerName
-        {
-            get
-            {
-                return _currentPlayerName;
-            }
-            private set
-            {
-                SetProperty(ref _currentPlayerName, value);
-            }
-        }
+		private string _currentPlayerName;
+		public string CurrentPlayerName
+		{
+			get
+			{
+				return _currentPlayerName;
+			}
+			private set
+			{
+				SetProperty(ref _currentPlayerName, value);
+			}
+		}
 
-        private Dictionary<int, int> _scores;
-        public ReadOnlyDictionary<int, int> Scores { get; private set; }
+		private string _currentTeamName;
+		public string CurrentTeamName
+		{
+			get
+			{
+				return _currentTeamName;
+			}
+			private set
+			{
+				SetProperty(ref _currentTeamName, value);
+			}
+		}
 
-        public ICommand RefreshCommand { get; private set; }
+		private Dictionary<int, int> _scores;
+		public ReadOnlyDictionary<int, int> Scores { get; private set; }
 
-        private async Task Refresh()
-        {
-            this.OnPropertyChanged(() => this.Scores);
+		public int PlayerTotalScore
+		{
+			get
+			{
+				return this.Scores.Values.Sum();
+			}
+		}
 
-            await Task.FromResult<object>(null);
-        }
+		private int _totalTeamScoreWithoutPlayer;
+		public int TeamTotalScore
+		{
+			get
+			{
+				return _totalTeamScoreWithoutPlayer + this.PlayerTotalScore;
+			}
+		}
 
-        private void InitializeEventHandling()
-        {
-            var bus = ServiceBusFactory.New(sbc =>
-            {
-                sbc.UseMsmq(msmq =>
-                {
-                    msmq.UseMulticastSubscriptionClient();
-                    msmq.VerifyMsmqConfiguration();
-                });
-                sbc.ReceiveFrom("msmq://localhost/ramp-festival_live_receiver");
-                sbc.SetNetwork("WORKGROUP");
+		public bool IsTeamGame
+		{
+			get
+			{
+				return !string.IsNullOrEmpty(_currentTeamName);
+			}
+		}
 
-                sbc.Subscribe(s => s.Handler<GameStarted>(OnGameStarted));
-                sbc.Subscribe(s => s.Handler<PlayerScored>(OnPlayerScored));
-            });
-        }
+		public ICommand RefreshCommand { get; private set; }
+
+		private async Task Refresh()
+		{
+			this.OnPropertyChanged(() => this.Scores);
+
+			await Task.FromResult<object>(null);
+		}
+
+		private void InitializeEventHandling()
+		{
+			var bus = ServiceBusFactory.New(sbc =>
+			{
+				sbc.UseMsmq(msmq =>
+				{
+					msmq.UseMulticastSubscriptionClient();
+					msmq.VerifyMsmqConfiguration();
+				});
+				sbc.ReceiveFrom("msmq://localhost/ramp-festival_live_receiver");
+				sbc.SetNetwork("WORKGROUP");
+
+				sbc.Subscribe(s => s.Handler<GameStarted>(OnGameStarted));
+				sbc.Subscribe(s => s.Handler<PlayerScored>(OnPlayerScored));
+			});
+		}
 
 
-        private void OnGameStarted(GameStarted e)
-        {
-            this.CurrentGameId = e.GameId;
-            this.CurrentPlayerName = e.PlayerName;
-        }
+		private void OnGameStarted(GameStarted e)
+		{
+			this.CurrentGameId = e.GameId;
+			this.CurrentPlayerName = e.PlayerName;
+			this.CurrentTeamName = e.TeamName;
+			_scores.Clear();
+			if (e.Shots != null)
+			{
+				foreach (var shot in e.Shots.Where(x => e.PlayerName.Equals(x.PlayerName)))
+					_scores.Add(shot.ShotNumber, shot.Score);
+			}
+			this.OnPropertyChanged("Scores");
+			this.OnPropertyChanged("PlayerTotalScore");
+			if (e.Shots != null)
+				_totalTeamScoreWithoutPlayer = e.Shots.Where(x => !e.PlayerName.Equals(x.PlayerName)).Sum(x => x.Score);
+			else
+				_totalTeamScoreWithoutPlayer = 0;
+			this.OnPropertyChanged("TeamTotalScore");
+			this.OnPropertyChanged("IsTeamGame");
+		}
 
-        private void OnPlayerScored(PlayerScored e)
-        {
-            _scores[e.ShotNumber] = e.Points;
-            this.OnPropertyChanged("Scores");
-        }
-    }
+		private void OnPlayerScored(PlayerScored e)
+		{
+			_scores[e.ShotNumber] = e.Points;
+			this.OnPropertyChanged("Scores");
+			this.OnPropertyChanged("PlayerTotalScore");
+			this.OnPropertyChanged("TeamTotalScore");
+		}
+	}
 }

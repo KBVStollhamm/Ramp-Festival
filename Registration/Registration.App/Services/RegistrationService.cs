@@ -23,8 +23,8 @@ namespace Registration.Services
 			var command = new RegisterPlayerToContest()
 			{
 				ContestId = registration.ContestId,
-                GameId = Guid.NewGuid(),
-                PlayerName = registration.PlayerName
+				GameId = Guid.NewGuid(),
+				PlayerName = registration.PlayerName
 			};
 
 			_commandBus.Publish(command);
@@ -32,23 +32,23 @@ namespace Registration.Services
 			await Task.FromResult<object>(null);
 		}
 
-        public async Task Submit(TeamContestRegistration registration)
-        {
-            var command = new RegisterTeamToContest()
-            {
-                ContestId = registration.ContestId,
-                GameId = Guid.NewGuid(),
-                TeamName = registration.TeamName,
-                Player1Name = registration.Player1Name,
-                Player2Name = registration.Player2Name,
-                Player3Name = registration.Player3Name,
-                Player4Name = registration.Player4Name,
-                Player5Name = registration.Player5Name
-            };
+		public async Task Submit(TeamContestRegistration registration)
+		{
+			var command = new RegisterTeamToContest()
+			{
+				ContestId = registration.ContestId,
+				GameId = Guid.NewGuid(),
+				TeamName = registration.TeamName,
+				Player1Name = registration.Player1Name,
+				Player2Name = registration.Player2Name,
+				Player3Name = registration.Player3Name,
+				Player4Name = registration.Player4Name,
+				Player5Name = registration.Player5Name
+			};
 
-            _commandBus.Publish(command);
+			_commandBus.Publish(command);
 
-            await Task.FromResult<object>(null);
-        }
-    }
+			await Task.FromResult<object>(null);
+		}
+	}
 }

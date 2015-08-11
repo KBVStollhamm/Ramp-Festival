@@ -52,14 +52,14 @@ namespace Registration.Application.Handlers
 			if (game != null)
 			{
 				game.Start();
+
+				_repository.Save(game, message.Id.ToString());
 				Console.WriteLine("Single player game with ID: {0} started.", message.GameId);
 			}
 			else
 			{
 				Console.WriteLine("Couldn't find a single player game with ID: {1}", message.GameId);
 			}
-
-			_repository.Save(game, message.Id.ToString());
 		}
 
 		public void Consume(MakePlayerShot message)
@@ -72,9 +72,9 @@ namespace Registration.Application.Handlers
 			if (game != null)
 			{
 				game.MakeShot(message.PlayerName, message.ShotNumber, message.Score);
-			}
 
-			_repository.Save(game, message.Id.ToString());
+				_repository.Save(game, message.Id.ToString());
+			}
 		}
 	}
 }

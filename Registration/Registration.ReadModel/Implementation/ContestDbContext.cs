@@ -36,7 +36,11 @@ namespace Registration.ReadModel.Implementation
             modelBuilder.Entity<GameResult>().HasKey(e => e.GameId);
             modelBuilder.Entity<GameResult>().HasMany(e => e.Scores).WithRequired().HasForeignKey(e => e.GameId);
             modelBuilder.Entity<Shot>().ToTable("ShotsView", SchemaName);
-            modelBuilder.Entity<Shot>().HasKey(e => new { e.GameId, e.ShotNumber });
+            modelBuilder.Entity<Shot>().HasKey(e => new { e.GameId, e.PlayerName, e.ShotNumber });
+			modelBuilder.Entity<Leaderboard>().ToTable("LeaderboardView", SchemaName);
+			modelBuilder.Entity<Leaderboard>().HasKey(e => e.Id);
+			modelBuilder.Entity<LeaderboardItem>().ToTable("LeaderboardItemsView", SchemaName);
+			modelBuilder.Entity<LeaderboardItem>().HasKey(e => e.Id);
 
             modelBuilder.Entity<Contest>().ToTable("ContestsView", SchemaName);
 		}
@@ -50,7 +54,7 @@ namespace Registration.ReadModel.Implementation
 			return await this.Set<T>().FindAsync(id);
 		}
 
-		public IQueryable<T> Query<T>() where T : class
+		public DbSet<T> Query<T>() where T : class
 		{
 			return this.Set<T>();
 		}

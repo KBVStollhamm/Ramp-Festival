@@ -142,6 +142,9 @@
     <Compile Include="Controls\ShotsControl.xaml.cs">
       <DependentUpon>ShotsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TeamHeaderControl.xaml.cs">
+      <DependentUpon>TeamHeaderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Tile.cs" />
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
@@ -238,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ShotsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TeamHeaderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

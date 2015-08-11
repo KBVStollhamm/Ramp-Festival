@@ -13,23 +13,26 @@ namespace Registration.Views
 	{
 		public DataTemplate SinglePlayerGameTemplate { get; set; }
 		public DataTemplate TeamGameTemplate { get; set; }
-        public DataTemplate ChildGameTemplate { get; set; }
+		public DataTemplate ChildGameTemplate { get; set; }
+		public DataTemplate WomenGameTemplate { get; set; }
 
-        public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
+		public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
 		{
 			var si = item as SequencingItem;
 
 			if (si != null)
 			{
-                switch (si.GameType)
-                {
-                    case GameType.SinglePlayerGame:
-                        return this.SinglePlayerGameTemplate;
-                    case GameType.TeamGame:
-                        return this.TeamGameTemplate;
-                    case GameType.ChildGame:
-                        return this.ChildGameTemplate;
-                }
+				switch (si.GameType)
+				{
+					case GameType.SinglePlayerGame:
+						return this.SinglePlayerGameTemplate;
+					case GameType.TeamGame:
+						return this.TeamGameTemplate;
+					case GameType.ChildGame:
+						return this.ChildGameTemplate;
+					case GameType.WomenGame:
+						return this.WomenGameTemplate;
+				}
 			}
 
 			return base.SelectTemplate(item, container);

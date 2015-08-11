@@ -16,24 +16,26 @@ using System.Windows.Shapes;
 namespace Registration.Controls
 {
     /// <summary>
-    /// Interaction logic for PlayerHeaderControl.xaml
+    /// Interaction logic for TeamHeaderControl.xaml
     /// </summary>
-    public partial class PlayerHeaderControl : UserControl
+    public partial class TeamHeaderControl : UserControl
     {
-        public PlayerHeaderControl()
+        public TeamHeaderControl()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
-        public string PlayerName
+        public string TeamName
         {
-            get { return (string)GetValue(PlayerNameProperty); }
-            set { SetValue(PlayerNameProperty, value); }
+            get { return (string)GetValue(TeamNameProperty); }
+            set { SetValue(TeamNameProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for PlayerName.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PlayerNameProperty =
-            DependencyProperty.Register("PlayerName", typeof(string), typeof(PlayerHeaderControl), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty TeamNameProperty =
+            DependencyProperty.Register("TeamName", typeof(string), typeof(TeamHeaderControl), new PropertyMetadata(default(string)));
+
+
 
         public int TotalScore
         {
@@ -43,6 +45,6 @@ namespace Registration.Controls
 
         // Using a DependencyProperty as the backing store for TotalScore.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TotalScoreProperty =
-            DependencyProperty.Register("TotalScore", typeof(int), typeof(PlayerHeaderControl), new PropertyMetadata(0));
+            DependencyProperty.Register("TotalScore", typeof(int), typeof(TeamHeaderControl), new PropertyMetadata(0));
     }
 }

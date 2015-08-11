@@ -13,7 +13,8 @@ namespace Registration.Application.Handlers
 	public class TeamGameCommandHandler
 		: Consumes<RegisterTeamToContest>.All
 		, Consumes<StartTeamGame>.All
-	{
+        , Consumes<MakeTeamPlayerShot>.All
+    {
 		private readonly IEventSourcedRepository<TeamGame> _repository;
 
 		public TeamGameCommandHandler(IEventSourcedRepository<TeamGame> repository)
@@ -21,7 +22,7 @@ namespace Registration.Application.Handlers
 			_repository = repository;
 		}
 
-		public void Consume(RegisterTeamToContest message)
+        public void Consume(RegisterTeamToContest message)
 		{
 			if (message == null) throw new ArgumentNullException("message");
 
@@ -49,7 +50,7 @@ namespace Registration.Application.Handlers
 			var game = _repository.Find(message.GameId);
 			if (game != null)
 			{
-				game.Start();
+				game.Start(message.PlayerName);
 				Console.WriteLine("Team player game with ID: {0} started.", message.GameId);
 			}
 			else
@@ -59,5 +60,21 @@ namespace Registration.Application.Handlers
 
 			_repository.Save(game, message.Id.ToString());
 		}
-	}
+
+        public void Consume(MakeTeamPlayerShot message)
+        {
+            if (message == null) throw new ArgumentNullException("message");
+
+            Console.WriteLine(message.Score);
+
+            var game = _repository.Find(message.GameId);
+            if (game != null)
+            {
+                game.MakeShot(message.PlayerName, message.ShotNumber, message.Score);
+            }
+
+            _repository.Save(game, message.Id.ToString());
+
+        }
+    }
 }

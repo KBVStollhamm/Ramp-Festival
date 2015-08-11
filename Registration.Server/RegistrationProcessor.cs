@@ -124,7 +124,7 @@ namespace Registration.Server
 					msmq.UseMulticastSubscriptionClient();
 					msmq.VerifyMsmqConfiguration();
 				});
-				sbc.ReceiveFrom("msmq://pc-mad/ramp-festival_registration");
+				sbc.ReceiveFrom("msmq://localhost/ramp-festival_registration");
 				sbc.SetNetwork("WORKGROUP");
 
 				// This will find all of the consumers in the container and

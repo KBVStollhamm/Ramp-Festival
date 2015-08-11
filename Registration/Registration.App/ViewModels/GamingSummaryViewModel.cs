@@ -33,7 +33,7 @@ namespace Registration.ViewModels
 			this.OpenGameSelectionCommand = _controller.OpenGameSelectionCommand;
 			this.StartGameCommand = DelegateCommand<SequencingItem>.FromAsyncHandler(StartGame);
 			this.MakeShotCommand = DelegateCommand<string>.FromAsyncHandler(MakeShot);
-			this.EditShotCommand = new DelegateCommand(EditShot);
+			this.EditShotCommand = new DelegateCommand<string>(EditShot);
 
 			eventAggregator.GetEvent<GameSelected>().Subscribe((payload) => this.CurrentGame = payload);
 
@@ -66,7 +66,7 @@ namespace Registration.ViewModels
 				if (value == null) return;
 
 				this.CurrentGameResult = new NotifyTaskCompletion<GameResult>(
-				  this.LoadGameResult(value.GameId));                
+				  this.LoadGameResult(value.GameId, value.PlayerName));                
 				this.OnPropertyChanged("CurrentGameResult");
 			}
 		}
@@ -88,13 +88,13 @@ namespace Registration.ViewModels
 			}
 		}
 
-		private static Dictionary<int, int> GenerateShots(GameResult gameResult)
+		private static Dictionary<int, int> GenerateShots(GameResult gameResult, string playerName)
 		{
 			var shots = new Dictionary<int, int>();
 
 			if (gameResult != null && gameResult.Scores != null)
 			{
-				foreach (var shot in gameResult.Scores)
+				foreach (var shot in gameResult.Scores.Where(x => playerName.Equals(x.PlayerName)))
 					shots.Add(shot.ShotNumber, shot.Points);
 			}
 
@@ -106,7 +106,7 @@ namespace Registration.ViewModels
 		{
 			get
 			{
-				return _currentShotNumber;
+				return _shotNumberToEdit > 0 ? _shotNumberToEdit : _currentShotNumber;
 			}
 			set
 			{
@@ -116,17 +116,34 @@ namespace Registration.ViewModels
 			}
 		}
 
-		public async Task<GameResult> LoadGameResult(Guid gameId)
+		public async Task<GameResult> LoadGameResult(Guid gameId, string playerName)
 		{
 			var gameResult = await _contestDao.FindGameResult(gameId);
-			this.Shots = GenerateShots(gameResult);
-			this.CurrentShotNumber = gameResult == null ? 1 : gameResult.Scores.Count() + 1;
+			this.Shots = GenerateShots(gameResult, playerName);
+			this.CurrentShotNumber = gameResult == null ? 1 : gameResult.Scores.Where(x => x.PlayerName.Equals(playerName)).Count() + 1;
+			this.PlayerTotalScore = gameResult == null ? 0 : gameResult.TotalScore;
 
 			if (_startGameOnLoading)
 			{
 				await StartGame(this.CurrentGame);
+
+				List<Events.Live.Shot> eventShots = new List<Events.Live.Shot>();
+				foreach (var shot in gameResult.Scores)
+					eventShots.Add(new Events.Live.Shot() { PlayerName = shot.PlayerName, ShotNumber = shot.ShotNumber, Score = shot.Points });
+				var @event = new GameStarted
+				{
+					GameId = gameId,
+					PlayerName = this.CurrentGame.PlayerName,
+					TeamName = this.CurrentGame.TeamName,
+					Shots = eventShots
+				};
+
+				_liveBus.Publish(@event);
+
 				_startGameOnLoading = false;
 			}
+
+			_shotNumberToEdit = 0; // Reset edit mode
 
 			return gameResult;
 		}
@@ -183,15 +200,6 @@ namespace Registration.ViewModels
 				await _controlService.StartSinglePlayerGame(game.GameId);
 			}
 
-			var @event = new GameStarted
-			{
-				GameId = game.GameId,
-				PlayerName = game.PlayerName,
-				TeamName = game.TeamName           
-			};
-
-			_liveBus.Publish(@event);
-
 			await Task.FromResult<object>(null);
 		}
 
@@ -204,7 +212,10 @@ namespace Registration.ViewModels
 
 				int points = int.Parse(scores);
 
-				await _controlService.MakePlayerShot(_currentGame.GameId, this.CurrentShotNumber, points);
+				if (_currentGame.GameType == GameType.TeamGame)
+					await _controlService.MakeTeamPlayerShot(_currentGame.GameId, _currentGame.PlayerName, this.CurrentShotNumber, points);
+				else
+					await _controlService.MakePlayerShot(_currentGame.GameId, _currentGame.PlayerName, this.CurrentShotNumber, points);
 
 				var @event = new PlayerScored
 				{
@@ -223,15 +234,17 @@ namespace Registration.ViewModels
 					var gameResult = await _contestDao.FindGameResult(this.CurrentGame.GameId);
 
 					if (gameResult != null)
-						found = gameResult.Scores.FirstOrDefault(x => x.ShotNumber.Equals(waitForShotNumber)) != null;
+						found = gameResult.Scores.FirstOrDefault(x => x.ShotNumber.Equals(waitForShotNumber) && x.PlayerName.Equals(this.CurrentGame.PlayerName)) != null;
 
 					if (!found)
 						await Task.Delay(500);
 				}
 
+				if (_shotNumberToEdit > 0) await Task.Delay(5000);
+
 				this.CurrentGameResult = new NotifyTaskCompletion<GameResult>(
-				  this.LoadGameResult(this.CurrentGame.GameId));
-				this.OnPropertyChanged("CurrentGameResult");     
+				  this.LoadGameResult(this.CurrentGame.GameId, this.CurrentGame.PlayerName));
+				this.OnPropertyChanged("CurrentGameResult");
 			}
 			finally
 			{
@@ -239,9 +252,25 @@ namespace Registration.ViewModels
 			}
 		}
 
-		private void EditShot()
+		private int _playerTotalScore;
+		public int PlayerTotalScore
 		{
-			System.Windows.MessageBox.Show("Edit Shot");
-		}        
+			get
+			{
+				return _playerTotalScore;
+			}
+			set
+			{
+				SetProperty(ref _playerTotalScore, value);
+			}
+		}
+
+		private void EditShot(string param)
+		{
+			_shotNumberToEdit = int.Parse(param);
+			//System.Windows.MessageBox.Show("Edit Shot");
+		}
+
+		private int _shotNumberToEdit = 0;
 	}
 }

@@ -9,9 +9,9 @@ namespace Registration.Domain.Contest
 {
 	public class SinglePlayerGamePlaced : VersionedEvent
 	{
-        public Guid ContestId { get; set; }
-        public DateTime RegisteredAt { get; set; }
+		public Guid ContestId { get; set; }
+		public DateTime RegisteredAt { get; set; }
 
-        public string PlayerName { get; set; }
-    }
+		public string PlayerName { get; set; }
+	}
 }

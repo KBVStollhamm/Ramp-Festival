@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Registration.ReadModel
+namespace Registration.Commands
 {
-    public class Shot
+    public class MakeTeamPlayerShot : GameCommand
     {
-        public Guid GameId { get; set; }
         public string PlayerName { get; set; }
         public int ShotNumber { get; set; }
-        public int Points { get; set; }
+        public int Score { get; set; }
     }
 }

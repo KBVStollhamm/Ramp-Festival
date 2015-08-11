@@ -60,15 +60,15 @@ namespace Registration.Application.Handlers
 					switch (contestDto.ContestType)
 					{
 						case ContestType.SinglePlayerContest:
-							dtoItem.GameType = GameType.SinglePlayerGame;
+							dtoItem.GameType = Registration.ReadModel.GameType.SinglePlayerGame;
 							break;
 						case ContestType.TeamContest:
 							throw new InvalidOperationException();
 						case ContestType.ChildrenContest:
-							dtoItem.GameType = GameType.ChildGame;
+							dtoItem.GameType = Registration.ReadModel.GameType.ChildGame;
 							break;
 						case ContestType.WomenContest:
-							dtoItem.GameType = GameType.WomenGame;
+							dtoItem.GameType = Registration.ReadModel.GameType.WomenGame;
 							break;
 						default:
 							break;
@@ -119,7 +119,7 @@ namespace Registration.Application.Handlers
 				sequence.Sequence.Add(dtoItem);
 			}
 			dtoItem.GameId = gameId;
-			dtoItem.GameType = GameType.TeamGame;
+			dtoItem.GameType = Registration.ReadModel.GameType.TeamGame;
 			dtoItem.RegisteredAt = registeredAt;
 			dtoItem.Position = position;
 			dtoItem.PlayerName = playerName;
@@ -174,7 +174,7 @@ namespace Registration.Application.Handlers
 		{
 			using (var context = _contextFactory.Invoke())
 			{
-				var dto = context.Query<SequencingItem>().Where(e => e.GameId.Equals(message.SourceId)).SingleOrDefault();
+				var dto = context.Query<SequencingItem>().Where(e => e.GameId.Equals(message.SourceId) && e.PlayerName.Equals(message.PlayerName)).SingleOrDefault();
 				if (dto != null)
 				{
 					dto.Status = GameState.Running;
@@ -190,7 +190,7 @@ namespace Registration.Application.Handlers
 		{
 			using (var context = _contextFactory.Invoke())
 			{
-				var dto = context.Query<SequencingItem>().Where(e => e.GameId.Equals(message.SourceId)).SingleOrDefault();
+				var dto = context.Query<SequencingItem>().Where(e => e.GameId.Equals(message.SourceId) && e.PlayerName.Equals(message.PlayerName)).SingleOrDefault();
 				if (dto != null)
 				{
 					dto.Status = GameState.Finished;

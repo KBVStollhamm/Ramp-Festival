@@ -11,5 +11,8 @@ namespace Registration.Events.Live
         public Guid GameId { get; set; }
         public string PlayerName { get; set; }
         public string TeamName { get; set; }
+
+        // Score info
+        public List<Shot> Shots { get; set; }
     }
 }

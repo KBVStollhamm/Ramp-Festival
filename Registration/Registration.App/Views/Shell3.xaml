@@ -9,7 +9,7 @@
 		xmlns:vm="clr-namespace:Registration.ViewModels"
 		xmlns:v="clr-namespace:Registration.Views"
 		Title="Rampenfest"
-		mc:Ignorable="d" ResizeMode="NoResize" WindowState="Maximized">
+		mc:Ignorable="d" WindowState="Maximized">
 
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">
@@ -99,7 +99,7 @@
 		<ImageBrush ImageSource="/Assets/background3.jpg"  Stretch="UniformToFill"/>
 	</Window.Background>
 	
-	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+	<Grid HorizontalAlignment="Left" VerticalAlignment="Stretch">
 		<Grid Grid.Row="1" RenderTransformOrigin="0.5,0.5" Margin="0">
 			<Grid.Resources>
 				<conv:VisibilityToStarHeightConverter x:Key="VisibilityToStarHeightConverter" />
@@ -112,7 +112,8 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" MinWidth="650" />
 				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
 
 			<!-- logo -->
 			<Canvas x:Name="Logo" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">

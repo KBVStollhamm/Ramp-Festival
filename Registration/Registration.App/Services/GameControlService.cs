@@ -17,10 +17,11 @@ namespace Registration.Services
 			_commandBus = commandBus;
 		}
 
-		public async Task MakePlayerShot(Guid gameId, int shotNumber, int scores)
+		public async Task MakePlayerShot(Guid gameId, string playerName, int shotNumber, int scores)
 		{
 			var command = new MakePlayerShot
 			{
+                PlayerName = playerName,
 				GameId = gameId,
 				ShotNumber = shotNumber,
 				Score = scores
@@ -31,16 +32,26 @@ namespace Registration.Services
 			await Task.FromResult<object>(null);
 		}
 
-		public Task MakeTeamPlayerShot(Guid gameId, string playerName, int shotNumber, int scores)
+		public async Task MakeTeamPlayerShot(Guid gameId, string playerName, int shotNumber, int scores)
 		{
-			throw new NotImplementedException();
-		}
+            var command = new MakeTeamPlayerShot
+            {
+                PlayerName = playerName,
+                GameId = gameId,
+                ShotNumber = shotNumber,
+                Score = scores
+            };
+
+            _commandBus.Publish(command);
+
+            await Task.FromResult<object>(null);
+        }
 
 		public async Task StartSinglePlayerGame(Guid gameId)
 		{
 			var command = new StartSinglePlayerGame
 			{
-				GameId = gameId
+				GameId = gameId				
 			};
 
 			_commandBus.Publish(command);

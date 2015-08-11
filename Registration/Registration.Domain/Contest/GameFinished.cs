@@ -9,5 +9,8 @@ namespace Registration.Domain.Contest
 {
 	public class GameFinished : VersionedEvent
 	{
+		public string PlayerName { get; set; }
+		public int TotalScore { get; set; }
+		public string TeamName { get; set; }
 	}
 }
