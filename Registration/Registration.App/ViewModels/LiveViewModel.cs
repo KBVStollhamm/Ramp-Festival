@@ -5,18 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Infrastructure.ViewModel;
 using MassTransit;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Registration.Events.Live;
 using Registration.Models;
+using Registration.ReadModel;
 
 namespace Registration.ViewModels
 {
 	public class LiveViewModel : BindableBase
 	{
-		public LiveViewModel()
+		private readonly IContestDao _contestDao;
+
+		public LiveViewModel(IContestDao contestDao)
 		{
+			_contestDao = contestDao;
+
 			_currentPlayerName = "KEIN SPIEL GESTARTET";
 			_scores = new Dictionary<int, int>();
 			this.Scores = new ReadOnlyDictionary<int, int>(_scores);
@@ -139,6 +145,9 @@ namespace Registration.ViewModels
 				_totalTeamScoreWithoutPlayer = 0;
 			this.OnPropertyChanged("TeamTotalScore");
 			this.OnPropertyChanged("IsTeamGame");
+
+			this.Leaderboard = new NotifyTaskCompletion<Leaderboard>(this.GetLeaderboard());
+			//this.OnPropertyChanged("Leaderboard");
 		}
 
 		private void OnPlayerScored(PlayerScored e)
@@ -147,6 +156,15 @@ namespace Registration.ViewModels
 			this.OnPropertyChanged("Scores");
 			this.OnPropertyChanged("PlayerTotalScore");
 			this.OnPropertyChanged("TeamTotalScore");
+		}
+
+		public NotifyTaskCompletion<Leaderboard> Leaderboard { get; private set; }
+
+		private async Task<Leaderboard> GetLeaderboard()
+		{
+			var board =  await _contestDao.GetLeaderboard();
+
+			return board;
 		}
 	}
 }

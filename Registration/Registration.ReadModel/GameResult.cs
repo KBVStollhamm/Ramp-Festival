@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Registration.ReadModel
 {
-    public class GameResult
-    {
-        public GameResult()
-        {
-            this.Scores = new List<Shot>();
-        }
+	public class GameResult
+	{
+		public GameResult()
+		{
+			this.Scores = new List<Shot>();
+		}
 
-        public Guid GameId { get; set; }
-        public List<Shot> Scores { get; set; }
-        public int TotalScore { get; set; }
-    }
+		public Guid GameId { get; set; }
+		public List<Shot> Scores { get; set; }
+		public int TotalScore { get; set; }
+		public GameType GameType { get; set; }
+		public string Name { get; set; }
+	}
 }
