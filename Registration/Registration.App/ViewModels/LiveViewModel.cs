@@ -173,9 +173,9 @@ namespace Registration.ViewModels
 		{
 			var board =  await _contestDao.GetLeaderboard();
 
-			this.Items.Clear();
-			if (board.SinglePlayerContestLeader != null)
-				this.Items.Add(board.SinglePlayerContestLeader);
+			//this.Items.Clear();
+			//if (board.SinglePlayerContestLeader != null)
+			//	this.Items.Add(board.SinglePlayerContestLeader);
 
 			return board;
 

@@ -1116,7 +1116,7 @@
 
 	<ControlTemplate x:Key="SubmitButtonTemplate" TargetType="Button">
 		<Grid Height="{TemplateBinding Height}">
-			<Border Width="105" x:Name="BgEnabled" Background="#FF006C3B" BorderBrush="#FFFFFFFF" BorderThickness="2,2,1,2" CornerRadius="9,0,0,9" HorizontalAlignment="Right">
+			<Border Width="140" x:Name="BgEnabled" Background="#FF006C3B" BorderBrush="#FFFFFFFF" BorderThickness="2,2,1,2" CornerRadius="9,0,0,9" HorizontalAlignment="Right">
 				<TextBlock x:Name="textBlock" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFFFFFF" />
 			</Border>
 		</Grid>
@@ -1168,7 +1168,7 @@
 
 	<ControlTemplate x:Key="CancelButtonTemplate" TargetType="Button">
 		<Grid Height="{TemplateBinding Height}">
-			<Border Width="105" BorderBrush="#FFFFFFFF" BorderThickness="1,2,2,2" CornerRadius="0,9,9,0" Background="#FFFFFFFF">
+			<Border Width="140" BorderBrush="#FFFFFFFF" BorderThickness="1,2,2,2" CornerRadius="0,9,9,0" Background="#FFFFFFFF">
 				<TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF666666"  Margin="-9,0,0,0" />
 			</Border>
 		</Grid>

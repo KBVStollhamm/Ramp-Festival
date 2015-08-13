@@ -2,90 +2,127 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:ctrl="clr-namespace:Registration.Controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Themes/Common.xaml" />
-        <ResourceDictionary Source="/Themes/TextBlock.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/Themes/Common.xaml" />
+		<ResourceDictionary Source="/Themes/TextBlock.xaml" />
+	</ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="ctrl:Tile">
-        <!--<Setter Property="Width"
+	<Style TargetType="ctrl:Tile">
+		<!--<Setter Property="Width"
 				Value="140" />
-        <Setter Property="Height"
+		<Setter Property="Height"
 				Value="140" />-->
-        <Setter Property="Margin"
+		<Setter Property="Margin"
 				Value="3" />
-        <Setter Property="Foreground"
+		<Setter Property="Foreground"
 				Value="White" />
-        <Setter Property="Background"
+		<Setter Property="Background"
 				Value="{DynamicResource Accent}" />
-        <Setter Property="HorizontalContentAlignment"
+		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
-        <Setter Property="VerticalContentAlignment"
+		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="RenderTransformOrigin"
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="RenderTransformOrigin"
 				Value="0.5,0.5" />
-        <Setter Property="TitleFontSize"
+		<Setter Property="TitleFontSize"
 				Value="16"/>
-        <Setter Property="CountFontSize"
+		<Setter Property="CountFontSize"
 				Value="28"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ctrl:Tile">
-                    <Grid Background="{TemplateBinding Background}">
-                        <StackPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ctrl:Tile">
+					<Grid Background="{TemplateBinding Background}">
+						<StackPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									Orientation="Horizontal">
-                            <ContentPresenter RecognizesAccessKey="True" />
-                            <TextBlock Text="{TemplateBinding Count}"
+							<ContentPresenter RecognizesAccessKey="True" />
+							<TextBlock Text="{TemplateBinding Count}"
 									   FontSize="{Binding CountFontSize, RelativeSource={RelativeSource TemplatedParent}}"
 									   VerticalAlignment="Center" />
-                        </StackPanel>
+						</StackPanel>
 
-                        <Label Grid.ColumnSpan="2"
+						<Label Grid.ColumnSpan="2"
 							   HorizontalAlignment="Left"
 							   VerticalAlignment="Bottom"
 							   Foreground="{TemplateBinding Foreground}">
-                            <AccessText Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"
+							<AccessText Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"
 										Foreground="{TemplateBinding Foreground}"
 										TextWrapping="Wrap"
 										FontSize="{Binding TitleFontSize, RelativeSource={RelativeSource TemplatedParent}}"
 										Margin="3" />
-                        </Label>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Button.IsPressed"
+						</Label>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="Button.IsPressed"
 								 Value="True">
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <ScaleTransform ScaleX="0.98"
+							<Setter Property="RenderTransform">
+								<Setter.Value>
+									<ScaleTransform ScaleX="0.98"
 													ScaleY="0.98"
 													CenterX="0.5"
 													CenterY="0.5" />
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <Style x:Key="SmallTileStyle" TargetType="ctrl:Tile">
-        <Setter Property="Width" Value="70" />
-        <Setter Property="Height" Value="70" />
-    </Style>
+	<Style x:Key="SmallTileStyle" TargetType="ctrl:Tile">
+		<Setter Property="Width" Value="70" />
+		<Setter Property="Height" Value="70" />
+	</Style>
 
-    <Style x:Key="LargeTileStyle" TargetType="ctrl:Tile">
-        <Setter Property="Width" Value="280" />
-        <Setter Property="Height" Value="140" />
-    </Style>
+	<Style x:Key="LargeTileStyle" TargetType="ctrl:Tile">
+		<Setter Property="Width" Value="280" />
+		<Setter Property="Height" Value="140" />
+	</Style>
 
-    <Style x:Key="MegaTileStyle" TargetType="ctrl:Tile">
-        <Setter Property="Width" Value="280" />
-        <Setter Property="Height" Value="280" />
+	<Style x:Key="MegaTileStyle" TargetType="ctrl:Tile">
+		<Setter Property="Width" Value="280" />
+		<Setter Property="Height" Value="280" />
 		<Setter Property="CountFontSize"
 				Value="40"/>
 	</Style>
-    
+
+	<Style x:Key="SelectableTile" TargetType="ctrl:Tile">
+		<Setter Property="Width" Value="44" />
+		<Setter Property="Height" Value="44" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ctrl:Tile">
+					<Grid Background="Gray">
+						<StackPanel VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+									Orientation="Horizontal">
+							<ContentPresenter RecognizesAccessKey="True" />
+							<TextBlock Text="{TemplateBinding Count}"
+									   FontSize="{Binding CountFontSize, RelativeSource={RelativeSource TemplatedParent}}"
+									   VerticalAlignment="Center" />
+						</StackPanel>
+
+						<Label Grid.ColumnSpan="2"
+							   HorizontalAlignment="Left"
+							   VerticalAlignment="Bottom"
+							   Foreground="{TemplateBinding Foreground}">
+							<AccessText Text="{Binding Title, RelativeSource={RelativeSource TemplatedParent}}"
+										Foreground="{TemplateBinding Foreground}"
+										TextWrapping="Wrap"
+										FontSize="{Binding TitleFontSize, RelativeSource={RelativeSource TemplatedParent}}"
+										Margin="3" />
+						</Label>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="Button.IsPressed" Value="True">
+							<Setter Property="Background" Value="{TemplateBinding Background}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 </ResourceDictionary>

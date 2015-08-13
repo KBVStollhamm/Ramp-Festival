@@ -64,6 +64,7 @@
 			<DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Visible}"/>
 		</ObjectAnimationUsingKeyFrames>
 	</Storyboard>
+	
 	<Style x:Key="myErrorTemplate" TargetType="Control">
 		<Setter Property="Validation.ErrorTemplate">
 			<Setter.Value>
@@ -114,5 +115,12 @@
 			</Trigger>
 		</Style.Triggers>
 	</Style>
-	<Style TargetType="TextBox" BasedOn="{StaticResource myErrorTemplate}" />
+	
+	<Style TargetType="TextBox" BasedOn="{StaticResource myErrorTemplate}">
+		<Setter Property="BorderThickness" Value="3" />
+		<Setter Property="BorderBrush" Value="Gray" />
+		<Setter Property="FontSize" Value="30" />
+		<Setter Property="Margin" Value="5" />
+	</Style>	
+	
 </ResourceDictionary>

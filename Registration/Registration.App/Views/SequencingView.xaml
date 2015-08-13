@@ -14,7 +14,7 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<TextBlock Text="Nächste Spieler" Style="{StaticResource Heading1}"/>
+		<TextBlock Text="Nächste Spieler" Style="{StaticResource Heading1}" TextWrapping="Wrap"/>
 		<ItemsControl Grid.Row="1" ItemsSource="{Binding Sequence}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="Loaded">

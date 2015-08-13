@@ -26,7 +26,7 @@ namespace Registration.ViewModels
 			this.Sequence = new ReadOnlyObservableCollection<SequencingItem>(_sequence);
 			eventBus.SubscribeHandler<SequencingChanged>(async (e) =>
 			{
-				await LoadData();
+				await LoadData().ConfigureAwait(false);
 			});
 
 			this.RefreshDataCommand = DelegateCommand.FromAsyncHandler(LoadData);
@@ -42,12 +42,12 @@ namespace Registration.ViewModels
 				IList<SequencingItem> model = await _contestDao.GetAllNewGames();
 				if (model == null) return;
 
-				App.Current.Dispatcher.Invoke(() =>
-				{
+				//app.current.dispatcher.invoke(() =>
+				//{
 					_sequence.Clear();
 					foreach (var item in model)
 						_sequence.Add(item);
-				});
+				//});
 			}
 			catch (Exception ex)
 			{

@@ -18,7 +18,7 @@
         <TextBlock Grid.Column="1" Text="{Binding PlayerName, ElementName=playerHeaderControl}" TextAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource Heading1}" />
         <Grid Grid.Column="2">
             <TextBlock Grid.Column="2" Text="{Binding TotalScore, ElementName=playerHeaderControl}" TextAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource Heading1}" FontSize="90" />
-            <TextBlock Grid.Column="2" Text="Gesamt" TextAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Title}" FontSize="18" Margin="0 5 0 0"/>
+            <TextBlock Grid.Column="2" Text="Gesamt" TextAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Title}" FontSize="18" Margin="0 0 0 0"/>
         </Grid>
     </Grid>
 </UserControl>

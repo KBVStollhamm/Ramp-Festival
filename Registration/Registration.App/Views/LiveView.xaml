@@ -15,18 +15,18 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="140"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="420"/>
 			<RowDefinition />
 		</Grid.RowDefinitions>
 
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="50" />
-			<ColumnDefinition Width="700"/>
+			<ColumnDefinition Width="540"/>
 			<ColumnDefinition Width="380"/>
 		</Grid.ColumnDefinitions>
-		<ctrl:PlayerHeaderControl Grid.Row="1" Grid.Column="1" PlayerName="{Binding CurrentPlayerName}" TotalScore="{Binding PlayerTotalScore}" Margin="3"/>
-		<ctrl:TeamHeaderControl Grid.Row="0" Grid.Column="1" TeamName="{Binding CurrentTeamName}" TotalScore="{Binding TeamTotalScore}"  Margin="3" Background="Green" Height="140" Visibility="{Binding IsTeamGame, Converter={StaticResource BooleanToVisibilityConverter}}" />
+		<ctrl:PlayerHeaderControl Grid.Row="1" Grid.Column="1" PlayerName="{Binding CurrentPlayerName}" TotalScore="{Binding PlayerTotalScore}" Height="100" Margin="3"/>
+		<ctrl:TeamHeaderControl Grid.Row="0" Grid.Column="1" TeamName="{Binding CurrentTeamName}" TotalScore="{Binding TeamTotalScore}"  Margin="3" Background="Green" Height="100" Visibility="{Binding IsTeamGame, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
 		<Grid Grid.Row="2" Grid.Column="1">
 			<Grid.RowDefinitions>
@@ -56,6 +56,6 @@
 			<!--<ctrl:Tile Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Count="99" CountFontSize="100" />-->
 		</Grid>
 		
-		<v:LeaderboardView Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" />
+		<v:LeaderboardView Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" />
 	</Grid>
 </UserControl>

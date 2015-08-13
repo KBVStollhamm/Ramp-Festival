@@ -12,44 +12,89 @@
 		<DataTemplate x:Key="SinglePlayerTemplate">
 			<ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}">
 				<ctrl:Tile.Content>
-					<StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Left">
-						<TextBlock Text="Männer" Style="{StaticResource Title}" HorizontalAlignment="Center" />
+					<Grid Width="280" Height="130">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center" TextWrapping="Wrap" />
+						<TextBlock Grid.Row="2" Text="Männer" Style="{StaticResource Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" Margin="12"/>
+						<TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 0"/>
+					</Grid>
+					<!--<StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Left">
+						<TextBlock Text="Männer" Style="{StaticResource Title}" HorizontalAlignment="Right" FontSize="16" />
 						<TextBlock Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
 						<TextBlock Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-					</StackPanel>
+					</StackPanel>-->
 				</ctrl:Tile.Content>
 			</ctrl:Tile>
 		</DataTemplate>
 		<DataTemplate x:Key="TeamTemplate">
 			<ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" Background="Green">
 				<ctrl:Tile.Content>
-					<StackPanel Grid.Column="1" VerticalAlignment="Stretch">
-						<TextBlock Text="Mannschaft" Style="{StaticResource Title}" HorizontalAlignment="Center" />
-						<TextBlock Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-						<TextBlock Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-					</StackPanel>
+					<Grid Width="280" Height="130">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center" TextWrapping="Wrap" />
+						<TextBlock Grid.Row="2" Text="Mannschaft" Style="{StaticResource Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" Margin="12"/>
+						<TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 0"/>
+					</Grid>
 				</ctrl:Tile.Content>
 			</ctrl:Tile>
 		</DataTemplate>
 		<DataTemplate x:Key="ChildTemplate">
 			<ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" Background="Orange">
 				<ctrl:Tile.Content>
-					<StackPanel Grid.Column="1" VerticalAlignment="Stretch">
-						<TextBlock Text="Kinder" Style="{StaticResource Title}" HorizontalAlignment="Center" />
-						<TextBlock Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-						<TextBlock Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-					</StackPanel>
+					<Grid Width="280" Height="130">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center" TextWrapping="Wrap" />
+						<TextBlock Grid.Row="2" Text="Kinder" Style="{StaticResource Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" Margin="12"/>
+						<TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 0"/>
+					</Grid>
 				</ctrl:Tile.Content>
 			</ctrl:Tile>
 		</DataTemplate>
 		<DataTemplate x:Key="WomenTemplate">
 			<ctrl:Tile Style="{StaticResource LargeTileStyle}" Command="{Binding Path=DataContext.SelectGameCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" Background="PaleVioletRed">
 				<ctrl:Tile.Content>
-					<StackPanel Grid.Column="1" VerticalAlignment="Stretch">
-						<TextBlock Text="Frauen" Style="{StaticResource Title}" HorizontalAlignment="Center" />
-						<TextBlock Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-						<TextBlock Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Center"/>
-					</StackPanel>
+					<Grid Width="280" Height="130">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center" TextWrapping="Wrap" />
+						<TextBlock Grid.Row="2" Text="Frauen" Style="{StaticResource Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" Margin="12"/>
+						<TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 0"/>
+					</Grid>
 				</ctrl:Tile.Content>
 			</ctrl:Tile>
 		</DataTemplate>

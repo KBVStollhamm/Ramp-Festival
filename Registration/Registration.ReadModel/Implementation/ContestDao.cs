@@ -106,17 +106,21 @@ namespace Registration.ReadModel.Implementation
 				var childLeader = await context.Query<GameResult>().Where(x => x.GameType == GameType.ChildGame).OrderByDescending(x => x.TotalScore).FirstOrDefaultAsync();
 				var womenLeader = await context.Query<GameResult>().Where(x => x.GameType == GameType.WomenGame).OrderByDescending(x => x.TotalScore).FirstOrDefaultAsync();
 
-				if (singleLeader != null)
-					result.SinglePlayerContestLeader = new LeaderboardItem() { GameId = singleLeader.GameId, TotalScore = singleLeader.TotalScore, LeaderName = singleLeader.Name, GameType = GameType.SinglePlayerGame };
-				if (teamLeader != null)
-					result.TeamContestLeader = new LeaderboardItem() { GameId = teamLeader.GameId, TotalScore = teamLeader.TotalScore, LeaderName = teamLeader.Name, GameType = GameType.TeamGame };
-				if (childLeader != null)
-					result.ChildrenContestLeader = new LeaderboardItem() { GameId = teamLeader.GameId, TotalScore = teamLeader.TotalScore, LeaderName = teamLeader.Name, GameType = GameType.ChildGame };
-				if (womenLeader != null)
-					result.WomenContestLeader = new LeaderboardItem() { GameId = womenLeader.GameId, TotalScore = womenLeader.TotalScore, LeaderName = womenLeader.Name, GameType = GameType.WomenGame };
+				result.SinglePlayerContestLeader = FromGameResult(singleLeader);
+				result.TeamContestLeader = FromGameResult(teamLeader);
+				result.ChildrenContestLeader = FromGameResult(childLeader);
+				result.WomenContestLeader = FromGameResult(womenLeader);
 			}
 
 			return result;			
+		}
+
+		private LeaderboardItem FromGameResult(GameResult gameResult)
+		{
+			if (gameResult == null) return null;
+
+			return new LeaderboardItem() { GameId = gameResult.GameId, TotalScore = gameResult.TotalScore, LeaderName = gameResult.Name, GameType = gameResult.GameType };
+
 		}
 	}
 }

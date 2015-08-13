@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
 	<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-		<Button Name="SubmitButton" Command="{Binding SubmitCommand}" Template="{StaticResource SubmitButtonTemplate}" Cursor="Hand">Registrieren</Button>
-		<Button Name="CancelButton" Command="{Binding CancelCommand}" Template="{StaticResource CancelButtonTemplate}" Cursor="Hand">Abbrechen</Button>
+		<Button Name="SubmitButton" Command="{Binding SubmitCommand}" Template="{StaticResource SubmitButtonTemplate}" FontSize="22" Cursor="Hand">Registrieren</Button>
+		<Button Name="CancelButton" Command="{Binding CancelCommand}" Template="{StaticResource CancelButtonTemplate}" FontSize="22" Cursor="Hand">Abbrechen</Button>
 	</StackPanel>
 </UserControl>

@@ -8,8 +8,8 @@
 		xmlns:inf="clr-namespace:Registration.Infrastructure"
 		xmlns:vm="clr-namespace:Registration.ViewModels"
 		xmlns:v="clr-namespace:Registration.Views"
-		Title="Rampenfest"
-		mc:Ignorable="d" WindowState="Maximized">
+		Title="Rampenfest"		
+		mc:Ignorable="d" WindowState="Maximized" WindowStyle="None" d:DesignWidth="800" d:DesignHeight="600">
 
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">
@@ -112,8 +112,8 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" MinWidth="650" />
 				<ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="100" />
-            </Grid.ColumnDefinitions>
+				<ColumnDefinition Width="50" />
+			</Grid.ColumnDefinitions>
 
 			<!-- logo -->
 			<Canvas x:Name="Logo" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
@@ -125,8 +125,8 @@
 						<TranslateTransform/>
 					</TransformGroup>
 				</Canvas.RenderTransform>
-				<Image Source="/Assets/Cool-Text-125969995899261.png" Width="400" Canvas.Top="30" />
-				<Image Source="/Assets/2015.png" Width="400" Canvas.Left="380" />
+				<Image Margin="50 0 0 0" Source="/Assets/Cool-Text-125969995899261.png" Width="400" Canvas.Top="30" />
+				<Image Margin="50 0 0 0" Source="/Assets/2015.png" Width="400" Canvas.Left="380" />
 				<!--<TextBlock Text="Rampenfest " TextWrapping="NoWrap" Foreground="#FFC4CFD6" FontSize="72" Opacity="0.85" Canvas.Left="0" Canvas.Top="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="100" Width="400" TextAlignment="Left" FontWeight="Normal" />
 				<TextBlock Text="2015" TextWrapping="NoWrap" Foreground="#FFC4CFD6" FontSize="72" Opacity="0.85" Height="100" TextAlignment="Left" FontWeight="Bold" Width="525" Canvas.Left="400" Canvas.Top="5"/>-->
 			</Canvas>
@@ -202,7 +202,7 @@
 			</Grid>
 
 			<!-- sidebar -->
-			<Grid x:Name="SideGrid" Margin="10,29,10,10" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" Width="Auto">
+			<Grid x:Name="SideGrid" Margin="10,29,10,10" Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Stretch" Width="Auto">
 				<Grid.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>

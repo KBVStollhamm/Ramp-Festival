@@ -4,60 +4,67 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:infra="clr-namespace:Registration.Infrastructure"
+			 xmlns:ctrl="clr-namespace:Registration.Controls"
 			 xmlns:v="clr-namespace:Registration.Views"
 			 mc:Ignorable="d"			 
 			 infra:FocusExtensions.LoadedFocusedElement="{Binding ElementName=inputName}">
 
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+	<Grid Margin="50 0 0 0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 
-        <TextBlock Text="Team registrieren" Style="{StaticResource Heading1}"/>
+		<TextBlock Text="Team registrieren" Style="{StaticResource Heading1}"/>
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
 
-            <Grid Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="300"/>
-                </Grid.ColumnDefinitions>
+			<Grid Grid.ColumnSpan="2">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="300"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <TextBlock Text="Name des Teams" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
-                <TextBox x:Name="inputName" Grid.Column="1" Text="{Binding Path=TeamName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBlock Grid.Row="1" Text="1. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Player1Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBlock Grid.Row="2" Text="2. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Player2Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBlock Grid.Row="3" Text="3. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Player3Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBlock Grid.Row="4" Text="4. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=Player4Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <TextBlock Grid.Row="5" Text="5. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=Player5Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
-                <v:RegisterCommandsView Grid.Row="6" Grid.ColumnSpan="2" Height="50" Margin="15"/>
-            </Grid>
-        </Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<TextBlock Text="Name des Teams" Style="{DynamicResource Title}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+				<TextBox x:Name="inputName" Grid.Column="1" Text="{Binding Path=TeamName, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+				<TextBlock Grid.Row="1" Text="1. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Player1Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+				<TextBlock Grid.Row="2" Text="2. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Player2Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+				<TextBlock Grid.Row="3" Text="3. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=Player3Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+				<TextBlock Grid.Row="4" Text="4. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Path=Player4Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+				<TextBlock Grid.Row="5" Text="5. Werfer" Style="{DynamicResource Title}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Path=Player5Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True, NotifyOnValidationError=True, ValidatesOnDataErrors=True}" />
+				<v:RegisterCommandsView Grid.Row="6" Grid.ColumnSpan="2" Height="50" Margin="15"/>
+				<!--<StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Orientation="Horizontal">
+					<ctrl:Tile Width="46" Height="46" Count="M" />
+					<ctrl:Tile Width="46" Height="46" Count="F" Background="PaleVioletRed"/>
+					<ctrl:Tile Width="46" Height="46" Count="K" Background="Orange"/>
+				</StackPanel>-->
+			</Grid>
+		</Grid>
 
-        <!--<StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+		<!--<StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
 			<Button Content="Registrieren" Command="{Binding SubmitCommand}" Margin="5" />
 			<Button Content="Abbrechen" Command="{Binding CancelCommand}" Margin="5"/>
 		</StackPanel>-->
 
-    </Grid>
+	</Grid>
 </UserControl>

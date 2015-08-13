@@ -101,7 +101,7 @@
 		<v:ContestDataTemplateSelector x:Key="ContestTemplateSelector" SinglePlayerContestTemplate="{StaticResource SinglePlayerContestTemplate}" TeamContestTemplate="{StaticResource TeamContestTemplate}" ChildrenContestTemplate="{StaticResource ChildrenContestTemplate}" WomenContestTemplate="{StaticResource WomenContestTemplate}" />
 	</UserControl.Resources>
 
-	<Grid>
+	<Grid Margin="50 0 0 0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition />
