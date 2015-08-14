@@ -45,6 +45,15 @@ namespace Registration.ReadModel.Implementation
 			}
 		}
 
+		public async Task<SequencingItem> FindSequencingItem(Guid gameId)
+		{
+			using (var context = _contextFactory.Invoke())
+			{
+				return await context.Query<SequencingItem>()
+					.FirstOrDefaultAsync(seq => seq.GameId.Equals(gameId));
+			}
+		}
+
 		public async Task<SequencingItem> FindNextGame(Guid stationId)
 		{
 			using (var context = _contextFactory.Invoke())

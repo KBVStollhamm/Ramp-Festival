@@ -49,6 +49,7 @@ namespace Registration.Application.Handlers
 					dtoItem = new SequencingItem();
 					dto.Sequence.Add(dtoItem);
 				}
+				dtoItem.ContestId = message.ContestId;
 				dtoItem.GameId = message.SourceId;
 				dtoItem.RegisteredAt = message.RegisteredAt;
 				dtoItem.Position = 1;
@@ -120,6 +121,7 @@ namespace Registration.Application.Handlers
 				dtoItem = new SequencingItem();
 				sequence.Sequence.Add(dtoItem);
 			}
+			dtoItem.ContestId = dtoItem.ContestId;
 			dtoItem.GameId = gameId;
 			dtoItem.GameType = Registration.ReadModel.GameType.TeamGame;
 			dtoItem.RegisteredAt = registeredAt;

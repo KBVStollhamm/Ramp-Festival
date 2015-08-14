@@ -117,9 +117,10 @@
         </Border>
         
         <ctrl:Tile Grid.Row="1" Count="Spiel wählen" Command="{Binding OpenGameSelectionCommand}" />
+		<ctrl:Tile Grid.Row="3" Count="Neue Karte" Command="{Binding NewGameCommand}" Background="BurlyWood" Visibility="{Binding IsSinglePlayer, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
-        <!-- Busy indicator -->
-        <TextBlock Style="{StaticResource Heading1}" Text="Lade Daten..." Visibility="{Binding Summary.IsNotCompleted,
+		<!-- Busy indicator -->
+        <TextBlock Style="{StaticResource Heading1}" Text="Steuerungszentrale" Visibility="{Binding Summary.IsNotCompleted,
             Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <!-- Results -->
         <TextBlock Style="{StaticResource Heading2}" Text="{Binding Summary.Result.ActiveGameId}" />

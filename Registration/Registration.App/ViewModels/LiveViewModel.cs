@@ -175,18 +175,20 @@ namespace Registration.ViewModels
 			this.OnPropertyChanged(propertyName);
 		}
 
-		public int Score1
+		public int? Score1
 		{
 			get
 			{
-				int v = 0;
-				_scores.TryGetValue(1, out v);
-				return v;
+				if (_scores.ContainsKey(1))
+					return _scores[1];
+				return null;
 			}
 			set
 			{
-				_scores[1] = value;
-				this.OnPropertyChanged("Score1");
+				if (!value.HasValue)
+					_scores.Remove(1);
+				else
+					_scores[1] = value.Value;
 			}
 		}
 		public int? Score2

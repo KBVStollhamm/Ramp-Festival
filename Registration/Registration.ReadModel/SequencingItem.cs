@@ -12,6 +12,7 @@ namespace Registration.ReadModel
 		{
 		}
 
+		public Guid ContestId { get; set; }
 		public Guid GameId { get; set; }
 		public GameType GameType { get; set; }
 		public DateTime RegisteredAt { get; set; }

@@ -90,7 +90,7 @@
 		<Setter Property="CountFontSize"
 				Value="28"/>
 		<Setter Property="FontSize"
-				Value="46"/>
+				Value="60"/>
 		<!--<Setter Property="Content" Value="{Binding RelativeSource={RelativeSource Self}, Path=Count}" />-->
 		<Setter Property="Template">
 			<Setter.Value>

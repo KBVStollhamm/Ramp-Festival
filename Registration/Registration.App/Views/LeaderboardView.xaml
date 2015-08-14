@@ -25,7 +25,7 @@
 
 						<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding LeaderName}" Style="{StaticResource Heading1}" HorizontalAlignment="Center" TextWrapping="Wrap" />
 						<TextBlock Grid.Row="2" Text="Männer" Style="{StaticResource Title}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="16" Margin="12"/>
-						<TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 0"/>
+						<TextBlock Grid.Row="2" Grid.Column="1"  Text="{Binding TotalScore}" Style="{StaticResource Heading1}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 8 0" FontSize="36"/>
 					</Grid>
 					<!--<StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Left">
 						<TextBlock Text="Männer" Style="{StaticResource Title}" HorizontalAlignment="Right" FontSize="16" />

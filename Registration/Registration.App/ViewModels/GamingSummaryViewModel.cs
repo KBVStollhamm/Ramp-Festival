@@ -12,6 +12,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Registration.Controllers;
 using Registration.Events;
 using Registration.Events.Live;
+using Registration.Models;
 using Registration.ReadModel;
 using Registration.Services;
 
@@ -21,19 +22,22 @@ namespace Registration.ViewModels
 	{
 		private readonly GameController _controller;
 		private readonly IGameControlService _controlService;
+		private readonly IRegistrationService _registrationService;
 		private readonly IContestDao _contestDao;
 		private readonly IServiceBus _liveBus;
 
-		public GamingSummaryViewModel(GameController controller, IGameControlService controlService, IContestDao contestDao, IEventAggregator eventAggregator)
+		public GamingSummaryViewModel(GameController controller, IGameControlService controlService, IRegistrationService registrationService, IContestDao contestDao, IEventAggregator eventAggregator)
 		{
 			_controller = controller;
 			_controlService = controlService;
+			_registrationService = registrationService;
 			_contestDao = contestDao;
 
 			this.OpenGameSelectionCommand = _controller.OpenGameSelectionCommand;
 			this.StartGameCommand = DelegateCommand<SequencingItem>.FromAsyncHandler(StartGame);
 			this.MakeShotCommand = DelegateCommand<string>.FromAsyncHandler(MakeShot);
 			this.EditShotCommand = new DelegateCommand<string>(EditShot);
+			this.NewGameCommand = DelegateCommand.FromAsyncHandler(NewGame, CanNewGame);
 
 			eventAggregator.GetEvent<GameSelected>().Subscribe((payload) => this.CurrentGame = payload);
 
@@ -62,6 +66,10 @@ namespace Registration.ViewModels
 
 				this.Shots = null;
 				_startGameOnLoading = true;
+				_currentShotNumber = 0;
+
+				this.OnPropertyChanged("IsSinglePlayer");
+				(this.NewGameCommand as DelegateCommand).RaiseCanExecuteChanged();
 
 				if (value == null) return;
 
@@ -147,7 +155,7 @@ namespace Registration.ViewModels
 				_startGameOnLoading = false;
 			}
 
-			_shotNumberToEdit = 0; // Reset edit mode
+			this.ShotNumberToEdit = 0; // Reset edit mode
 
 			return gameResult;
 		}
@@ -192,6 +200,7 @@ namespace Registration.ViewModels
 		public ICommand StartGameCommand { get; private set; }
 		public ICommand MakeShotCommand { get; private set; }
 		public ICommand EditShotCommand { get; private set; }
+		public ICommand NewGameCommand { get; private set; }
 
 		private async Task StartGame(SequencingItem game)
 		{
@@ -251,6 +260,9 @@ namespace Registration.ViewModels
 				this.CurrentGameResult = new NotifyTaskCompletion<GameResult>(
 				  this.LoadGameResult(this.CurrentGame.GameId, this.CurrentGame.PlayerName));
 				this.OnPropertyChanged("CurrentGameResult");
+				this.OnPropertyChanged("IsSinglePlayer");
+				(this.NewGameCommand as DelegateCommand).RaiseCanExecuteChanged();
+
 			}
 			finally
 			{
@@ -273,10 +285,76 @@ namespace Registration.ViewModels
 
 		private void EditShot(string param)
 		{
-			_shotNumberToEdit = int.Parse(param);
+			this.ShotNumberToEdit = int.Parse(param);
 			//System.Windows.MessageBox.Show("Edit Shot");
 		}
 
 		private int _shotNumberToEdit = 0;
+		public int ShotNumberToEdit
+		{
+			get { return _shotNumberToEdit; }
+			set
+			{
+				this.SetProperty(ref _shotNumberToEdit, value);
+			}
+		}
+
+
+		public async Task NewGame()
+		{
+			try
+			{
+				this.BusyText = "Neue Karte wir erstellt...";
+				this.IsBusy = true;
+
+				PlayerContestRegistration registration = new PlayerContestRegistration();
+				registration.ContestId = this.CurrentGame.ContestId;
+				registration.GameId = Guid.NewGuid();
+				registration.PlayerName = this.CurrentGame.PlayerName;
+
+				await _registrationService.Submit(registration);
+
+				await Task.Delay(1000);
+
+				bool found = false;
+				SequencingItem sequence = null;
+				while (!found)
+				{
+					sequence = await _contestDao.FindSequencingItem(registration.GameId);
+
+					if (sequence != null)
+						found = true;
+
+					if (!found)
+						await Task.Delay(500);
+				}
+
+				this.CurrentGame = sequence;
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				this.IsBusy = false;
+			}
+		}
+
+		public bool CanNewGame()
+		{
+			if (this.CurrentGame == null) return false;
+
+			return this.CurrentGame.GameType != GameType.TeamGame && this.CurrentShotNumber == 9;
+		}
+
+		public bool IsSinglePlayer
+		{
+			get
+			{
+				if (this.CurrentGame == null) return false;
+
+				return this.CurrentGame.GameType != GameType.TeamGame && this.CurrentShotNumber == 9;
+			}
+		}
 	}
 }

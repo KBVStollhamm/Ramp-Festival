@@ -19,8 +19,8 @@
 			<ColumnDefinition />
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
-		
-		<ctrl:Tile Grid.Column="0" Command="{Binding EditShotCommand}" Count="{Binding Path=Shots[1]}" CommandParameter="1"/>
+
+		<ctrl:Tile Grid.Column="0" Command="{Binding EditShotCommand}" Count="{Binding Path=Shots[1]}" CommandParameter="1" />
 		<ctrl:Tile Grid.Column="1" Command="{Binding EditShotCommand}" Count="{Binding Path=Shots[2]}" CommandParameter="2"/>
 		<ctrl:Tile Grid.Column="2" Command="{Binding EditShotCommand}" Count="{Binding Path=Shots[3]}" CommandParameter="3"/>
 		<ctrl:Tile Grid.Column="3" Command="{Binding EditShotCommand}" Count="{Binding Path=Shots[4]}" CommandParameter="4"/>

@@ -20,10 +20,13 @@ namespace Registration.Services
 
 		public async Task Submit(PlayerContestRegistration registration)
 		{
+			if (registration.GameId.Equals(Guid.Empty))
+				registration.GameId = Guid.NewGuid();
+
 			var command = new RegisterPlayerToContest()
 			{
 				ContestId = registration.ContestId,
-				GameId = Guid.NewGuid(),
+				GameId = registration.GameId,
 				PlayerName = registration.PlayerName
 			};
 
