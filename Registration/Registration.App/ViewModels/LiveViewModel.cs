@@ -135,7 +135,9 @@ namespace Registration.ViewModels
 			if (e.Shots != null)
 			{
 				foreach (var shot in e.Shots.Where(x => e.PlayerName.Equals(x.PlayerName)))
+				{
 					_scores.Add(shot.ShotNumber, shot.Score);
+				}
 			}
 			this.OnPropertyChanged("Scores");
 			this.OnPropertyChanged("PlayerTotalScore");
@@ -150,16 +152,171 @@ namespace Registration.ViewModels
 
 			this.Leaderboard = new NotifyTaskCompletion<Leaderboard>(this.GetLeaderboard());
 			this.OnPropertyChanged("Leaderboard");
+
+			for (int i = 1; i <= 9; i++)
+				this.RaiseScoreChanged(i);
+
 		}
 
 		private void OnPlayerScored(PlayerScored e)
 		{
 			_scores[e.ShotNumber] = e.Points;
+			//this.OnPropertyChanged("Scores[]");
 			this.OnPropertyChanged("Scores");
 			this.OnPropertyChanged("PlayerTotalScore");
 			this.OnPropertyChanged("TeamTotalScore");
+
+			RaiseScoreChanged(e.ShotNumber);
 		}
 
+		private void RaiseScoreChanged(int shotNumber)
+		{
+			string propertyName = "Score" + shotNumber.ToString();
+			this.OnPropertyChanged(propertyName);
+		}
+
+		public int Score1
+		{
+			get
+			{
+				int v = 0;
+				_scores.TryGetValue(1, out v);
+				return v;
+			}
+			set
+			{
+				_scores[1] = value;
+				this.OnPropertyChanged("Score1");
+			}
+		}
+		public int? Score2
+		{
+			get
+			{
+				if (_scores.ContainsKey(2))
+					return _scores[2];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(2);
+				else
+					_scores[2] = value.Value;
+			}
+		}
+		public int? Score3
+		{
+			get
+			{
+				if (_scores.ContainsKey(3))
+					return _scores[3];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(3);
+				else
+					_scores[3] = value.Value;
+			}
+		}
+		public int? Score4
+		{
+			get
+			{
+				if (_scores.ContainsKey(4))
+					return _scores[4];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(4);
+				else
+					_scores[4] = value.Value;
+			}
+		}
+		public int? Score5
+		{
+			get
+			{
+				if (_scores.ContainsKey(5))
+					return _scores[5];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(5);
+				else
+					_scores[5] = value.Value;
+			}
+		}
+		public int? Score6
+		{
+			get
+			{
+				if (_scores.ContainsKey(6))
+					return _scores[6];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(6);
+				else
+					_scores[6] = value.Value;
+			}
+		}
+		public int? Score7
+		{
+			get
+			{
+				if (_scores.ContainsKey(7))
+					return _scores[7];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(7);
+				else
+					_scores[7] = value.Value;
+			}
+		}
+		public int? Score8
+		{
+			get
+			{
+				if (_scores.ContainsKey(8))
+					return _scores[8];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(8);
+				else
+					_scores[8] = value.Value;
+			}
+		}
+		public int? Score9
+		{
+			get
+			{
+				if (_scores.ContainsKey(9))
+					return _scores[9];
+				return null;
+			}
+			set
+			{
+				if (!value.HasValue)
+					_scores.Remove(9);
+				else
+					_scores[9] = value.Value;
+			}
+		}
 
 		public ObservableCollection<LeaderboardItem> Items
 		{
@@ -178,7 +335,6 @@ namespace Registration.ViewModels
 			//	this.Items.Add(board.SinglePlayerContestLeader);
 
 			return board;
-
 		}
 	}
 }

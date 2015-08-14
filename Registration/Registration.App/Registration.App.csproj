@@ -146,6 +146,7 @@
       <DependentUpon>TeamHeaderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Tile.cs" />
+    <Compile Include="Controls\XAnimatedButton.cs" />
     <Compile Include="Converters\MarkupConverter.cs" />
     <Compile Include="Converters\ToLowerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
@@ -393,6 +394,9 @@
     <Resource Include="Assets\background.jpg" />
     <Resource Include="Assets\background2.jpg" />
     <Resource Include="Assets\background3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\smiley_weinend.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

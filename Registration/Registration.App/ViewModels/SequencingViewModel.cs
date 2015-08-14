@@ -42,12 +42,12 @@ namespace Registration.ViewModels
 				IList<SequencingItem> model = await _contestDao.GetAllNewGames();
 				if (model == null) return;
 
-				//app.current.dispatcher.invoke(() =>
-				//{
+				App.Current.Dispatcher.Invoke(() =>
+				{
 					_sequence.Clear();
 					foreach (var item in model)
 						_sequence.Add(item);
-				//});
+				});
 			}
 			catch (Exception ex)
 			{

@@ -9,7 +9,7 @@
 		xmlns:vm="clr-namespace:Registration.ViewModels"
 		xmlns:v="clr-namespace:Registration.Views"
 		Title="Rampenfest"		
-		mc:Ignorable="d" WindowState="Maximized" WindowStyle="None" d:DesignWidth="800" d:DesignHeight="600">
+		mc:Ignorable="d" WindowState="Maximized" d:DesignWidth="800" d:DesignHeight="600">
 
 	<Window.Resources>
 		<DataTemplate DataType="{x:Type vm:RegisterPlayerViewModel}">

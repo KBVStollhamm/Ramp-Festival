@@ -10,6 +10,7 @@
 
 	<UserControl.Resources>
 		<BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+		<Image Source="/Assets/smiley_weinend.jpg" x:Key="smiley" />
 	</UserControl.Resources>
 
 	<Grid>
@@ -41,17 +42,17 @@
 				<!--<ColumnDefinition Width="2*"/>-->
 			</Grid.ColumnDefinitions>
 
-			<ctrl:Tile Grid.Column="0" Grid.Row="0" Count="{Binding Scores[1]}" CountFontSize="50" Title="Wurf 1" />
-			<ctrl:Tile Grid.Column="1" Grid.Row="0" Count="{Binding Scores[2]}" CountFontSize="50" Title="Wurf 2"/>
-			<ctrl:Tile Grid.Column="2" Grid.Row="0" Count="{Binding Scores[3]}" CountFontSize="50" Title="Wurf 3" />
+			<ctrl:AnimatedTile Grid.Column="0" Grid.Row="0" Content="{Binding Score1, Mode=TwoWay}" Title="Wurf 1" />
+			<ctrl:AnimatedTile Grid.Column="1" Grid.Row="0" Content="{Binding Score2, Mode=TwoWay}" Title="Wurf 2" />
+			<ctrl:AnimatedTile Grid.Column="2" Grid.Row="0" Content="{Binding Score3, Mode=TwoWay}" Title="Wurf 3" />
 
-			<ctrl:Tile Grid.Column="0" Grid.Row="1" Count="{Binding Scores[4]}" CountFontSize="50" Title="Wurf 4"/>
-			<ctrl:Tile Grid.Column="1" Grid.Row="1" Count="{Binding Scores[5]}" CountFontSize="50" Title="Wurf 5"/>
-			<ctrl:Tile Grid.Column="2" Grid.Row="1" Count="{Binding Scores[6]}" CountFontSize="50" Title="Wurf 6"/>
+			<ctrl:AnimatedTile Grid.Column="0" Grid.Row="1" Content="{Binding Score4, Mode=TwoWay}" Title="Wurf 4" />
+			<ctrl:AnimatedTile Grid.Column="1" Grid.Row="1" Content="{Binding Score5, Mode=TwoWay}" Title="Wurf 5" />
+			<ctrl:AnimatedTile Grid.Column="2" Grid.Row="1" Content="{Binding Score6, Mode=TwoWay}" Title="Wurf 6" />
 
-			<ctrl:Tile Grid.Column="0" Grid.Row="2" Count="{Binding Scores[7]}" CountFontSize="50" Title="Wurf 7"/>
-			<ctrl:Tile Grid.Column="1" Grid.Row="2" Count="{Binding Scores[8]}" CountFontSize="50" Title="Wurf 8"/>
-			<ctrl:Tile Grid.Column="2" Grid.Row="2" Count="{Binding Scores[9]}" CountFontSize="50" Title="Wurf 9"/>
+			<ctrl:AnimatedTile Grid.Column="0" Grid.Row="2" Content="{Binding Score7, Mode=TwoWay}" Title="Wurf 7" />
+			<ctrl:AnimatedTile Grid.Column="1" Grid.Row="2" Content="{Binding Score8, Mode=TwoWay}" Title="Wurf 8" />
+			<ctrl:AnimatedTile Grid.Column="2" Grid.Row="2" Content="{Binding Score9, Mode=TwoWay}" Title="Wurf 9" />
 
 			<!--<ctrl:Tile Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Count="99" CountFontSize="100" />-->
 		</Grid>
